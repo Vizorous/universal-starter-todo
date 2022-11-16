@@ -1,0 +1,28 @@
+{
+
+	"folders": [
+		{
+			"path": "./",
+			"name": "root"
+		},
+		{
+			"path": "./apps/backend",
+			"name": "backend"
+		},
+		{
+			"path": "./apps/frontend",
+			"name": "frontend"
+		},
+	],
+	"settings": {
+		"terminal.integrated.cwd":"${workspaceRoot}",
+			"cSpell.words": ["yarnhook"],
+			"graphql-config.load.filePath": "${workspaceRoot}/apps/frontend/.graphqlrc",
+			"graphql-config.load.rootDir": "./apps/frontend/",
+			"relay.rootDirectory": "./apps/frontend/",
+			// "relay.pathToConfig": "./apps/frontend/",
+			"relay.pathToBinary": "./apps/frontend/",
+			"relay.autoStartCompiler": false
+			// "graphql-config.load.configName": ".graphqlrc"		
+	}
+}

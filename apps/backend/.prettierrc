@@ -1,0 +1,9 @@
+{
+	"useTabs": true,
+	"tabWidth": 2,
+	"bracketSpacing": true,
+	"printWidth": 120,
+	"jsxSingleQuote": false,
+	"htmlWhitespaceSensitivity": "ignore",
+	"endOfLine": "crlf"
+}

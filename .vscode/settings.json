@@ -1,0 +1,10 @@
+{
+	"graphql-config.load.filePath": "${workspaceRoot}/apps/frontend/.graphqlrc",
+	"graphql-config.load.rootDir": "./apps/frontend/",
+	"relay.rootDirectory": "./apps/frontend/",
+	// "relay.pathToConfig": "./apps/frontend/",
+	"relay.pathToBinary": "./apps/frontend/",
+	"relay.autoStartCompiler": false,
+	"cSpell.words": ["Todos"]
+}
+

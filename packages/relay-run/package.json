@@ -1,0 +1,12 @@
+{
+	"name": "relay-run",
+	"version": "1.0.0",
+	"description": "graphql package ",
+	"main": "index.js",
+	"scripts": {
+		"dev": "pnpm --filter frontend relay",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Vizorous",
+	"license": "ISC"
+}

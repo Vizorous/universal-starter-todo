@@ -1,0 +1,53 @@
+{
+	"name": "asl-crm-next",
+	"version": "0.0.0",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"prebuild": "rimraf .dist",
+		"prepare": "npx husky install",
+		"build": "turbo run build",
+		"dev": "turbo run dev --parallel ",
+		"dev:vite": "turbo run dev:vite --parallel ",
+		"lint": "turbo run lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"be": "pnpm --filter backend",
+		"bea": "pnpm --filter backend add",
+		"fe": "pnpm --filter frontend",
+		"fea": "pnpm --filter frontend add",
+		"nest": "pnpm --filter backend nest",
+		"relay": "pnpm fe relay",
+		"be:fix": "npx eslint ./apps/backend/**/*.ts --fix"
+	},
+	"lint-staged": {
+		"*.{ts,tsx}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{js,json,md}": [
+			"prettier --write"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"post-checkout": "yarnhook",
+			"post-merge": "yarnhook",
+			"post-rewrite": "yarnhook"
+		}
+	},
+	"devDependencies": {
+		"eslint-config-custom": "workspace:*",
+		"prettier": "latest",
+		"turbo": "latest"
+	},
+	"engines": {
+		"npm": ">=7.0.0",
+		"node": ">=14.0.0"
+	},
+	"dependencies": {},
+	"packageManager": "pnpm@7.0.1"
+}
+

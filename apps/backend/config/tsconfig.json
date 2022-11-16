@@ -1,0 +1,30 @@
+{
+	"ts-node": {
+		"swc": true,
+		"transpileOnly": true
+	},
+	"compilerOptions": {
+		"target": "es2019",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitAny": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"outDir": "../../../.dist/backend",
+		"baseUrl": "../",
+		"pretty": true,
+		"esModuleInterop": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"declaration": false,
+		"declarationMap": false,
+		"skipLibCheck": true,
+		"lib": ["esnext"],
+		"paths": {}
+	},
+	"include": ["src", "test"],
+	"exclude": ["node_modules", "test", ".dist", "**/*spec.ts"]
+}
