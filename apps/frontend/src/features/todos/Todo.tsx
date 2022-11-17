@@ -1,17 +1,13 @@
-import { ActionIcon, Badge, Card, Group, Space, Stack, Text } from "@mantine/core";
+import { ActionIcon, Card, Group, Stack } from "@mantine/core";
 import { TablerX } from "@seamlessc/tabler-icons-react";
 import React from "react";
 import { useMutation } from "react-relay";
 import { graphql } from "relay-runtime";
-import {
-	EditCategoriesGetFragment$data,
-	EditCategoriesGetFragment$key,
-} from "../../__gen__/EditCategoriesGetFragment.graphql";
+import { EditCategoriesGetFragment$key } from "../../__gen__/EditCategoriesGetFragment.graphql";
 import { TodoDeleteMutation } from "../../__gen__/TodoDeleteMutation.graphql";
 import { TodosFragment$data } from "../../__gen__/TodosFragment.graphql";
 import EditCategories from "./EditCategories";
 import EditTodoName from "./EditTodoName";
-
 
 // used to delete a todo
 // @connections is used to automatically update the data when a mutation is performed
@@ -34,7 +30,7 @@ const Todo: React.FC<TodoProps> = ({ todo, connectionID, categoryKey }) => {
 	const [deleteTodo, isDeleting] = useMutation<TodoDeleteMutation>(deleteTodoM);
 	return (
 		<>
-			<Card sx={{ overflow: "unset" }} key={`${todo}-card`} m={"lg"} shadow="md">
+			<Card sx={{ overflow: "unset" }} key={`${todo.id}-card`} m={"lg"} shadow="md">
 				<Group position="apart" align="flex-start">
 					<Stack>
 						<EditTodoName connectionID={connectionID} todoName={todo.name}></EditTodoName>
@@ -65,4 +61,3 @@ const Todo: React.FC<TodoProps> = ({ todo, connectionID, categoryKey }) => {
 };
 
 export default Todo;
-

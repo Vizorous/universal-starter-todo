@@ -1,14 +1,14 @@
-import React, { ReactElement, ReactNode, Suspense, useEffect } from 'react'
-import { useQueryLoader } from 'react-relay'
-import { GraphQLTaggedNode, OperationType, VariablesOf } from 'relay-runtime'
-import { FetchRenderFunc, QueryFetchContainer } from './QueryFetchContainer'
+import React, { ReactElement, ReactNode, Suspense, useEffect } from "react";
+import { useQueryLoader } from "react-relay";
+import { GraphQLTaggedNode, OperationType, VariablesOf } from "relay-runtime";
+import { FetchRenderFunc, QueryFetchContainer } from "./QueryFetchContainer";
 
 export interface QueryFragContainerProps<T extends OperationType> {
-	query: GraphQLTaggedNode
-	variables?: VariablesOf<T>
-	suspenseFallback?: ReactNode
-	errorFallback?: ReactNode
-	render: FetchRenderFunc<T>
+	query: GraphQLTaggedNode;
+	variables?: VariablesOf<T>;
+	suspenseFallback?: ReactNode;
+	errorFallback?: ReactNode;
+	render: FetchRenderFunc<T>;
 }
 /**
  * A container that loads and fetches a query or a fragment and renders the result.
@@ -25,19 +25,19 @@ export interface QueryFragContainerProps<T extends OperationType> {
 			></QueryFragContainer>
  */
 const QueryFragContainer = <T extends OperationType>(props: QueryFragContainerProps<T>): ReactElement => {
-	const [queryRef, loadQuery] = useQueryLoader<T>(props.query)
+	const [queryRef, loadQuery] = useQueryLoader<T>(props.query);
 	useEffect(() => {
-		loadQuery(props.variables)
-	}, [loadQuery])
+		loadQuery(props.variables);
+	}, [loadQuery]);
 	return (
 		<>
-			<Suspense fallback={props.suspenseFallback ?? 'Loading page...'}>
+			<Suspense fallback={props.suspenseFallback ?? "Loading page..."}>
 				{queryRef !== null && (
 					<QueryFetchContainer<T> query={props.query} queryRef={queryRef} render={props.render}></QueryFetchContainer>
 				)}
 			</Suspense>
 		</>
-	)
-}
+	);
+};
 
-export default QueryFragContainer
+export default QueryFragContainer;

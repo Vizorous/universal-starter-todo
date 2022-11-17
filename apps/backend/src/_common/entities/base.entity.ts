@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { ID, ObjectType } from "@nestjs/graphql";
 import { FilterableField, KeySet } from "@vizorous/nestjs-query-graphql";
 import { Expose } from "class-transformer";
 import { CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";

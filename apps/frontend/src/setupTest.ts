@@ -1,3 +1,3 @@
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
 // @ts-expect-error
-globalThis.IS_REACT_ACT_ENVIRONMENT = true
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;

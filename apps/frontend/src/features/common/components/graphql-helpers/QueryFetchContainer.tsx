@@ -1,12 +1,12 @@
-import { ReactElement } from 'react'
-import { PreloadedQuery, usePreloadedQuery } from 'react-relay'
-import { GraphQLTaggedNode, OperationType } from 'relay-runtime'
-export type FetchRenderFunc<T extends OperationType> = (data: T['response']) => ReactElement
+import { ReactElement } from "react";
+import { PreloadedQuery, usePreloadedQuery } from "react-relay";
+import { GraphQLTaggedNode, OperationType } from "relay-runtime";
+export type FetchRenderFunc<T extends OperationType> = (data: T["response"]) => ReactElement;
 
 export interface QueryFetchContainerProps<T extends OperationType> {
-	query: GraphQLTaggedNode
-	queryRef: PreloadedQuery<T>
-	render: FetchRenderFunc<T>
+	query: GraphQLTaggedNode;
+	queryRef: PreloadedQuery<T>;
+	render: FetchRenderFunc<T>;
 }
 /**
  *
@@ -21,6 +21,6 @@ export interface QueryFetchContainerProps<T extends OperationType> {
 
  */
 export const QueryFetchContainer = <T extends OperationType>(props: QueryFetchContainerProps<T>): ReactElement => {
-	const data = usePreloadedQuery<T>(props.query, props.queryRef)
-	return <>{props.render(data)}</>
-}
+	const data = usePreloadedQuery<T>(props.query, props.queryRef);
+	return <>{props.render(data)}</>;
+};

@@ -1,15 +1,10 @@
-import { Badge, Button, Menu } from "@mantine/core";
-import { useToggle } from "@mantine/hooks";
+import { Button, Menu } from "@mantine/core";
 import React from "react";
 import { useMutation, usePaginationFragment } from "react-relay";
 import { graphql } from "relay-runtime";
-import {
-	EditCategoriesGetFragment$data,
-	EditCategoriesGetFragment$key,
-} from "../../__gen__/EditCategoriesGetFragment.graphql";
+import { EditCategoriesGetFragment$key } from "../../__gen__/EditCategoriesGetFragment.graphql";
 import { EditCategoriesMutation } from "../../__gen__/EditCategoriesMutation.graphql";
 import { TodosFragment$data } from "../../__gen__/TodosFragment.graphql";
-import { TodosQuery$data } from "../../__gen__/TodosQuery.graphql";
 
 // used to fetch the category list
 // @argumentDefinitions define local variables that can be used in the fragment
@@ -72,13 +67,21 @@ const EditCategories: React.FC<EditCategoriesProps> = (props) => {
 		<>
 			<Menu>
 				<Menu.Target>
-					<Button py={0} fz="xs" variant="light" radius="xl" size="xs" color={props.category ? "aiesec" : "gray"}>
+					<Button
+						py={0}
+						fz="xs"
+						variant="light"
+						radius="xl"
+						size="xs"
+						color={props.category != null ? "aiesec" : "gray"}
+					>
 						{props.category?.name ?? "No category"}
 					</Button>
 				</Menu.Target>
 				<Menu.Dropdown style={{ zIndex: 99 }}>
 					{categories.map((item) => (
 						<Menu.Item
+							key={item.id}
 							onClick={() => {
 								editCategories({
 									variables: {
@@ -100,4 +103,3 @@ const EditCategories: React.FC<EditCategoriesProps> = (props) => {
 };
 
 export default EditCategories;
-

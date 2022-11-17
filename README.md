@@ -1,4 +1,4 @@
-# Universal Starter Template 
+# Universal Starter Template
 
 ## Get started
 
@@ -18,12 +18,19 @@
   ```
   pnpm install
   ```
-- Run backend first to create the schema file for frontend
 
-    ```
-    pnpm be dev
-    ```
-- You can shut it down then and start development. 
+- You should have mysql installed and running on your machine.
+
+- You can customize the database connection by creating a `.env.dev` file in [backend](apps/backend/) folder. Structure of the file is as follows.
+
+  ```
+  DATABASE_NAME=universal_todo
+  DATABASE_USER=root
+  DATABASE_PASSWORD=root
+  ```
+
+- Make sure your MySQL has a database with the correct name with correct username and password.
+
 - Start the development servers with,
 
   ```
@@ -51,10 +58,13 @@ Utilize following commands to install in the respective project folders
 Aliases has been created to utilize scoped PNPM commands correctly.
 
 - backend (for `pnpm --filter backend`)
+
   ```
   pnpm be
   ```
+
 - frontend (for `pnpm --filter frontend`)
+
   ```
   pnpm fe
   ```
@@ -62,22 +72,92 @@ Aliases has been created to utilize scoped PNPM commands correctly.
 ### PNPM Examples
 
 - Run dev script in backend.
+
   ```
   pnpm be dev
   ```
+
 - remove lodash from frontend
   ```
   pnpm fe remove lodash
   ```
 
+## Commit guide
+
+We utilize convention commits to put our commits in a standard format. This helps us to generate changelogs and release notes automatically. Please follow the following guide to commit your changes.
+
+### The commit message should be structured as follows:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer]
+```
+
+### Examples
+
+#### Commit message with description
+
+```
+feat: add 'comments' option
+```
+
+You should use feat:, fix:, chore:, mainly. Additionally you can use docs:, style:, refactor:, perf:, test: as well.
+
+#### Commit message with description and breaking change in body
+
+```
+feat: allow provided config object to extend other configs
+
+BREAKING CHANGE: `extends` key in config file is now used for extending other config files
+```
+
+#### Commit message with no body
+
+```
+docs: correct spelling of CHANGELOG
+```
+
+#### Commit message with scope
+
+```
+feat(lang): added polish language
+```
+
+#### Commit message for a fix using an (optional) issue number.
+
+```
+fix: minor typos in code
+
+see the issue for details on the typos fixed
+
+fixes issue #12
+```
+
 ## Workspace usage
 
-Utilize the [workspace](seamless-analytics.code-workspace) file to access the workspace, it contains following folders,
+Utilize the [workspace](starter.code-workspace) file to access the workspace, it contains following folders,
 
 - [frontend](apps/frontend/)
 - [backend](apps/backend/)
-- [relay-graphql](packages/relay-graphql//)
+- [relay-graphql](packages/relay-run/)
 - [root](/)
+
+## Library Documentation
+
+### Backend
+
+- Nest Query - https://tripss.github.io/nestjs-query/
+- Nest GraphQL - https://docs.nestjs.com/graphql/quick-start
+- Nest Tutorials - https://github.com/nestjs/awesome-nestjs
+
+### Frontend
+
+- Relay docs - https://relay.dev/docs/
+- GraphQL docs - https://graphql.org/
+- React tutorials - https://github.com/enaqx/awesome-react
 
 ## Nest CLI (GraphQL CRUD Endpoint Generation)
 
@@ -87,6 +167,11 @@ Utilize the [workspace](seamless-analytics.code-workspace) file to access the wo
   ```
 - [Nest CLI reference](https://docs.nestjs.com/cli/overview)
 
+## Database Browsing
+
+- You can use any mysql client to browse. I recommend dBeaver. You can download it from here https://dbeaver.io/download/
+
+<!--
 ### Nest CLI Examples
 
 - Generate a new CRUD resource called matric inside [src/facebook](apps/backend/src/facebook/) folder in backend. (Utilized the `folder_name/resource_name` syntax to add to the correct folder)
@@ -99,7 +184,7 @@ Utilize the [workspace](seamless-analytics.code-workspace) file to access the wo
 
 - Use [MongoDBCompass](https://www.mongodb.com/try/download/compass) to browse the data.
 
-- Use the URL in `MONGO_DB` field in `.env.dev` to connect to the online database.
+- Use the URL in `MONGO_DB` field in `.env.dev` to connect to the online database. -->
 
 ### Build Process
 
@@ -108,21 +193,6 @@ Todo
 ### Testing
 
 Todo
-
-## Library Documentation
-
-### Backend
-
-Nest GraphQL - https://docs.nestjs.com/graphql/quick-start  
-Nest Mongoose - https://docs.nestjs.com/recipes/mongodb  
-Nest Tutorials - https://github.com/nestjs/awesome-nestjs  
-Mongoose Docs - https://mongoosejs.com/docs/api.html
-
-### Frontend
-
-Relay docs - https://relay.dev/docs/  
-GraphQL docs - https://graphql.org/  
-React tutorials - https://github.com/enaqx/awesome-react
 
 - [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
 - [Caching](https://turborepo.org/docs/core-concepts/caching)

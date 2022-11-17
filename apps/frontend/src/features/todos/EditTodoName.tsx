@@ -9,13 +9,12 @@ interface EditTodoNameProps {
 const EditTodoName: React.FC<EditTodoNameProps> = (props) => {
 	return (
 		<>
-<Group>
-			<Text weight={500}>{props.todoName}</Text>
-            <ActionIcon ></ActionIcon>
-</Group>
+			<Group>
+				<Text weight={500}>{props.todoName}</Text>
+				<ActionIcon></ActionIcon>
+			</Group>
 		</>
 	);
 };
 
 export default EditTodoName;
-

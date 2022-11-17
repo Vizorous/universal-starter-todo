@@ -11,7 +11,7 @@ module.exports = {
 		ecmaVersion: "latest",
 	},
 	root: true,
-	extends: ["plugin:react/recommended", "prettier", "standard-with-typescript"],
+	extends: ["plugin:react/recommended", "standard-with-typescript", "prettier"],
 	overrides: [],
 	ignorePatterns: [
 		"**/*.graphql.ts",
@@ -29,16 +29,33 @@ module.exports = {
 	},
 	plugins: ["react", "unused-imports", "prettier"],
 	rules: {
+		"@typescript-eslint/member-delimiter-style": [
+			"warn",
+			{
+				multiline: {
+					delimiter: "semi",
+					requireLast: true,
+				},
+				singleline: {
+					delimiter: "semi",
+					requireLast: false,
+				},
+				multilineDetection: "brackets",
+			},
+		],
+		"@typescript-eslint/semi": "off",
+		"@typescript-eslint/comma-dangle": "off",
 		"@typescript-eslint/explicit-function-return-type": "off",
-
+		"@typescript-eslint/quotes": ["warn", "double"],
 		"prettier/prettier": ["warn"],
 		"@typescript-eslint/no-empty-interface": "off",
 		"no-tabs": "off",
-		indent: ["warn", "tab"],
+		indent: "off",
+		"@typescript-eslint/space-before-function-parentheses": "off",
 		"react/react-in-jsx-scope": "off",
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": "off",
-		"@typescript-eslint/indent": ["warn", "tab"],
+		"@typescript-eslint/indent": "off",
 		"unused-imports/no-unused-imports": "warn",
 		"unused-imports/no-unused-vars": [
 			"warn",

@@ -1,3 +1,3 @@
-import aiesecman from './aiesecman.png'
+import aiesecman from "./aiesecman.png";
 
-export const aiesecmanLogo = aiesecman
+export const aiesecmanLogo = aiesecman;

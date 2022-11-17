@@ -4,6 +4,8 @@
 	"bracketSpacing": true,
 	"printWidth": 120,
 	"jsxSingleQuote": false,
+	"semi": true,
 	"htmlWhitespaceSensitivity": "ignore",
 	"endOfLine": "crlf"
 }
+

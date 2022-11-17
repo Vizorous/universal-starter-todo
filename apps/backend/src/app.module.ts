@@ -11,14 +11,14 @@ import { CategoryModule } from "./category/category.module";
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({ envFilePath: [".env.dev", ".env.prod"], isGlobal: true, cache: true }),
+		ConfigModule.forRoot({ envFilePath: [".env", ".env.dev", ".env.prod"], isGlobal: true, cache: true }),
 		TypeOrmModule.forRoot({
 			type: "mysql",
-			database: "test",
+			database: process.env.DATABASE_NAME ?? "universal_todo",
 			host: "localhost",
 			port: 3306,
-			username: "root",
-			password: "root",
+			username: process.env.DATABASE_USERNAME ?? "root",
+			password: process.env.DATABASE_PASSWORD ?? "root",
 			// type: "postgres",
 			// database: "test",
 			// port: 5432,

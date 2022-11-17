@@ -11,7 +11,7 @@ interface AddTodosProps {
 }
 
 // this is the mutation that will be used to add a todo
-// connections make sure that the added data is updated in the cache, 
+// connections make sure that the added data is updated in the cache,
 // so that the data is updated in the UI
 // @appendNode makes sure that the added data is added to the end of the list
 // you have to pass the connections and edgeName (which can be taken from suggestions) to @appendNode
@@ -38,7 +38,7 @@ const AddTodo: React.FC<AddTodosProps> = ({ connectionID }) => {
 			description: "",
 		},
 	});
-	//useMutation hook is used to execute the mutation
+	// useMutation hook is used to execute the mutation
 	const [addTodo, isAdding] = useMutation<AddTodoMutation>(addTodoM);
 
 	return (
@@ -48,7 +48,7 @@ const AddTodo: React.FC<AddTodosProps> = ({ connectionID }) => {
 					onSubmit={form.onSubmit((values) => {
 						addTodo({
 							onCompleted(response, errors) {
-								if (errors) {
+								if (errors != null) {
 									return console.log(errors);
 								}
 								setOpened(false);
@@ -84,4 +84,3 @@ const AddTodo: React.FC<AddTodosProps> = ({ connectionID }) => {
 };
 
 export default AddTodo;
-

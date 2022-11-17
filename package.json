@@ -33,7 +33,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "lint-staged",
+			"pre-commit": "pnpm lint",
 			"post-checkout": "yarnhook",
 			"post-merge": "yarnhook",
 			"post-rewrite": "yarnhook"
@@ -48,7 +48,9 @@
 		"npm": ">=7.0.0",
 		"node": ">=14.0.0"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@commitlint/cli": "^17.2.0",
+		"@commitlint/config-conventional": "^17.2.0"
+	},
 	"packageManager": "pnpm@7.0.1"
 }
-

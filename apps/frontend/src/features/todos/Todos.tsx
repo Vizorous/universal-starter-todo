@@ -1,13 +1,8 @@
-import { ActionIcon, Badge, Button, Card, Group, Text, Title, Tooltip } from "@mantine/core";
-import { TablerCross, TablerPlus } from "@seamlessc/tabler-icons-react";
+import { Group, Title } from "@mantine/core";
 import React from "react";
-import { ConnectionHandler, graphql, usePaginationFragment } from "react-relay";
-import {
-	EditCategoriesGetFragment$data,
-	EditCategoriesGetFragment$key,
-} from "../../__gen__/EditCategoriesGetFragment.graphql";
+import { graphql, usePaginationFragment } from "react-relay";
+import { EditCategoriesGetFragment$key } from "../../__gen__/EditCategoriesGetFragment.graphql";
 import { TodosFragment$key } from "../../__gen__/TodosFragment.graphql";
-import { TodosQuery } from "../../__gen__/TodosQuery.graphql";
 import AddTodo from "./AddTodo";
 import Todo from "./Todo";
 
@@ -85,4 +80,3 @@ const Todos: React.FC<TodosProps> = (props) => {
 };
 
 export default Todos;
-
