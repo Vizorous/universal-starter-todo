@@ -2,7 +2,7 @@ import React from "react";
 import { AppShell, Header, MediaQuery, Burger, Image, createStyles, CSSObject } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ResponsiveNavbar from "../navbar/ResponsiveNavbar";
-import { aiesecmanLogo } from "../common/assets/exports";
+import { aiesecmanLogo } from "../0common/assets/exports";
 import Home from "../home/Home";
 
 interface ShellProps {}
