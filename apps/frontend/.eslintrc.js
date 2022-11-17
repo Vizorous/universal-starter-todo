@@ -17,7 +17,7 @@ module.exports = {
 		"**/*.graphql.ts",
 		"**/*.d.ts",
 		".eslintrc.js",
-		"",
+		"schema.graphql",
 		"jest.config.js",
 		"webpack-hmr.config.js",
 		".lintstagedrc.js",

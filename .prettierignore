@@ -1,3 +1,4 @@
 seamless-analytics.code-workspace
 **/*.graphql.ts
 **/*.d.ts
+**/*.graphql

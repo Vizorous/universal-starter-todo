@@ -1,79 +1,132 @@
-# Turborepo starter with pnpm
+# Universal Starter Template 
 
-This is an official starter turborepo.
+## Get started
 
-## What's inside?
+- Make sure you've installed Node 16 for optimal usage. (14 will work but pnpm setup could be harder)
+- Install pnpm package manager. For node versions before 16, use `npm install -g pnpm`
+  ```
+  corepack enable
+  ```
+- Install watchman (required for relay) from here https://facebook.github.io/watchman/ or through chocolatey,
 
-sdfsfsfsf
-This turborepo uses [pnpm](https://pnpm.io) as a packages manager. It includes the following packages/apps:
+  ```
+  choco install watchman
+  ```
 
-### Apps and Packages
+- Install dependencies through,
 
-- `docs`: a [Next.js](https://nextjs.org) app
-- `web`: another [Next.js](https://nextjs.org) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+  ```
+  pnpm install
+  ```
+- Run backend first to create the schema file for frontend
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+    ```
+    pnpm be dev
+    ```
+- You can shut it down then and start development. 
+- Start the development servers with,
 
-### Utilities
+  ```
+  pnpm dev
+  ```
 
-This turborepo has some additional tools already setup for you:
+## Dependency Installation
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+Utilize following commands to install in the respective project folders
 
-## Setup
+- Frontend install (alias for `pnpm --filter frontend add`)
 
-This repository is used in the `npx create-turbo@latest` command, and selected when choosing which package manager you wish to use with your monorepo (pnpm).
+  ```
+  pnpm fea lodash
+  ```
 
-### Build
+- Backend install (alias for `pnpm --filter backend add`)
 
-To build all apps and packages, run the following command:
+  ```
+  pnpm bea lodash
+  ```
 
-```
-cd my-turborepo
-pnpm run build
-```
+## PNPM Command Usage
 
-### Develop
+Aliases has been created to utilize scoped PNPM commands correctly.
 
-To develop all apps and packages, run the following command:
+- backend (for `pnpm --filter backend`)
+  ```
+  pnpm be
+  ```
+- frontend (for `pnpm --filter frontend`)
+  ```
+  pnpm fe
+  ```
 
-```
-cd my-turborepo
-pnpm run dev
-```
+### PNPM Examples
 
-### Remote Caching
+- Run dev script in backend.
+  ```
+  pnpm be dev
+  ```
+- remove lodash from frontend
+  ```
+  pnpm fe remove lodash
+  ```
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## Workspace usage
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+Utilize the [workspace](seamless-analytics.code-workspace) file to access the workspace, it contains following folders,
 
-```
-cd my-turborepo
-pnpx turbo login
-```
+- [frontend](apps/frontend/)
+- [backend](apps/backend/)
+- [relay-graphql](packages/relay-graphql//)
+- [root](/)
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Nest CLI (GraphQL CRUD Endpoint Generation)
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+- An alias has been created for `pnpm --filter backend run nest` command to utilize nest cli commands correctly.
+  ```
+  pnpm nest
+  ```
+- [Nest CLI reference](https://docs.nestjs.com/cli/overview)
 
-```
-pnpx turbo link
-```
+### Nest CLI Examples
 
-## Useful Links
+- Generate a new CRUD resource called matric inside [src/facebook](apps/backend/src/facebook/) folder in backend. (Utilized the `folder_name/resource_name` syntax to add to the correct folder)
+  ```
+  pnpm nest g resource facebook/matric
+  ```
+- Please find the list of all generatable attributes [here](https://docs.nestjs.com/cli/usages#arguments-1)
 
-Learn more about the power of Turborepo:
+## Database browsing
+
+- Use [MongoDBCompass](https://www.mongodb.com/try/download/compass) to browse the data.
+
+- Use the URL in `MONGO_DB` field in `.env.dev` to connect to the online database.
+
+### Build Process
+
+Todo
+
+### Testing
+
+Todo
+
+## Library Documentation
+
+### Backend
+
+Nest GraphQL - https://docs.nestjs.com/graphql/quick-start  
+Nest Mongoose - https://docs.nestjs.com/recipes/mongodb  
+Nest Tutorials - https://github.com/nestjs/awesome-nestjs  
+Mongoose Docs - https://mongoosejs.com/docs/api.html
+
+### Frontend
+
+Relay docs - https://relay.dev/docs/  
+GraphQL docs - https://graphql.org/  
+React tutorials - https://github.com/enaqx/awesome-react
 
 - [Pipelines](https://turborepo.org/docs/core-concepts/pipelines)
 - [Caching](https://turborepo.org/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.org/docs/core-concepts/remote-caching)
+- [Remote Caching (Beta)](https://turborepo.org/docs/core-concepts/remote-caching)
 - [Scoped Tasks](https://turborepo.org/docs/core-concepts/scopes)
 - [Configuration Options](https://turborepo.org/docs/reference/configuration)
 - [CLI Usage](https://turborepo.org/docs/reference/command-line-reference)
-

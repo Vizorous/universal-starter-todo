@@ -1,0 +1,997 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """User name"""
+  name: String!
+
+  """User email"""
+  email: String!
+
+  """User AIESEC email"""
+  aiesecEmail: String
+
+  """User entity"""
+  entity: String!
+
+  """User role"""
+  role: String!
+}
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+type UserDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """User name"""
+  name: String
+
+  """User email"""
+  email: String
+
+  """User AIESEC email"""
+  aiesecEmail: String
+
+  """User entity"""
+  entity: String
+
+  """User role"""
+  role: String
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+type UserEdge {
+  """The node containing the User"""
+  node: User!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type UserConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [UserEdge!]!
+}
+
+type Category {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Category name"""
+  name: String!
+}
+
+type SubTask {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """SubTask name"""
+  name: String!
+
+  """SubTask done"""
+  done: Boolean!
+
+  """SubTask description"""
+  description: String!
+  todoId: String!
+  categoryId: String!
+  category: Category!
+}
+
+type Todo {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Todo name"""
+  name: String!
+
+  """Todo done"""
+  done: Boolean!
+
+  """Todo description"""
+  description: String!
+  categoryId: String
+  subTasksAggregate(
+    """Filter to find records to aggregate on"""
+    filter: SubTaskAggregateFilter
+  ): [TodoSubTasksAggregateResponse!]!
+  category: Category
+  subTasks(
+    """Specify to filter the records returned."""
+    filter: SubTaskFilter = {}
+
+    """Specify to sort results."""
+    sorting: [SubTaskSort!] = []
+  ): [SubTask!]
+}
+
+input SubTaskAggregateFilter {
+  and: [SubTaskAggregateFilter!]
+  or: [SubTaskAggregateFilter!]
+  id: SubTaskIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: SubTaskNameFilterComparison
+  done: BooleanFieldComparison
+  todoId: StringFieldComparison
+  categoryId: StringFieldComparison
+}
+
+input SubTaskIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
+}
+
+input SubTaskNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input BooleanFieldComparison {
+  is: Boolean
+  isNot: Boolean
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input SubTaskFilter {
+  and: [SubTaskFilter!]
+  or: [SubTaskFilter!]
+  id: SubTaskIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: SubTaskNameFilterComparison
+  done: BooleanFieldComparison
+  todoId: StringFieldComparison
+  categoryId: StringFieldComparison
+  category: SubTaskFilterCategoryFilter
+}
+
+input SubTaskFilterCategoryFilter {
+  and: [SubTaskFilterCategoryFilter!]
+  or: [SubTaskFilterCategoryFilter!]
+  id: CategoryIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: CategoryNameFilterComparison
+}
+
+input CategoryIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input CategoryNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input SubTaskSort {
+  field: SubTaskSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum SubTaskSortFields {
+  id
+  createdAt
+  updatedAt
+  name
+  done
+  todoId
+  categoryId
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+type TodoName {
+  id: ID!
+
+  """Todo name"""
+  name: String!
+}
+
+type TodoDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """Todo name"""
+  name: String
+
+  """Todo done"""
+  done: Boolean
+
+  """Todo description"""
+  description: String
+  categoryId: String
+}
+
+type TodoEdge {
+  """The node containing the Todo"""
+  node: Todo!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type TodoConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [TodoEdge!]!
+}
+
+type TodoAggregateGroupBy {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  name: String
+  done: Boolean
+  categoryId: String
+}
+
+type TodoCountAggregate {
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  name: Int
+  done: Int
+  categoryId: Int
+}
+
+type TodoMinAggregate {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  name: String
+  categoryId: String
+}
+
+type TodoMaxAggregate {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  name: String
+  categoryId: String
+}
+
+type TodoAggregateResponse {
+  groupBy: TodoAggregateGroupBy
+  count: TodoCountAggregate
+  min: TodoMinAggregate
+  max: TodoMaxAggregate
+}
+
+type TodoSubTasksAggregateGroupBy {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  name: String
+  done: Boolean
+  todoId: String
+  categoryId: String
+}
+
+type TodoSubTasksCountAggregate {
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  name: Int
+  done: Int
+  todoId: Int
+  categoryId: Int
+}
+
+type TodoSubTasksMinAggregate {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  name: String
+  todoId: String
+  categoryId: String
+}
+
+type TodoSubTasksMaxAggregate {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  name: String
+  todoId: String
+  categoryId: String
+}
+
+type TodoSubTasksAggregateResponse {
+  groupBy: TodoSubTasksAggregateGroupBy
+  count: TodoSubTasksCountAggregate
+  min: TodoSubTasksMinAggregate
+  max: TodoSubTasksMaxAggregate
+}
+
+type SubTaskDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """SubTask name"""
+  name: String
+
+  """SubTask done"""
+  done: Boolean
+
+  """SubTask description"""
+  description: String
+  todoId: String
+  categoryId: String
+}
+
+type SubTaskEdge {
+  """The node containing the SubTask"""
+  node: SubTask!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type SubTaskConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [SubTaskEdge!]!
+}
+
+type CategoryDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """Category name"""
+  name: String
+}
+
+type CategoryEdge {
+  """The node containing the Category"""
+  node: Category!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type CategoryConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [CategoryEdge!]!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  user(
+    """The id of the record to find."""
+    id: ID!
+  ): User!
+  users(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: UserFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [UserSort!] = []
+  ): UserConnection!
+  todoNames(todoName: String!): [TodoName]!
+  todoAggregate(
+    """Filter to find records to aggregate on"""
+    filter: TodoAggregateFilter
+  ): [TodoAggregateResponse!]!
+  todo(
+    """The id of the record to find."""
+    id: ID!
+  ): Todo!
+  todos(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: TodoFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [TodoSort!] = []
+  ): TodoConnection!
+  subTask(
+    """The id of the record to find."""
+    id: ID!
+  ): SubTask!
+  subTasks(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: SubTaskFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [SubTaskSort!] = []
+  ): SubTaskConnection!
+  category(
+    """The id of the record to find."""
+    id: ID!
+  ): Category!
+  categories(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: CategoryFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [CategorySort!] = []
+  ): CategoryConnection!
+}
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+input UserFilter {
+  and: [UserFilter!]
+  or: [UserFilter!]
+  id: UserIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: UserNameFilterComparison
+  email: UserEmailFilterComparison
+  aiesecEmail: UserAiesecEmailFilterComparison
+  entity: UserEntityFilterComparison
+  role: UserRoleFilterComparison
+}
+
+input UserIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input UserNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input UserEmailFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input UserAiesecEmailFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input UserEntityFilterComparison {
+  is: Boolean
+  in: [String!]
+}
+
+input UserRoleFilterComparison {
+  is: Boolean
+  in: [String!]
+}
+
+input UserSort {
+  field: UserSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum UserSortFields {
+  id
+  createdAt
+  updatedAt
+  name
+  email
+  aiesecEmail
+  entity
+  role
+}
+
+input TodoAggregateFilter {
+  and: [TodoAggregateFilter!]
+  or: [TodoAggregateFilter!]
+  id: TodoIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: TodoNameFilterComparison
+  done: BooleanFieldComparison
+  categoryId: StringFieldComparison
+}
+
+input TodoIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input TodoNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input TodoFilter {
+  and: [TodoFilter!]
+  or: [TodoFilter!]
+  id: TodoIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: TodoNameFilterComparison
+  done: BooleanFieldComparison
+  categoryId: StringFieldComparison
+  category: TodoFilterCategoryFilter
+}
+
+input TodoFilterCategoryFilter {
+  and: [TodoFilterCategoryFilter!]
+  or: [TodoFilterCategoryFilter!]
+  id: CategoryIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: CategoryNameFilterComparison
+}
+
+input TodoSort {
+  field: TodoSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum TodoSortFields {
+  id
+  createdAt
+  updatedAt
+  name
+  done
+  categoryId
+}
+
+input CategoryFilter {
+  and: [CategoryFilter!]
+  or: [CategoryFilter!]
+  id: CategoryIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: CategoryNameFilterComparison
+}
+
+input CategorySort {
+  field: CategorySortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum CategorySortFields {
+  id
+  createdAt
+  updatedAt
+  name
+}
+
+type Mutation {
+  createOneUser(input: CreateOneUserInput!): User!
+  createManyUsers(input: CreateManyUsersInput!): [User!]!
+  updateOneUser(input: UpdateOneUserInput!): User!
+  updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
+  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
+  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
+  setCategoryOnTodo(input: SetCategoryOnTodoInput!): Todo!
+  addSubTasksToTodo(input: AddSubTasksToTodoInput!): Todo!
+  setSubTasksOnTodo(input: SetSubTasksOnTodoInput!): Todo!
+  removeSubTasksFromTodo(input: RemoveSubTasksFromTodoInput!): Todo!
+  createOneTodo(input: CreateOneTodoInput!): Todo!
+  updateOneTodo(input: UpdateOneTodoInput!): Todo!
+  deleteOneTodo(input: DeleteOneTodoInput!): TodoDeleteResponse!
+  setCategoryOnSubTask(input: SetCategoryOnSubTaskInput!): SubTask!
+  createOneSubTask(input: CreateOneSubTaskInput!): SubTask!
+  updateOneSubTask(input: UpdateOneSubTaskInput!): SubTask!
+  deleteOneSubTask(input: DeleteOneSubTaskInput!): SubTaskDeleteResponse!
+  createOneCategory(input: CreateOneCategoryInput!): Category!
+  updateOneCategory(input: UpdateOneCategoryInput!): Category!
+  deleteOneCategory(input: DeleteOneCategoryInput!): CategoryDeleteResponse!
+}
+
+input CreateOneUserInput {
+  """The record to create"""
+  user: CreateUser!
+}
+
+input CreateUser {
+  """User name"""
+  name: String!
+
+  """User email"""
+  email: String!
+
+  """User entity"""
+  entity: String!
+
+  """User role"""
+  role: String!
+}
+
+input CreateManyUsersInput {
+  """Array of records to create"""
+  users: [CreateUser!]!
+}
+
+input UpdateOneUserInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateUser!
+}
+
+input UpdateUser {
+  """User name"""
+  name: String
+
+  """User email"""
+  email: String
+
+  """User AIESEC email"""
+  aiesecEmail: String
+
+  """User entity"""
+  entity: String
+
+  """User role"""
+  role: String
+  id: ID!
+}
+
+input UpdateManyUsersInput {
+  """Filter used to find fields to update"""
+  filter: UserUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateUser!
+}
+
+input UserUpdateFilter {
+  and: [UserUpdateFilter!]
+  or: [UserUpdateFilter!]
+  id: UserIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: UserNameFilterComparison
+  email: UserEmailFilterComparison
+  aiesecEmail: UserAiesecEmailFilterComparison
+  entity: UserEntityFilterComparison
+  role: UserRoleFilterComparison
+}
+
+input DeleteOneUserInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyUsersInput {
+  """Filter to find records to delete"""
+  filter: UserDeleteFilter!
+}
+
+input UserDeleteFilter {
+  and: [UserDeleteFilter!]
+  or: [UserDeleteFilter!]
+  id: UserIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: UserNameFilterComparison
+  email: UserEmailFilterComparison
+  aiesecEmail: UserAiesecEmailFilterComparison
+  entity: UserEntityFilterComparison
+  role: UserRoleFilterComparison
+}
+
+input SetCategoryOnTodoInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input AddSubTasksToTodoInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetSubTasksOnTodoInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input RemoveSubTasksFromTodoInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOneTodoInput {
+  """The record to create"""
+  todo: CreateTodo!
+}
+
+input CreateTodo {
+  """Todo name"""
+  name: String!
+
+  """Todo description"""
+  description: String!
+  categoryId: String
+}
+
+input UpdateOneTodoInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateTodo!
+}
+
+input UpdateTodo {
+  """Todo name"""
+  name: String
+
+  """Todo done"""
+  done: Boolean
+
+  """Todo description"""
+  description: String
+  categoryId: String
+  id: ID!
+}
+
+input DeleteOneTodoInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input SetCategoryOnSubTaskInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input CreateOneSubTaskInput {
+  """The record to create"""
+  subTask: CreateSubTask!
+}
+
+input CreateSubTask {
+  """SubTask name"""
+  name: String!
+
+  """SubTask description"""
+  description: String!
+  todoId: String!
+  categoryId: String!
+}
+
+input UpdateOneSubTaskInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateSubTask!
+}
+
+input UpdateSubTask {
+  """SubTask name"""
+  name: String
+
+  """SubTask done"""
+  done: Boolean
+
+  """SubTask description"""
+  description: String
+  todoId: String
+  categoryId: String
+  id: ID!
+}
+
+input DeleteOneSubTaskInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input CreateOneCategoryInput {
+  """The record to create"""
+  category: CreateCategory!
+}
+
+input CreateCategory {
+  """Category name"""
+  name: String!
+}
+
+input UpdateOneCategoryInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateCategory!
+}
+
+input UpdateCategory {
+  """Category name"""
+  name: String
+  id: ID!
+}
+
+input DeleteOneCategoryInput {
+  """The id of the record to delete."""
+  id: ID!
+}
