@@ -1,6 +1,6 @@
 import { ObjectType } from "@nestjs/graphql";
 import { FilterableRelation } from "@vizorous/nestjs-query-graphql";
-import { Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, Index, ManyToOne } from "typeorm";
 import { BaseEntity, CFF } from "@vizorous/nest-query-utils";
 import { Todo } from "src/todo/entities/todo.entity";
 import { Category } from "src/category/entities/category.entity";
