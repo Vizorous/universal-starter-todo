@@ -50,7 +50,7 @@ importers:
       '@types/supertest': ^2.0.11
       '@typescript-eslint/eslint-plugin': ^5.0.0
       '@typescript-eslint/parser': ^5.0.0
-      '@vizorous/nest-query-utils': 0.0.5
+      '@vizorous/nest-query-utils': 0.0.6
       '@vizorous/nestjs-query-core': 1.0.9
       '@vizorous/nestjs-query-graphql': 1.1.1
       '@vizorous/nestjs-query-typeorm': 1.1.2
@@ -113,7 +113,7 @@ importers:
       '@nestjs/platform-express': 8.4.7_pf2fb646rsvo5szivgkaevcpvi
       '@nestjs/platform-fastify': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
       '@nestjs/typeorm': 9.0.1_2ekyp7igf6cbpgvvmiypy4gzpu
-      '@vizorous/nest-query-utils': 0.0.5_cloj5exubuzy6pdoqaunfjc4y4
+      '@vizorous/nest-query-utils': 0.0.6_cloj5exubuzy6pdoqaunfjc4y4
       '@vizorous/nestjs-query-core': 1.0.9_o4bgegdgebs72zdvzqhbsdthpu
       '@vizorous/nestjs-query-graphql': 1.1.1_sxgbpn7uquzadbebch42iglnhy
       '@vizorous/nestjs-query-typeorm': 1.1.2_46yuwj3nkvwzgrnsejgbypyyey
@@ -4918,8 +4918,8 @@ packages:
       sirv: 2.0.2
     dev: true
 
-  /@vizorous/nest-query-utils/0.0.5_cloj5exubuzy6pdoqaunfjc4y4:
-    resolution: {integrity: sha512-u2B2yhXnGimeMLdbn1nkHd0lPy5vRsmyIfSndkBH+nJrLarupaDrRcmURIoJ9mS+LRpUdBJ9GSZAOjzzjz9lvA==}
+  /@vizorous/nest-query-utils/0.0.6_cloj5exubuzy6pdoqaunfjc4y4:
+    resolution: {integrity: sha512-Od18feewJMCK8yf5hVkuEsLR17uEOlDxA167/CQKNsOo67WEL12CW0Ptm5zBO08F7DMURkOgxKuYhNqCjzhsIg==}
     engines: {node: '>=12.0'}
     dependencies:
       '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a

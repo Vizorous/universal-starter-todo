@@ -94,6 +94,7 @@ type Category {
 
   """Category name"""
   name: String!
+  description: String
 }
 
 type SubTask {
@@ -110,7 +111,7 @@ type SubTask {
   """SubTask description"""
   description: String!
   todoId: String!
-  categoryId: String!
+  categoryId: String
   category: Category!
 }
 
@@ -128,23 +129,48 @@ type Todo {
   """Todo description"""
   description: String!
   categoryId: String
-  subTasksAggregate(
-    """Filter to find records to aggregate on"""
-    filter: SubTaskAggregateFilter
-  ): [TodoSubTasksAggregateResponse!]!
   category: Category
   subTasks(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
     """Specify to filter the records returned."""
     filter: SubTaskFilter = {}
 
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
     """Specify to sort results."""
     sorting: [SubTaskSort!] = []
-  ): [SubTask!]
+  ): TodoSubTasksConnection
 }
 
-input SubTaskAggregateFilter {
-  and: [SubTaskAggregateFilter!]
-  or: [SubTaskAggregateFilter!]
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+input SubTaskFilter {
+  and: [SubTaskFilter!]
+  or: [SubTaskFilter!]
   id: SubTaskIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -152,6 +178,7 @@ input SubTaskAggregateFilter {
   done: BooleanFieldComparison
   todoId: StringFieldComparison
   categoryId: StringFieldComparison
+  category: SubTaskFilterCategoryFilter
 }
 
 input SubTaskIdFilterComparison {
@@ -210,19 +237,6 @@ input StringFieldComparison {
   notILike: String
   in: [String!]
   notIn: [String!]
-}
-
-input SubTaskFilter {
-  and: [SubTaskFilter!]
-  or: [SubTaskFilter!]
-  id: SubTaskIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: SubTaskNameFilterComparison
-  done: BooleanFieldComparison
-  todoId: StringFieldComparison
-  categoryId: StringFieldComparison
-  category: SubTaskFilterCategoryFilter
 }
 
 input SubTaskFilterCategoryFilter {
@@ -353,49 +367,20 @@ type TodoAggregateResponse {
   max: TodoMaxAggregate
 }
 
-type TodoSubTasksAggregateGroupBy {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  done: Boolean
-  todoId: String
-  categoryId: String
+type SubTaskEdge {
+  """The node containing the SubTask"""
+  node: SubTask!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
 }
 
-type TodoSubTasksCountAggregate {
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  name: Int
-  done: Int
-  todoId: Int
-  categoryId: Int
-}
+type TodoSubTasksConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
 
-type TodoSubTasksMinAggregate {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  todoId: String
-  categoryId: String
-}
-
-type TodoSubTasksMaxAggregate {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  todoId: String
-  categoryId: String
-}
-
-type TodoSubTasksAggregateResponse {
-  groupBy: TodoSubTasksAggregateGroupBy
-  count: TodoSubTasksCountAggregate
-  min: TodoSubTasksMinAggregate
-  max: TodoSubTasksMaxAggregate
+  """Array of edges."""
+  edges: [SubTaskEdge!]!
 }
 
 type SubTaskDeleteResponse {
@@ -415,14 +400,6 @@ type SubTaskDeleteResponse {
   categoryId: String
 }
 
-type SubTaskEdge {
-  """The node containing the SubTask"""
-  node: SubTask!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
 type SubTaskConnection {
   """Paging information"""
   pageInfo: PageInfo!
@@ -438,6 +415,7 @@ type CategoryDeleteResponse {
 
   """Category name"""
   name: String
+  description: String
 }
 
 type CategoryEdge {
@@ -569,20 +547,6 @@ type Query {
     """Specify to sort results."""
     sorting: [CategorySort!] = []
   ): CategoryConnection!
-}
-
-input CursorPaging {
-  """Paginate before opaque cursor"""
-  before: ConnectionCursor
-
-  """Paginate after opaque cursor"""
-  after: ConnectionCursor
-
-  """Paginate first"""
-  first: Int
-
-  """Paginate last"""
-  last: Int
 }
 
 input UserFilter {
@@ -798,7 +762,6 @@ input UpdateUser {
 
   """User role"""
   role: String
-  id: ID!
 }
 
 input UpdateManyUsersInput {
@@ -909,7 +872,6 @@ input UpdateTodo {
   """Todo description"""
   description: String
   categoryId: String
-  id: ID!
 }
 
 input DeleteOneTodoInput {
@@ -937,7 +899,7 @@ input CreateSubTask {
   """SubTask description"""
   description: String!
   todoId: String!
-  categoryId: String!
+  categoryId: String
 }
 
 input UpdateOneSubTaskInput {
@@ -959,7 +921,6 @@ input UpdateSubTask {
   description: String
   todoId: String
   categoryId: String
-  id: ID!
 }
 
 input DeleteOneSubTaskInput {
@@ -975,6 +936,7 @@ input CreateOneCategoryInput {
 input CreateCategory {
   """Category name"""
   name: String!
+  description: String
 }
 
 input UpdateOneCategoryInput {
@@ -988,7 +950,7 @@ input UpdateOneCategoryInput {
 input UpdateCategory {
   """Category name"""
   name: String
-  id: ID!
+  description: String
 }
 
 input DeleteOneCategoryInput {
