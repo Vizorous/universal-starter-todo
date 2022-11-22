@@ -82,6 +82,16 @@ Aliases has been created to utilize scoped PNPM commands correctly.
   pnpm fe remove lodash
   ```
 
+## CRUD Endpoint generation
+
+- A custom made version of @nestjs/cli has been created for this project.
+- It is capable of generating an entire CRUD resource (Module, Service, Resolver, Entity, DTOs) by itself.
+- It is integrated with TypeORM and nestjs-query as well.
+- Run the following command to create a new resource.
+  ```
+  pnpm viz g resource resource-name
+  ```
+- *You should always use this to generate new Endpoints.*
 ## Commit guide
 
 We utilize convention commits to put our commits in a standard format. This helps us to generate changelogs and release notes automatically. Please follow the following guide to commit your changes.
@@ -158,14 +168,6 @@ Utilize the [workspace](starter.code-workspace) file to access the workspace, it
 - Relay docs - https://relay.dev/docs/
 - GraphQL docs - https://graphql.org/
 - React tutorials - https://github.com/enaqx/awesome-react
-
-## Nest CLI (GraphQL CRUD Endpoint Generation)
-
-- An alias has been created for `pnpm --filter backend run nest` command to utilize nest cli commands correctly.
-  ```
-  pnpm nest
-  ```
-- [Nest CLI reference](https://docs.nestjs.com/cli/overview)
 
 ## Database Browsing
 
