@@ -1,5 +1,5 @@
 import { InputType } from "@nestjs/graphql";
-import { UpdateType } from "src/_common/utils/MappedTypes";
+import { UpdateType } from "@vizorous/nest-query-utils";
 import { Todo } from "../entities/todo.entity";
 
 @InputType()

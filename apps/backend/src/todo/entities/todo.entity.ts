@@ -1,9 +1,9 @@
 import { ObjectType } from "@nestjs/graphql";
 import { FilterableRelation, UnPagedRelation } from "@vizorous/nestjs-query-graphql";
 import { Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import CF from "src/_common/decorators/CF";
-import CFF from "src/_common/decorators/CFF";
-import { BaseEntity } from "../../_common/entities/base.entity";
+import { CF } from "@vizorous/nest-query-utils";
+import { CFF } from "@vizorous/nest-query-utils";
+import { BaseEntity } from "@vizorous/nest-query-utils";
 import { Category } from "src/category/entities/category.entity";
 import { SubTask } from "src/sub-task/entities/sub-task.entity";
 

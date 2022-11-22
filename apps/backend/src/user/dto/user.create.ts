@@ -1,5 +1,5 @@
 import { InputType } from "@nestjs/graphql";
-import { CreateType } from "src/_common/utils/MappedTypes";
+import { CreateType } from "@vizorous/nest-query-utils";
 import { User } from "../entities/user.entity";
 
 @InputType()

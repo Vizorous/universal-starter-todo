@@ -1,11 +1,10 @@
 import { ObjectType } from "@nestjs/graphql";
 import { FilterableRelation } from "@vizorous/nestjs-query-graphql";
 import { Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import CFF from "src/_common/decorators/CFF";
+import { BaseEntity, CFF } from "@vizorous/nest-query-utils";
 import { Todo } from "src/todo/entities/todo.entity";
 import { Category } from "src/category/entities/category.entity";
-import { BaseEntity } from "src/_common/entities/base.entity";
-import CF from "src/_common/decorators/CF";
+import { CF } from "@vizorous/nest-query-utils";
 
 @ObjectType()
 @Entity()

@@ -1,5 +1,5 @@
 import { InputType } from "@nestjs/graphql";
-import { CreateType } from "src/_common/utils/MappedTypes";
+import { CreateType } from "@vizorous/nest-query-utils";
 import { SubTask } from "../entities/sub-task.entity";
 
 // Make sure to omit category and todo from the CreateType
