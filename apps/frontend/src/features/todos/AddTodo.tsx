@@ -1,4 +1,13 @@
-import { ActionIcon, Button, Group, Modal, Space, Textarea, TextInput, Tooltip } from "@mantine/core";
+import {
+	ActionIcon,
+	Button,
+	Group,
+	Modal,
+	Space,
+	Textarea,
+	TextInput,
+	Tooltip,
+} from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 import { TablerPlus } from "@seamlessc/tabler-icons-react";
 import React from "react";
@@ -16,7 +25,11 @@ interface AddTodosProps {
 // @appendNode makes sure that the added data is added to the end of the list
 // you have to pass the connections and edgeName (which can be taken from suggestions) to @appendNode
 export const addTodoM = graphql`
-	mutation AddTodoMutation($connections: [ID!]!, $name: String!, $description: String!) {
+	mutation AddTodoMutation(
+		$connections: [ID!]!
+		$name: String!
+		$description: String!
+	) {
 		createOneTodo(input: { todo: { name: $name, description: $description } })
 			@appendNode(connections: $connections, edgeTypeName: "TodoEdge") {
 			id
@@ -43,7 +56,12 @@ const AddTodo: React.FC<AddTodosProps> = ({ connectionID }) => {
 
 	return (
 		<>
-			<Modal opened={opened} onClose={() => setOpened(false)} title="Add a todo" centered>
+			<Modal
+				opened={opened}
+				onClose={() => setOpened(false)}
+				title="Add a todo"
+				centered
+			>
 				<form
 					onSubmit={form.onSubmit((values) => {
 						addTodo({
@@ -61,7 +79,12 @@ const AddTodo: React.FC<AddTodosProps> = ({ connectionID }) => {
 						});
 					})}
 				>
-					<TextInput withAsterisk label="Name" placeholder="Todo name" {...form.getInputProps("name")} />
+					<TextInput
+						withAsterisk
+						label="Name"
+						placeholder="Todo name"
+						{...form.getInputProps("name")}
+					/>
 					<Space h="sm"></Space>
 					<Textarea
 						withAsterisk

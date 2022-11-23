@@ -30,10 +30,18 @@ const Todo: React.FC<TodoProps> = ({ todo, connectionID, categoryKey }) => {
 	const [deleteTodo, isDeleting] = useMutation<TodoDeleteMutation>(deleteTodoM);
 	return (
 		<>
-			<Card sx={{ overflow: "unset" }} key={`${todo.id}-card`} m={"lg"} shadow="md">
+			<Card
+				sx={{ overflow: "unset" }}
+				key={`${todo.id}-card`}
+				m={"lg"}
+				shadow="md"
+			>
 				<Group position="apart" align="flex-start">
 					<Stack>
-						<EditTodoName connectionID={connectionID} todoName={todo.name}></EditTodoName>
+						<EditTodoName
+							connectionID={connectionID}
+							todoName={todo.name}
+						></EditTodoName>
 						<EditCategories
 							todoId={todo.id}
 							connectionID={connectionID}

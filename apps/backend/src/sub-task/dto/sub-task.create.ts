@@ -6,4 +6,8 @@ import { SubTask } from "../entities/sub-task.entity";
 // This is because those are relations for objects.
 // We use categoryId and todoId for DTO purposes.
 @InputType()
-export class CreateSubTask extends CreateType(SubTask, ["category", "done", "todo"]) {}
+export class CreateSubTask extends CreateType(SubTask, [
+	"category",
+	"done",
+	"todo",
+]) {}

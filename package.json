@@ -19,7 +19,7 @@
 		"fe": "pnpm --filter frontend",
 		"fea": "pnpm --filter frontend add",
 		"nest": "pnpm --filter backend nest",
-		"viz": "pnpm --filter backend viz",
+		"vizgen": "pnpm --filter backend viz g resource",
 		"relay": "pnpm fe relay",
 		"be:fix": "npx eslint ./apps/backend/**/*.ts --fix"
 	},

@@ -17,10 +17,16 @@ import { TodosFragment$data } from "../../__gen__/TodosFragment.graphql";
 // __id is the unique id of the connection
 export const categoriesF = graphql`
 	fragment EditCategoriesGetFragment on Query
-	@argumentDefinitions(first: { type: "Int!" }, after: { type: "ConnectionCursor!" })
+	@argumentDefinitions(
+		first: { type: "Int!" }
+		after: { type: "ConnectionCursor!" }
+	)
 	@refetchable(queryName: "CategoryRefetchQuery") {
-		categories(first: $first, after: $after, sorting: [{ field: createdAt, direction: ASC }])
-			@connection(key: "EditCategoriesGetFragment_categories", filters: []) {
+		categories(
+			first: $first
+			after: $after
+			sorting: [{ field: createdAt, direction: ASC }]
+		) @connection(key: "EditCategoriesGetFragment_categories", filters: []) {
 			__id
 			pageInfo {
 				hasNextPage
@@ -62,7 +68,8 @@ interface EditCategoriesProps {
 const EditCategories: React.FC<EditCategoriesProps> = (props) => {
 	const fragment = usePaginationFragment(categoriesF, props.categoryKey);
 	const categories = fragment.data.categories.edges.map((edge) => edge.node);
-	const [editCategories, isEditing] = useMutation<EditCategoriesMutation>(editCategoriesM);
+	const [editCategories, isEditing] =
+		useMutation<EditCategoriesMutation>(editCategoriesM);
 	return (
 		<>
 			<Menu>

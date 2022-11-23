@@ -23,8 +23,11 @@ export const todosQ = graphql`
 // __id is the unique id of the connection
 export const todoFragment = graphql`
 	fragment TodosFragment on Query @refetchable(queryName: "TodosRefetchQuery") {
-		todos(first: $first, after: $cursor, sorting: [{ field: createdAt, direction: ASC }])
-			@connection(key: "TodosFragment_todos", filters: []) {
+		todos(
+			first: $first
+			after: $cursor
+			sorting: [{ field: createdAt, direction: ASC }]
+		) @connection(key: "TodosFragment_todos", filters: []) {
 			__id
 			pageInfo {
 				hasNextPage
@@ -73,7 +76,12 @@ const Todos: React.FC<TodosProps> = (props) => {
 				<AddTodo connectionID={connectionID}></AddTodo>
 			</Group>
 			{todos.map((todo) => (
-				<Todo connectionID={connectionID} todo={todo} key={todo.id} categoryKey={props.categoryKey}></Todo>
+				<Todo
+					connectionID={connectionID}
+					todo={todo}
+					key={todo.id}
+					categoryKey={props.categoryKey}
+				></Todo>
 			))}
 		</>
 	);

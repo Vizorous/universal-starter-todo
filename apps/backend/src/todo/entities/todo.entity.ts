@@ -1,5 +1,8 @@
 import { ObjectType } from "@nestjs/graphql";
-import { CursorConnection, FilterableRelation } from "@vizorous/nestjs-query-graphql";
+import {
+	CursorConnection,
+	FilterableRelation,
+} from "@vizorous/nestjs-query-graphql";
 import { Entity, Index, ManyToOne, OneToMany } from "typeorm";
 import { CFF, CF } from "@vizorous/nest-query-utils";
 import { BaseEntity } from "@vizorous/nest-query-utils";
@@ -10,18 +13,27 @@ import { SubTask } from "src/sub-task/entities/sub-task.entity";
 @Entity({})
 // Defines a OneToOne or ManyToOne relations in the GraphQL Schema.
 // You can filter todos by category due to FilterableRelation.
-@FilterableRelation("category", () => Category, { disableRemove: true, nullable: true })
+@FilterableRelation("category", () => Category, {
+	disableRemove: true,
+	nullable: true,
+})
 // Defines a OneToMany or ManyToMany relations in the GraphQL Schema.
 // This defines a subtask relation which outputs a list of subtasks in GraphQL Schema.
 // You can use @FilterableCursorConnection to enable filtering through subtasks.
-@CursorConnection("subTasks", () => SubTask, { nullable: true, enableAggregate: false })
+@CursorConnection("subTasks", () => SubTask, {
+	nullable: true,
+	enableAggregate: false,
+})
 export class Todo extends BaseEntity {
 	// Turns on fulltext search for this field.
 	@Index({ fulltext: true })
 	// CFF is a custom decorator which stands for Column Filterable Field.
 	// It combines @Column and @FilterableField decorators.
 	// This enables filtering by this field.
-	@CFF({ description: "Todo name", fieldOptions: { allowedComparisons: ["in", "is", "like"] } })
+	@CFF({
+		description: "Todo name",
+		fieldOptions: { allowedComparisons: ["in", "is", "like"] },
+	})
 	name: string;
 
 	@CFF({

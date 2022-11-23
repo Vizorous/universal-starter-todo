@@ -1,6 +1,17 @@
-import { Environment, FetchFunction, Network, RecordSource, Store } from "relay-runtime";
+import {
+	Environment,
+	FetchFunction,
+	Network,
+	RecordSource,
+	Store,
+} from "relay-runtime";
 
-const fetchRelay: FetchFunction = async function (operation, variables, cacheConfig, uploadables) {
+const fetchRelay: FetchFunction = async function (
+	operation,
+	variables,
+	cacheConfig,
+	uploadables
+) {
 	try {
 		return await (
 			await fetch("http://localhost:3333/graphql", {

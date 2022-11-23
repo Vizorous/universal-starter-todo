@@ -4,17 +4,26 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { MercuriusDriver, MercuriusDriverConfig } from "@nestjs/mercurius";
 import { DateScalar } from "./_common/scalars/date.scalar";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserModule } from "./user/user.module";
-import { TodoModule } from "./todo/todo.module";
-import { SubTaskModule } from "./sub-task/sub-task.module";
-import { CategoryModule } from "./category/category.module";
+import { DashboardModule } from "./dashboard/dashboard/dashboard.module";
+import { SectionModule } from "./dashboard/section/section.module";
+import { GraphModule } from "./graph/graph/graph.module";
+import { GraphLayoutModule } from "./graph/graph-layout/graph-layout.module";
+import { GAnalyticsSourceModule } from "./graph/g-analytics-source/g-analytics-source.module";
+import { FbInsightsSourceModule } from "./graph/fb-insights-source/fb-insights-source.module";
+import { FbPageModule } from "./facebook/fb-page/fb-page.module";
+import { FbLongTokenModule } from "./facebook/fb-long-token/fb-long-token.module";
+import { FbUserModule } from "./facebook/fb-user/fb-user.module";
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({ envFilePath: [".env", ".env.dev", ".env.prod"], isGlobal: true, cache: true }),
+		ConfigModule.forRoot({
+			envFilePath: [".env", ".env.dev", ".env.prod"],
+			isGlobal: true,
+			cache: true,
+		}),
 		TypeOrmModule.forRoot({
 			type: "mysql",
-			database: process.env.DATABASE_NAME ?? "universal_todo",
+			database: process.env.DATABASE_NAME ?? "seamless_analytics",
 			host: "localhost",
 			port: 3306,
 			username: process.env.DATABASE_USERNAME ?? "root",
@@ -42,10 +51,19 @@ import { CategoryModule } from "./category/category.module";
 			graphiql: false,
 			autoSchemaFile: "./../frontend/schema.graphql",
 		}),
-		UserModule,
-		TodoModule,
-		SubTaskModule,
-		CategoryModule,
+		// UserModule,
+		// TodoModule,
+		// SubTaskModule,
+		// CategoryModule,
+		DashboardModule,
+		SectionModule,
+		GraphModule,
+		GraphLayoutModule,
+		GAnalyticsSourceModule,
+		FbInsightsSourceModule,
+		FbPageModule,
+		FbLongTokenModule,
+		FbUserModule,
 	],
 	controllers: [],
 	providers: [DateScalar],

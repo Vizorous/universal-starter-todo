@@ -4,7 +4,9 @@ import { defineConfig, ConfigEnv } from "vite";
 import { RequestAdapter, VitePluginNode } from "vite-plugin-node";
 import tsconfigPaths from "vite-tsconfig-paths";
 /// <reference types="vitest" />
-export const NestFastifyHandler: RequestAdapter<NestFastifyApplication> = async (app, req, res) => {
+export const NestFastifyHandler: RequestAdapter<
+	NestFastifyApplication
+> = async (app, req, res) => {
 	await app.init();
 	const instance = app.getHttpAdapter().getInstance();
 	await instance.ready();

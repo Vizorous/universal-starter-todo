@@ -2,12 +2,15 @@
 
 ## Get started
 
-- Make sure you've installed Node 16 for optimal usage. (14 will work but pnpm setup could be harder)
-- Install pnpm package manager. For node versions before 16, use `npm install -g pnpm`
+- Make sure you've installed Node 16 for optimal usage. (14 will work but pnpm
+  setup could be harder)
+- Install pnpm package manager. For node versions before 16, use
+  `npm install -g pnpm`
   ```
   corepack enable
   ```
-- Install watchman (required for relay) from here https://facebook.github.io/watchman/ or through chocolatey,
+- Install watchman (required for relay) from here
+  https://facebook.github.io/watchman/ or through chocolatey,
 
   ```
   choco install watchman
@@ -21,7 +24,8 @@
 
 - You should have mysql installed and running on your machine.
 
-- You can customize the database connection by creating a `.env.dev` file in [backend](apps/backend/) folder. Structure of the file is as follows.
+- You can customize the database connection by creating a `.env.dev` file in
+  [backend](apps/backend/) folder. Structure of the file is as follows.
 
   ```
   DATABASE_NAME=universal_todo
@@ -29,7 +33,8 @@
   DATABASE_PASSWORD=root
   ```
 
-- Make sure your MySQL has a database with the correct name with correct username and password.
+- Make sure your MySQL has a database with the correct name with correct
+  username and password.
 
 - Start the development servers with,
 
@@ -85,16 +90,20 @@ Aliases has been created to utilize scoped PNPM commands correctly.
 ## CRUD Endpoint generation
 
 - A custom made version of @nestjs/cli has been created for this project.
-- It is capable of generating an entire CRUD resource (Module, Service, Resolver, Entity, DTOs) by itself.
+- It is capable of generating an entire CRUD resource (Module, Service,
+  Resolver, Entity, DTOs) by itself.
 - It is integrated with TypeORM and nestjs-query as well.
 - Run the following command to create a new resource.
   ```
   pnpm viz g resource resource-name
   ```
-- *You should always use this to generate new Endpoints.*
+- _You should always use this to generate new Endpoints._
+
 ## Commit guide
 
-We utilize convention commits to put our commits in a standard format. This helps us to generate changelogs and release notes automatically. Please follow the following guide to commit your changes.
+We utilize convention commits to put our commits in a standard format. This
+helps us to generate changelogs and release notes automatically. Please follow
+the following guide to commit your changes.
 
 ### The commit message should be structured as follows:
 
@@ -114,7 +123,8 @@ We utilize convention commits to put our commits in a standard format. This help
 feat: add 'comments' option
 ```
 
-You should use feat:, fix:, chore:, mainly. Additionally you can use docs:, style:, refactor:, perf:, test: as well.
+You should use feat:, fix:, chore:, mainly. Additionally you can use docs:,
+style:, refactor:, perf:, test: as well.
 
 #### Commit message with description and breaking change in body
 
@@ -148,7 +158,8 @@ fixes issue #12
 
 ## Workspace usage
 
-Utilize the [workspace](starter.code-workspace) file to access the workspace, it contains following folders,
+Utilize the [workspace](starter.code-workspace) file to access the workspace, it
+contains following folders,
 
 - [frontend](apps/frontend/)
 - [backend](apps/backend/)
@@ -171,7 +182,8 @@ Utilize the [workspace](starter.code-workspace) file to access the workspace, it
 
 ## Database Browsing
 
-- You can use any mysql client to browse. I recommend dBeaver. You can download it from here https://dbeaver.io/download/
+- You can use any mysql client to browse. I recommend dBeaver. You can download
+  it from here https://dbeaver.io/download/
 
 <!--
 ### Nest CLI Examples

@@ -1,5 +1,8 @@
 import { NestFactory } from "@nestjs/core";
-import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
+import {
+	FastifyAdapter,
+	NestFastifyApplication,
+} from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module";
 import { getEnv } from "./_common/config/local.config";
 import { NestApplicationOptions, ValidationPipe } from "@nestjs/common";
@@ -10,7 +13,11 @@ declare const module: any;
 type appType = Promise<NestFastifyApplication>;
 
 export async function createApp(options?: NestApplicationOptions): appType {
-	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(), options);
+	const app = await NestFactory.create<NestFastifyApplication>(
+		AppModule,
+		new FastifyAdapter(),
+		options
+	);
 	app.enableCors();
 	app.useGlobalPipes(
 		new ValidationPipe({
@@ -37,8 +44,12 @@ async function main() {
 }
 async function reload() {
 	const app = await main();
-	console.log(`🚀 GraphQL listening on http://localhost:${getEnv().PORT}/graphql`);
-	console.log(`🚀 GraphQL Playground on http://localhost:${getEnv().PORT}/altair`);
+	console.log(
+		`🚀 GraphQL listening on http://localhost:${getEnv().PORT}/graphql`
+	);
+	console.log(
+		`🚀 GraphQL Playground on http://localhost:${getEnv().PORT}/altair`
+	);
 	if (module.hot) {
 		module.hot.accept();
 		module.hot.dispose(() => app.close());

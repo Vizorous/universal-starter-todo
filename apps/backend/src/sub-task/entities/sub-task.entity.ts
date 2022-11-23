@@ -17,7 +17,10 @@ export class SubTask extends BaseEntity {
 	// CFF is a custom decorator which stands for Column Filterable Field.
 	// It combines @Column and @FilterableField decorators.
 	// This enables filtering by this field.
-	@CFF({ description: "SubTask name", fieldOptions: { allowedComparisons: ["in", "is", "like"] } })
+	@CFF({
+		description: "SubTask name",
+		fieldOptions: { allowedComparisons: ["in", "is", "like"] },
+	})
 	name: string;
 
 	@CFF({

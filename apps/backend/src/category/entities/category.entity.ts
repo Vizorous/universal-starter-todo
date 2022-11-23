@@ -15,7 +15,10 @@ import { CF, CFF, BaseEntity } from "@vizorous/nest-query-utils";
 export class Category extends BaseEntity {
 	// Turns on fulltext search for this field.
 	// @Index({ fulltext: true })
-	@CFF({ description: "Category name", fieldOptions: { allowedComparisons: ["in", "is", "like"] } })
+	@CFF({
+		description: "Category name",
+		fieldOptions: { allowedComparisons: ["in", "is", "like"] },
+	})
 	name: string;
 
 	@CF({ nullable: true })

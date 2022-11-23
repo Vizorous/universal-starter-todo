@@ -2,140 +2,127 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type GraphLayout {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
 
-  """User name"""
-  name: String!
-
-  """User email"""
-  email: String!
-
-  """User AIESEC email"""
-  aiesecEmail: String
-
-  """User entity"""
-  entity: String!
-
-  """User role"""
-  role: String!
-}
-
-type DeleteManyResponse {
-  """The number of records deleted."""
-  deletedCount: Int!
-}
-
-type UserDeleteResponse {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-
-  """User name"""
-  name: String
-
-  """User email"""
-  email: String
-
-  """User AIESEC email"""
-  aiesecEmail: String
-
-  """User entity"""
-  entity: String
-
-  """User role"""
-  role: String
-}
-
-type UpdateManyResponse {
-  """The number of records updated."""
-  updatedCount: Int!
-}
-
-type UserEdge {
-  """The node containing the User"""
-  node: User!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-"""Cursor for paging through collections"""
-scalar ConnectionCursor
-
-type PageInfo {
-  """true if paging forward and there are more records."""
-  hasNextPage: Boolean
-
-  """true if paging backwards and there are more records."""
-  hasPreviousPage: Boolean
-
-  """The cursor of the first returned record."""
-  startCursor: ConnectionCursor
-
-  """The cursor of the last returned record."""
-  endCursor: ConnectionCursor
-}
-
-type UserConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [UserEdge!]!
-}
-
-type Category {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """Category name"""
+  """GraphLayout  name"""
   name: String!
   description: String
 }
 
-type SubTask {
+type FbInsightsSource {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
-
-  """SubTask name"""
-  name: String!
-
-  """SubTask done"""
-  done: Boolean!
-
-  """SubTask description"""
-  description: String!
-  todoId: String!
-  categoryId: String
-  category: Category!
+  metricList: [String!]!
+  period: FbDatePreset
+  since: String
+  until: String
+  date_preset: FbDatePreset
+  show_description_from_api_doc: Boolean!
 }
 
-type Todo {
+enum FbDatePreset {
+  today
+  yesterday
+  this_month
+  last_month
+  this_quarter
+  maximum
+  data_maximum
+  last_3d
+  last_7d
+  last_14d
+  last_28d
+  last_30d
+  last_90d
+  last_week_mon_sun
+  last_week_sun_sat
+  last_quarter
+  last_year
+  this_week_mon_today
+  this_week_sun_today
+  this_year
+}
+
+type GAnalyticsSource {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
 
-  """Todo name"""
+  """GAnalyticsSource  name"""
+  name: String!
+  description: String
+}
+
+type Data {
+  x: Date!
+  y: Float!
+}
+
+type GraphDataset {
+  label: String!
+  name: String!
+  data: [Data!]!
+}
+
+type Graph {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Graph  name"""
+  name: String!
+  description: String
+  sectionId: ID!
+
+  """ID of the graph layout"""
+  graphLayoutId: ID!
+
+  """ID of the FB Insights Source"""
+  fbInsightsSourceId: ID
+
+  """ID of the Google Analytics Source"""
+  gAnalyticsSourceId: ID
+
+  """Type of the graph source"""
+  graphSourceType: GraphSourceType!
+  graphType: String!
+  graphDataset: [GraphDataset]!
+  graphLayout: GraphLayout!
+  fbInsightsSource: FbInsightsSource!
+  gAnalyticsSource: GAnalyticsSource!
+}
+
+enum GraphSourceType {
+  fbInsights
+  googleAnalytics
+  linkedIn
+}
+
+type Section {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Section name"""
   name: String!
 
-  """Todo done"""
-  done: Boolean!
+  """Section description"""
+  description: String
 
-  """Todo description"""
-  description: String!
-  categoryId: String
-  category: Category
-  subTasks(
+  """ID of the parent dashboard"""
+  dashboardId: ID!
+
+  """Graphs in this section"""
+  graphs(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: SubTaskFilter = {}
+    filter: GraphFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -150,8 +137,8 @@ type Todo {
     last: Int
 
     """Specify to sort results."""
-    sorting: [SubTaskSort!] = []
-  ): TodoSubTasksConnection
+    sorting: [GraphSort!] = []
+  ): SectionGraphsConnection!
 }
 
 input CursorPaging {
@@ -168,20 +155,19 @@ input CursorPaging {
   last: Int
 }
 
-input SubTaskFilter {
-  and: [SubTaskFilter!]
-  or: [SubTaskFilter!]
-  id: SubTaskIdFilterComparison
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input GraphFilter {
+  and: [GraphFilter!]
+  or: [GraphFilter!]
+  id: GraphIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: SubTaskNameFilterComparison
-  done: BooleanFieldComparison
-  todoId: StringFieldComparison
-  categoryId: StringFieldComparison
-  category: SubTaskFilterCategoryFilter
+  name: GraphNameFilterComparison
 }
 
-input SubTaskIdFilterComparison {
+input GraphIdFilterComparison {
   eq: ID
   in: [ID!]
 }
@@ -211,68 +197,23 @@ input DateFieldComparisonBetween {
   upper: DateTime!
 }
 
-input SubTaskNameFilterComparison {
+input GraphNameFilterComparison {
   is: Boolean
   like: String
   in: [String!]
 }
 
-input BooleanFieldComparison {
-  is: Boolean
-  isNot: Boolean
-}
-
-input StringFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: String
-  neq: String
-  gt: String
-  gte: String
-  lt: String
-  lte: String
-  like: String
-  notLike: String
-  iLike: String
-  notILike: String
-  in: [String!]
-  notIn: [String!]
-}
-
-input SubTaskFilterCategoryFilter {
-  and: [SubTaskFilterCategoryFilter!]
-  or: [SubTaskFilterCategoryFilter!]
-  id: CategoryIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: CategoryNameFilterComparison
-}
-
-input CategoryIdFilterComparison {
-  eq: ID
-  in: [ID!]
-}
-
-input CategoryNameFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input SubTaskSort {
-  field: SubTaskSortFields!
+input GraphSort {
+  field: GraphSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum SubTaskSortFields {
+enum GraphSortFields {
   id
   createdAt
   updatedAt
   name
-  done
-  todoId
-  categoryId
 }
 
 """Sort Directions"""
@@ -287,167 +228,362 @@ enum SortNulls {
   NULLS_LAST
 }
 
-type TodoName {
+type Dashboard {
   id: ID!
+  createdAt: Date!
+  updatedAt: Date!
 
-  """Todo name"""
+  """Dashboard  name"""
   name: String!
+  description: String
+  sections(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: SectionFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [SectionSort!] = []
+  ): DashboardSectionsConnection
 }
 
-type TodoDeleteResponse {
+input SectionFilter {
+  and: [SectionFilter!]
+  or: [SectionFilter!]
+  id: SectionIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: SectionNameFilterComparison
+  graphs: SectionFilterGraphFilter
+}
+
+input SectionIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input SectionNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input SectionFilterGraphFilter {
+  and: [SectionFilterGraphFilter!]
+  or: [SectionFilterGraphFilter!]
+  id: GraphIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: GraphNameFilterComparison
+}
+
+input SectionSort {
+  field: SectionSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum SectionSortFields {
+  id
+  createdAt
+  updatedAt
+  name
+}
+
+type DashboardDeleteResponse {
   id: ID
   createdAt: Date
   updatedAt: Date
 
-  """Todo name"""
+  """Dashboard  name"""
   name: String
-
-  """Todo done"""
-  done: Boolean
-
-  """Todo description"""
   description: String
-  categoryId: String
 }
 
-type TodoEdge {
-  """The node containing the Todo"""
-  node: Todo!
+type DashboardEdge {
+  """The node containing the Dashboard"""
+  node: Dashboard!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type TodoConnection {
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type DashboardConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [TodoEdge!]!
+  edges: [DashboardEdge!]!
 }
 
-type TodoAggregateGroupBy {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  done: Boolean
-  categoryId: String
-}
-
-type TodoCountAggregate {
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  name: Int
-  done: Int
-  categoryId: Int
-}
-
-type TodoMinAggregate {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  categoryId: String
-}
-
-type TodoMaxAggregate {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  categoryId: String
-}
-
-type TodoAggregateResponse {
-  groupBy: TodoAggregateGroupBy
-  count: TodoCountAggregate
-  min: TodoMinAggregate
-  max: TodoMaxAggregate
-}
-
-type SubTaskEdge {
-  """The node containing the SubTask"""
-  node: SubTask!
+type SectionEdge {
+  """The node containing the Section"""
+  node: Section!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type TodoSubTasksConnection {
+type DashboardSectionsConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [SubTaskEdge!]!
+  edges: [SectionEdge!]!
 }
 
-type SubTaskDeleteResponse {
+type SectionDeleteResponse {
   id: ID
   createdAt: Date
   updatedAt: Date
 
-  """SubTask name"""
+  """Section name"""
   name: String
 
-  """SubTask done"""
-  done: Boolean
-
-  """SubTask description"""
+  """Section description"""
   description: String
-  todoId: String
-  categoryId: String
+
+  """ID of the parent dashboard"""
+  dashboardId: ID
 }
 
-type SubTaskConnection {
+type SectionConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [SubTaskEdge!]!
+  edges: [SectionEdge!]!
 }
 
-type CategoryDeleteResponse {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-
-  """Category name"""
-  name: String
-  description: String
-}
-
-type CategoryEdge {
-  """The node containing the Category"""
-  node: Category!
+type GraphEdge {
+  """The node containing the Graph"""
+  node: Graph!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type CategoryConnection {
+type SectionGraphsConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [CategoryEdge!]!
+  edges: [GraphEdge!]!
+}
+
+type GraphDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """Graph  name"""
+  name: String
+  description: String
+  sectionId: ID
+
+  """ID of the graph layout"""
+  graphLayoutId: ID
+
+  """ID of the FB Insights Source"""
+  fbInsightsSourceId: ID
+
+  """ID of the Google Analytics Source"""
+  gAnalyticsSourceId: ID
+
+  """Type of the graph source"""
+  graphSourceType: GraphSourceType
+  graphType: String
+  graphDataset: [GraphDataset!]
+}
+
+type GraphConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [GraphEdge!]!
+}
+
+type GraphLayoutEdge {
+  """The node containing the GraphLayout"""
+  node: GraphLayout!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type GAnalyticsSourceEdge {
+  """The node containing the GAnalyticsSource"""
+  node: GAnalyticsSource!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type FbInsightsSourceEdge {
+  """The node containing the FbInsightsSource"""
+  node: FbInsightsSource!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type FbLongToken {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Long lived token"""
+  token: String!
+
+  """Expiration date"""
+  tokenExpiryDate: Date!
+}
+
+type FbUser {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """FbUser  name"""
+  name: String!
+  description: String
+}
+
+type FbPage {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Long lived token"""
+  token: String!
+
+  """Expiration date"""
+  tokenExpiryDate: Date!
+
+  """FbPage  name"""
+  name: String!
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String!
+
+  """Fb user id"""
+  fbUserId: ID!
+  fbUser: FbUser!
+}
+
+type PageFromFb {
+  """Name of the page"""
+  name: String!
+
+  """Id of the page"""
+  id: String!
+}
+
+type FbPageDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+
+  """FbPage  name"""
+  name: String
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String
+
+  """Fb user id"""
+  fbUserId: ID
+}
+
+type FbPageEdge {
+  """The node containing the FbPage"""
+  node: FbPage!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type FbPageConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [FbPageEdge!]!
+}
+
+type FbUserDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """FbUser  name"""
+  name: String
+  description: String
+}
+
+type FbUserEdge {
+  """The node containing the FbUser"""
+  node: FbUser!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type FbUserConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [FbUserEdge!]!
 }
 
 """Date custom scalar type"""
 scalar Date
 
 type Query {
-  user(
+  dashboard(
     """The id of the record to find."""
     id: ID!
-  ): User!
-  users(
+  ): Dashboard!
+  dashboards(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: UserFilter = {}
+    filter: DashboardFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -462,23 +598,18 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [UserSort!] = []
-  ): UserConnection!
-  todoNames(todoName: String!): [TodoName]!
-  todoAggregate(
-    """Filter to find records to aggregate on"""
-    filter: TodoAggregateFilter
-  ): [TodoAggregateResponse!]!
-  todo(
+    sorting: [DashboardSort!] = []
+  ): DashboardConnection!
+  section(
     """The id of the record to find."""
     id: ID!
-  ): Todo!
-  todos(
+  ): Section!
+  sections(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: TodoFilter = {}
+    filter: SectionFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -493,18 +624,18 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [TodoSort!] = []
-  ): TodoConnection!
-  subTask(
+    sorting: [SectionSort!] = []
+  ): SectionConnection!
+  graph(
     """The id of the record to find."""
     id: ID!
-  ): SubTask!
-  subTasks(
+  ): Graph!
+  graphs(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: SubTaskFilter = {}
+    filter: GraphFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -519,18 +650,20 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [SubTaskSort!] = []
-  ): SubTaskConnection!
-  category(
+    sorting: [GraphSort!] = []
+  ): GraphConnection!
+  pagesFromFb(fbUserId: String!, userToken: String!): [PageFromFb]!
+  pageFromFb(pageToken: String!): PageFromFb
+  fbPage(
     """The id of the record to find."""
     id: ID!
-  ): Category!
-  categories(
+  ): FbPage!
+  fbPages(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: CategoryFilter = {}
+    filter: FbPageFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -545,147 +678,155 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [CategorySort!] = []
-  ): CategoryConnection!
+    sorting: [FbPageSort!] = []
+  ): FbPageConnection!
+  fbUser(
+    """The id of the record to find."""
+    id: ID!
+  ): FbUser!
+  fbUsers(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: FbUserFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [FbUserSort!] = []
+  ): FbUserConnection!
 }
 
-input UserFilter {
-  and: [UserFilter!]
-  or: [UserFilter!]
-  id: UserIdFilterComparison
+input DashboardFilter {
+  and: [DashboardFilter!]
+  or: [DashboardFilter!]
+  id: DashboardIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: UserNameFilterComparison
-  email: UserEmailFilterComparison
-  aiesecEmail: UserAiesecEmailFilterComparison
-  entity: UserEntityFilterComparison
-  role: UserRoleFilterComparison
+  name: DashboardNameFilterComparison
+  sections: DashboardFilterSectionFilter
 }
 
-input UserIdFilterComparison {
+input DashboardIdFilterComparison {
   eq: ID
   in: [ID!]
 }
 
-input UserNameFilterComparison {
+input DashboardNameFilterComparison {
   is: Boolean
   like: String
   in: [String!]
 }
 
-input UserEmailFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
+input DashboardFilterSectionFilter {
+  and: [DashboardFilterSectionFilter!]
+  or: [DashboardFilterSectionFilter!]
+  id: SectionIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: SectionNameFilterComparison
 }
 
-input UserAiesecEmailFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input UserEntityFilterComparison {
-  is: Boolean
-  in: [String!]
-}
-
-input UserRoleFilterComparison {
-  is: Boolean
-  in: [String!]
-}
-
-input UserSort {
-  field: UserSortFields!
+input DashboardSort {
+  field: DashboardSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum UserSortFields {
+enum DashboardSortFields {
   id
   createdAt
   updatedAt
   name
-  email
-  aiesecEmail
-  entity
-  role
 }
 
-input TodoAggregateFilter {
-  and: [TodoAggregateFilter!]
-  or: [TodoAggregateFilter!]
-  id: TodoIdFilterComparison
+input FbPageFilter {
+  and: [FbPageFilter!]
+  or: [FbPageFilter!]
+  id: FbPageIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: TodoNameFilterComparison
-  done: BooleanFieldComparison
-  categoryId: StringFieldComparison
+  name: FbPageNameFilterComparison
+  fbInternalPageId: FbPageFbInternalPageIdFilterComparison
+  fbUser: FbPageFilterFbUserFilter
 }
 
-input TodoIdFilterComparison {
+input FbPageIdFilterComparison {
   eq: ID
   in: [ID!]
 }
 
-input TodoNameFilterComparison {
+input FbPageNameFilterComparison {
   is: Boolean
   like: String
   in: [String!]
 }
 
-input TodoFilter {
-  and: [TodoFilter!]
-  or: [TodoFilter!]
-  id: TodoIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: TodoNameFilterComparison
-  done: BooleanFieldComparison
-  categoryId: StringFieldComparison
-  category: TodoFilterCategoryFilter
+input FbPageFbInternalPageIdFilterComparison {
+  eq: String
 }
 
-input TodoFilterCategoryFilter {
-  and: [TodoFilterCategoryFilter!]
-  or: [TodoFilterCategoryFilter!]
-  id: CategoryIdFilterComparison
+input FbPageFilterFbUserFilter {
+  and: [FbPageFilterFbUserFilter!]
+  or: [FbPageFilterFbUserFilter!]
+  id: FbUserIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: CategoryNameFilterComparison
+  name: FbUserNameFilterComparison
 }
 
-input TodoSort {
-  field: TodoSortFields!
+input FbUserIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input FbUserNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input FbPageSort {
+  field: FbPageSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum TodoSortFields {
+enum FbPageSortFields {
   id
   createdAt
   updatedAt
   name
-  done
-  categoryId
+  fbInternalPageId
 }
 
-input CategoryFilter {
-  and: [CategoryFilter!]
-  or: [CategoryFilter!]
-  id: CategoryIdFilterComparison
+input FbUserFilter {
+  and: [FbUserFilter!]
+  or: [FbUserFilter!]
+  id: FbUserIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: CategoryNameFilterComparison
+  name: FbUserNameFilterComparison
 }
 
-input CategorySort {
-  field: CategorySortFields!
+input FbUserSort {
+  field: FbUserSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum CategorySortFields {
+enum FbUserSortFields {
   id
   createdAt
   updatedAt
@@ -693,130 +834,37 @@ enum CategorySortFields {
 }
 
 type Mutation {
-  createOneUser(input: CreateOneUserInput!): User!
-  createManyUsers(input: CreateManyUsersInput!): [User!]!
-  updateOneUser(input: UpdateOneUserInput!): User!
-  updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
-  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
-  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
-  setCategoryOnTodo(input: SetCategoryOnTodoInput!): Todo!
-  addSubTasksToTodo(input: AddSubTasksToTodoInput!): Todo!
-  setSubTasksOnTodo(input: SetSubTasksOnTodoInput!): Todo!
-  removeSubTasksFromTodo(input: RemoveSubTasksFromTodoInput!): Todo!
-  createOneTodo(input: CreateOneTodoInput!): Todo!
-  updateOneTodo(input: UpdateOneTodoInput!): Todo!
-  deleteOneTodo(input: DeleteOneTodoInput!): TodoDeleteResponse!
-  setCategoryOnSubTask(input: SetCategoryOnSubTaskInput!): SubTask!
-  createOneSubTask(input: CreateOneSubTaskInput!): SubTask!
-  updateOneSubTask(input: UpdateOneSubTaskInput!): SubTask!
-  deleteOneSubTask(input: DeleteOneSubTaskInput!): SubTaskDeleteResponse!
-  createOneCategory(input: CreateOneCategoryInput!): Category!
-  updateOneCategory(input: UpdateOneCategoryInput!): Category!
-  deleteOneCategory(input: DeleteOneCategoryInput!): CategoryDeleteResponse!
+  addSectionsToDashboard(input: AddSectionsToDashboardInput!): Dashboard!
+  setSectionsOnDashboard(input: SetSectionsOnDashboardInput!): Dashboard!
+  removeSectionsFromDashboard(input: RemoveSectionsFromDashboardInput!): Dashboard!
+  createOneDashboard(input: CreateOneDashboardInput!): Dashboard!
+  updateOneDashboard(input: UpdateOneDashboardInput!): Dashboard!
+  deleteOneDashboard(input: DeleteOneDashboardInput!): DashboardDeleteResponse!
+  addGraphsToSection(input: AddGraphsToSectionInput!): Section!
+  setGraphsOnSection(input: SetGraphsOnSectionInput!): Section!
+  removeGraphsFromSection(input: RemoveGraphsFromSectionInput!): Section!
+  createOneSection(input: CreateOneSectionInput!): Section!
+  updateOneSection(input: UpdateOneSectionInput!): Section!
+  deleteOneSection(input: DeleteOneSectionInput!): SectionDeleteResponse!
+  createOneGraph(input: CreateOneGraphInput!): Graph!
+  updateOneGraph(input: UpdateOneGraphInput!): Graph!
+  deleteOneGraph(input: DeleteOneGraphInput!): GraphDeleteResponse!
+  createOneGraphLayout(input: CreateOneGraphLayoutInput!): GraphLayout!
+  updateOneGraphLayout(input: UpdateOneGraphLayoutInput!): GraphLayout!
+  createOneGAnalyticsSource(input: CreateOneGAnalyticsSourceInput!): GAnalyticsSource!
+  updateOneGAnalyticsSource(input: UpdateOneGAnalyticsSourceInput!): GAnalyticsSource!
+  createOneFbInsightsSource(input: CreateOneFbInsightsSourceInput!): FbInsightsSource!
+  updateOneFbInsightsSource(input: UpdateOneFbInsightsSourceInput!): FbInsightsSource!
+  createOneFbPage(input: CreateOneFbPageInput!): FbPage!
+  updateOneFbPage(input: UpdateOneFbPageInput!): FbPage!
+  deleteOneFbPage(input: DeleteOneFbPageInput!): FbPageDeleteResponse!
+  createPageLongToken(createPageLongTokenInput: CreatePageLongTokenInput!): FbLongToken!
+  createOneFbUser(input: CreateOneFbUserInput!): FbUser!
+  updateOneFbUser(input: UpdateOneFbUserInput!): FbUser!
+  deleteOneFbUser(input: DeleteOneFbUserInput!): FbUserDeleteResponse!
 }
 
-input CreateOneUserInput {
-  """The record to create"""
-  user: CreateUser!
-}
-
-input CreateUser {
-  """User name"""
-  name: String!
-
-  """User email"""
-  email: String!
-
-  """User entity"""
-  entity: String!
-
-  """User role"""
-  role: String!
-}
-
-input CreateManyUsersInput {
-  """Array of records to create"""
-  users: [CreateUser!]!
-}
-
-input UpdateOneUserInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: UpdateUser!
-}
-
-input UpdateUser {
-  """User name"""
-  name: String
-
-  """User email"""
-  email: String
-
-  """User AIESEC email"""
-  aiesecEmail: String
-
-  """User entity"""
-  entity: String
-
-  """User role"""
-  role: String
-}
-
-input UpdateManyUsersInput {
-  """Filter used to find fields to update"""
-  filter: UserUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: UpdateUser!
-}
-
-input UserUpdateFilter {
-  and: [UserUpdateFilter!]
-  or: [UserUpdateFilter!]
-  id: UserIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: UserNameFilterComparison
-  email: UserEmailFilterComparison
-  aiesecEmail: UserAiesecEmailFilterComparison
-  entity: UserEntityFilterComparison
-  role: UserRoleFilterComparison
-}
-
-input DeleteOneUserInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyUsersInput {
-  """Filter to find records to delete"""
-  filter: UserDeleteFilter!
-}
-
-input UserDeleteFilter {
-  and: [UserDeleteFilter!]
-  or: [UserDeleteFilter!]
-  id: UserIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: UserNameFilterComparison
-  email: UserEmailFilterComparison
-  aiesecEmail: UserAiesecEmailFilterComparison
-  entity: UserEntityFilterComparison
-  role: UserRoleFilterComparison
-}
-
-input SetCategoryOnTodoInput {
-  """The id of the record."""
-  id: ID!
-
-  """The id of relation."""
-  relationId: ID!
-}
-
-input AddSubTasksToTodoInput {
+input AddSectionsToDashboardInput {
   """The id of the record."""
   id: ID!
 
@@ -824,7 +872,7 @@ input AddSubTasksToTodoInput {
   relationIds: [ID!]!
 }
 
-input SetSubTasksOnTodoInput {
+input SetSectionsOnDashboardInput {
   """The id of the record."""
   id: ID!
 
@@ -832,7 +880,7 @@ input SetSubTasksOnTodoInput {
   relationIds: [ID!]!
 }
 
-input RemoveSubTasksFromTodoInput {
+input RemoveSectionsFromDashboardInput {
   """The id of the record."""
   id: ID!
 
@@ -840,120 +888,322 @@ input RemoveSubTasksFromTodoInput {
   relationIds: [ID!]!
 }
 
-input CreateOneTodoInput {
+input CreateOneDashboardInput {
   """The record to create"""
-  todo: CreateTodo!
+  dashboard: CreateDashboard!
 }
 
-input CreateTodo {
-  """Todo name"""
+input CreateDashboard {
+  """Dashboard  name"""
   name: String!
-
-  """Todo description"""
-  description: String!
-  categoryId: String
+  description: String
 }
 
-input UpdateOneTodoInput {
+input UpdateOneDashboardInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateTodo!
+  update: UpdateDashboard!
 }
 
-input UpdateTodo {
-  """Todo name"""
+input UpdateDashboard {
+  """Dashboard  name"""
   name: String
-
-  """Todo done"""
-  done: Boolean
-
-  """Todo description"""
   description: String
-  categoryId: String
 }
 
-input DeleteOneTodoInput {
+input DeleteOneDashboardInput {
   """The id of the record to delete."""
   id: ID!
 }
 
-input SetCategoryOnSubTaskInput {
+input AddGraphsToSectionInput {
   """The id of the record."""
   id: ID!
 
-  """The id of relation."""
-  relationId: ID!
+  """The ids of the relations."""
+  relationIds: [ID!]!
 }
 
-input CreateOneSubTaskInput {
+input SetGraphsOnSectionInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input RemoveGraphsFromSectionInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOneSectionInput {
   """The record to create"""
-  subTask: CreateSubTask!
+  section: CreateSection!
 }
 
-input CreateSubTask {
-  """SubTask name"""
+input CreateSection {
+  """Section name"""
   name: String!
 
-  """SubTask description"""
-  description: String!
-  todoId: String!
-  categoryId: String
+  """Section description"""
+  description: String
+
+  """ID of the parent dashboard"""
+  dashboardId: ID!
 }
 
-input UpdateOneSubTaskInput {
+input UpdateOneSectionInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateSubTask!
+  update: UpdateSection!
 }
 
-input UpdateSubTask {
-  """SubTask name"""
+input UpdateSection {
+  """Section name"""
   name: String
 
-  """SubTask done"""
-  done: Boolean
-
-  """SubTask description"""
+  """Section description"""
   description: String
-  todoId: String
-  categoryId: String
+
+  """ID of the parent dashboard"""
+  dashboardId: ID
 }
 
-input DeleteOneSubTaskInput {
+input DeleteOneSectionInput {
   """The id of the record to delete."""
   id: ID!
 }
 
-input CreateOneCategoryInput {
+input CreateOneGraphInput {
   """The record to create"""
-  category: CreateCategory!
+  graph: CreateGraph!
 }
 
-input CreateCategory {
-  """Category name"""
+input CreateGraph {
+  """Graph  name"""
   name: String!
   description: String
+  sectionId: ID!
+
+  """ID of the graph layout"""
+  graphLayoutId: ID!
+
+  """ID of the FB Insights Source"""
+  fbInsightsSourceId: ID
+
+  """ID of the Google Analytics Source"""
+  gAnalyticsSourceId: ID
+
+  """Type of the graph source"""
+  graphSourceType: GraphSourceType!
+  graphType: String!
 }
 
-input UpdateOneCategoryInput {
+input UpdateOneGraphInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateCategory!
+  update: UpdateGraph!
 }
 
-input UpdateCategory {
-  """Category name"""
+input UpdateGraph {
+  """Graph  name"""
+  name: String
+  description: String
+  sectionId: ID
+
+  """Type of the graph source"""
+  graphSourceType: GraphSourceType
+  graphType: String
+}
+
+input DeleteOneGraphInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input CreateOneGraphLayoutInput {
+  """The record to create"""
+  graphLayout: CreateGraphLayout!
+}
+
+input CreateGraphLayout {
+  """GraphLayout  name"""
+  name: String!
+  description: String
+}
+
+input UpdateOneGraphLayoutInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateGraphLayout!
+}
+
+input UpdateGraphLayout {
+  """GraphLayout  name"""
   name: String
   description: String
 }
 
-input DeleteOneCategoryInput {
+input CreateOneGAnalyticsSourceInput {
+  """The record to create"""
+  gAnalyticsSource: CreateGAnalyticsSource!
+}
+
+input CreateGAnalyticsSource {
+  """GAnalyticsSource  name"""
+  name: String!
+  description: String
+}
+
+input UpdateOneGAnalyticsSourceInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateGAnalyticsSource!
+}
+
+input UpdateGAnalyticsSource {
+  """GAnalyticsSource  name"""
+  name: String
+  description: String
+}
+
+input CreateOneFbInsightsSourceInput {
+  """The record to create"""
+  fbInsightsSource: CreateFbInsightsSource!
+}
+
+input CreateFbInsightsSource {
+  metricList: [String!]!
+  period: FbDatePreset
+  since: String
+  until: String
+  date_preset: FbDatePreset
+  show_description_from_api_doc: Boolean = false
+}
+
+input UpdateOneFbInsightsSourceInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateFbInsightsSource!
+}
+
+input UpdateFbInsightsSource {
+  metricList: [String!]
+  period: FbDatePreset
+  since: String
+  until: String
+  date_preset: FbDatePreset
+  show_description_from_api_doc: Boolean = false
+}
+
+input CreateOneFbPageInput {
+  """The record to create"""
+  fbPage: CreateFbPage!
+}
+
+input CreateFbPage {
+  """Long lived token"""
+  token: String!
+
+  """Expiration date"""
+  tokenExpiryDate: Date!
+
+  """FbPage  name"""
+  name: String!
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String!
+
+  """Fb user id"""
+  fbUserId: ID!
+}
+
+input UpdateOneFbPageInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateFbPage!
+}
+
+input UpdateFbPage {
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+
+  """FbPage  name"""
+  name: String
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String
+
+  """Fb user id"""
+  fbUserId: ID
+}
+
+input DeleteOneFbPageInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input CreatePageLongTokenInput {
+  """User Id"""
+  fbUserId: ID!
+
+  """Page Id"""
+  fbPageId: ID!
+
+  """Fb Internal page Id"""
+  fbInternalPageId: String!
+
+  """Long Lived User Token"""
+  userLongToken: String!
+}
+
+input CreateOneFbUserInput {
+  """The record to create"""
+  fbUser: CreateFbUser!
+}
+
+input CreateFbUser {
+  """FbUser  name"""
+  name: String!
+  description: String
+}
+
+input UpdateOneFbUserInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateFbUser!
+}
+
+input UpdateFbUser {
+  """FbUser  name"""
+  name: String
+  description: String
+}
+
+input DeleteOneFbUserInput {
   """The id of the record to delete."""
   id: ID!
 }

@@ -6,7 +6,10 @@ import { BaseEntity } from "@vizorous/nest-query-utils";
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
-	@CFF({ description: "User name", fieldOptions: { allowedComparisons: ["in", "is", "like"] } })
+	@CFF({
+		description: "User name",
+		fieldOptions: { allowedComparisons: ["in", "is", "like"] },
+	})
 	name: string;
 	@CFF({
 		description: "User email",
@@ -22,9 +25,15 @@ export class User extends BaseEntity {
 	})
 	aiesecEmail: string;
 
-	@CFF({ description: "User entity", fieldOptions: { allowedComparisons: ["in", "is"] } })
+	@CFF({
+		description: "User entity",
+		fieldOptions: { allowedComparisons: ["in", "is"] },
+	})
 	entity: string;
 
-	@CFF({ description: "User role", fieldOptions: { allowedComparisons: ["in", "is"] } })
+	@CFF({
+		description: "User role",
+		fieldOptions: { allowedComparisons: ["in", "is"] },
+	})
 	role: string;
 }
