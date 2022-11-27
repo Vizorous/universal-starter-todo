@@ -128,7 +128,7 @@ type Todo {
 
   """Todo description"""
   description: String!
-  categoryId: String
+  categoryId: ID!
   category: Category
   subTasks(
     """Limit or page results."""
@@ -307,7 +307,7 @@ type TodoDeleteResponse {
 
   """Todo description"""
   description: String
-  categoryId: String
+  categoryId: ID
 }
 
 type TodoEdge {
@@ -332,7 +332,7 @@ type TodoAggregateGroupBy {
   updatedAt: Date
   name: String
   done: Boolean
-  categoryId: String
+  categoryId: ID
 }
 
 type TodoCountAggregate {
@@ -349,7 +349,7 @@ type TodoMinAggregate {
   createdAt: Date
   updatedAt: Date
   name: String
-  categoryId: String
+  categoryId: ID
 }
 
 type TodoMaxAggregate {
@@ -357,7 +357,7 @@ type TodoMaxAggregate {
   createdAt: Date
   updatedAt: Date
   name: String
-  categoryId: String
+  categoryId: ID
 }
 
 type TodoAggregateResponse {
@@ -620,7 +620,7 @@ input TodoAggregateFilter {
   updatedAt: DateFieldComparison
   name: TodoNameFilterComparison
   done: BooleanFieldComparison
-  categoryId: StringFieldComparison
+  categoryId: IDFilterComparison
 }
 
 input TodoIdFilterComparison {
@@ -634,6 +634,23 @@ input TodoNameFilterComparison {
   in: [String!]
 }
 
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
 input TodoFilter {
   and: [TodoFilter!]
   or: [TodoFilter!]
@@ -642,7 +659,7 @@ input TodoFilter {
   updatedAt: DateFieldComparison
   name: TodoNameFilterComparison
   done: BooleanFieldComparison
-  categoryId: StringFieldComparison
+  categoryId: IDFilterComparison
   category: TodoFilterCategoryFilter
 }
 
@@ -851,7 +868,7 @@ input CreateTodo {
 
   """Todo description"""
   description: String!
-  categoryId: String
+  categoryId: ID!
 }
 
 input UpdateOneTodoInput {
@@ -871,7 +888,7 @@ input UpdateTodo {
 
   """Todo description"""
   description: String
-  categoryId: String
+  categoryId: ID
 }
 
 input DeleteOneTodoInput {

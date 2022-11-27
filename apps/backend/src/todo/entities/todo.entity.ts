@@ -1,5 +1,5 @@
-import { ObjectType } from "@nestjs/graphql";
-import { CursorConnection, FilterableRelation } from "@vizorous/nestjs-query-graphql";
+import { ID, ObjectType } from "@nestjs/graphql";
+import { CursorConnection, FilterableField, FilterableRelation } from "@vizorous/nestjs-query-graphql";
 import { Entity, Index, ManyToOne, OneToMany } from "typeorm";
 import { CFF, CF } from "@vizorous/nest-query-utils";
 import { BaseEntity } from "@vizorous/nest-query-utils";
@@ -49,7 +49,7 @@ export class Todo extends BaseEntity {
 
 	// categoryId field can be used to set the relationship on input from GraphQL Schema.
 	// This can be used to filter as well.
-	@CFF({ nullable: true })
+	@CFF({ gqlType: () => ID, columnOptions: { nullable: true } })
 	categoryId?: string;
 
 	// This is used to create the TypeORM relation (DB Side).
