@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ResponsiveNavbar from "../navbar/ResponsiveNavbar";
-import { aiesecmanLogo } from "../0common/assets/exports";
+import { aiesecmanLogo } from "../_common/assets/exports";
 import Home from "../home/Home";
 
 interface ShellProps {}

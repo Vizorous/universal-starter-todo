@@ -1,7 +1,7 @@
 import { Container } from "@mantine/core";
 import React from "react";
 import { TodosQuery } from "../../__gen__/TodosQuery.graphql";
-import QueryFragContainer from "../0common/components/graphql-helpers/QueryFragContainer";
+import QueryFragContainer from "../_common/components/graphql-helpers/QueryFragContainer";
 import Todos, { todosQ } from "../todos/Todos";
 
 interface HomeProps {}
