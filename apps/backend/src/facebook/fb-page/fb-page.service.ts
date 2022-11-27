@@ -19,7 +19,7 @@ export class FbPageService extends TypeOrmQueryService<FbPage> {
 
 	async findAllFromFb(args: GetPagesFromFbArgs) {
 		return this.apiService
-			.get(`${args.fbUserId}/accounts?`, {
+			.get(`${args.fbInternalUserId}/accounts?`, {
 				params: {
 					access_token: args.userToken,
 				},

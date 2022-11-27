@@ -53,9 +53,9 @@ importers:
       '@vizorous/nest-cli': 9.1.6
       '@vizorous/nest-query-utils': 0.0.7
       '@vizorous/nest-schematics': ^9.0.3
-      '@vizorous/nestjs-query-core': 1.0.9
-      '@vizorous/nestjs-query-graphql': 1.1.1
-      '@vizorous/nestjs-query-typeorm': 1.1.2
+      '@vizorous/nestjs-query-core': ^1.1.3
+      '@vizorous/nestjs-query-graphql': ^1.1.3
+      '@vizorous/nestjs-query-typeorm': ^1.1.3
       altair-fastify-plugin: ^5.0.4
       case: ^1.6.3
       class-transformer: ^0.5.1
@@ -118,9 +118,9 @@ importers:
       '@vizorous/nest-cli': 9.1.6_@swc+core@1.3.18
       '@vizorous/nest-query-utils': 0.0.7_cloj5exubuzy6pdoqaunfjc4y4
       '@vizorous/nest-schematics': 9.0.3_typescript@4.9.3
-      '@vizorous/nestjs-query-core': 1.0.9_o4bgegdgebs72zdvzqhbsdthpu
-      '@vizorous/nestjs-query-graphql': 1.1.1_sxgbpn7uquzadbebch42iglnhy
-      '@vizorous/nestjs-query-typeorm': 1.1.2_46yuwj3nkvwzgrnsejgbypyyey
+      '@vizorous/nestjs-query-core': 1.1.3_o4bgegdgebs72zdvzqhbsdthpu
+      '@vizorous/nestjs-query-graphql': 1.1.3_sxgbpn7uquzadbebch42iglnhy
+      '@vizorous/nestjs-query-typeorm': 1.1.3_44vo3upxthpj7xdwwinyvcx4am
       altair-fastify-plugin: 5.0.4
       case: 1.6.3
       class-transformer: 0.5.1
@@ -4978,7 +4978,7 @@ packages:
     dependencies:
       '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
       '@nestjs/graphql': 10.1.6_rp3mmpa3f7kbz7horc3p4kv2wq
-      '@vizorous/nestjs-query-graphql': 1.1.2_sxgbpn7uquzadbebch42iglnhy
+      '@vizorous/nestjs-query-graphql': 1.1.3_sxgbpn7uquzadbebch42iglnhy
       class-transformer: 0.5.1
       typeorm: 0.3.10_x6u2u7rhw6egv6voummoev24bu
     transitivePeerDependencies:
@@ -5045,8 +5045,8 @@ packages:
       - chokidar
     dev: false
 
-  /@vizorous/nestjs-query-core/1.0.9_o4bgegdgebs72zdvzqhbsdthpu:
-    resolution: {integrity: sha512-REWID0wijUmo11ZxtXq0LgqW3TsUtMinc/xV39OA+NbBVl92t9kpIYJw3I88eX+b8wxsfgaa0kh35EEgMMKuQw==}
+  /@vizorous/nestjs-query-core/1.1.3_o4bgegdgebs72zdvzqhbsdthpu:
+    resolution: {integrity: sha512-Gg1dA7yLv7drhl4fFXYTDzfaEAGWYAJoLZoaWqQ9kzRcsN4LtcUGbTz94XsiwEj31IeQLn6uRv7p0mmxvrOICQ==}
     peerDependencies:
       '@nestjs/common': ^8.0.0 || ^9.0.0
       class-transformer: ^0.2.3 || 0.3.1 || ^0.5
@@ -5058,34 +5058,8 @@ packages:
       tslib: 2.4.1
     dev: false
 
-  /@vizorous/nestjs-query-core/1.1.1_o4bgegdgebs72zdvzqhbsdthpu:
-    resolution: {integrity: sha512-XQ4I/8j8lXNJd4EyoIGbgpWn4yi7OYwz6zIaSTPZjA8IB6dH0+F5IxhwEcPPrCS0pTC6DSQBtucBoDsuomuNeA==}
-    peerDependencies:
-      '@nestjs/common': ^8.0.0 || ^9.0.0
-      class-transformer: ^0.2.3 || 0.3.1 || ^0.5
-    dependencies:
-      '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
-      class-transformer: 0.5.1
-      lodash.merge: 4.6.2
-      reflect-metadata: 0.1.13
-      tslib: 2.4.1
-    dev: false
-
-  /@vizorous/nestjs-query-core/1.1.2_o4bgegdgebs72zdvzqhbsdthpu:
-    resolution: {integrity: sha512-xV5bfZ3+vgQ6VnBlnL7hbqwKs/rs1xdNM+HLFaBZ7BW+A3tFmdtx6oa+6liGcjJzX71puHgdlsRwCCV2udlj3Q==}
-    peerDependencies:
-      '@nestjs/common': ^8.0.0 || ^9.0.0
-      class-transformer: ^0.2.3 || 0.3.1 || ^0.5
-    dependencies:
-      '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
-      class-transformer: 0.5.1
-      lodash.merge: 4.6.2
-      reflect-metadata: 0.1.13
-      tslib: 2.4.1
-    dev: false
-
-  /@vizorous/nestjs-query-graphql/1.1.1_sxgbpn7uquzadbebch42iglnhy:
-    resolution: {integrity: sha512-BcsU1gFMk/ejTWvJAali003z+j/OyCWJG7L+/RgrNK2BIf+Owbwc3CKnVnSMNrvSnDZevbGay5mWZr/a15fG1g==}
+  /@vizorous/nestjs-query-graphql/1.1.3_sxgbpn7uquzadbebch42iglnhy:
+    resolution: {integrity: sha512-S0bI/zen028LbnTWdYXFR4LnaLFGj2UMHfEklZZXxRbbqI7Vb16oo4pkk2R2Wte31Aq3NDeJpx/zd8CrzdvpjQ==}
     peerDependencies:
       '@apollo/gateway': ^0.44.1 || ^0.46.0 || ^0.48.0 || ^0.49.0 || ^0.50.0 || ^2.0.0
       '@nestjs/common': ^8.0.0 || ^9.0.0
@@ -5101,7 +5075,7 @@ packages:
       '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
       '@nestjs/core': 9.2.0_cwtt3atepedbfcicd735tlm23q
       '@nestjs/graphql': 10.1.6_rp3mmpa3f7kbz7horc3p4kv2wq
-      '@vizorous/nestjs-query-core': 1.1.1_o4bgegdgebs72zdvzqhbsdthpu
+      '@vizorous/nestjs-query-core': 1.1.3_o4bgegdgebs72zdvzqhbsdthpu
       class-transformer: 0.5.1
       class-validator: 0.13.2
       dataloader: 2.1.0
@@ -5116,51 +5090,19 @@ packages:
       upper-case-first: 2.0.2
     dev: false
 
-  /@vizorous/nestjs-query-graphql/1.1.2_sxgbpn7uquzadbebch42iglnhy:
-    resolution: {integrity: sha512-hByMCtJNis8WJQDptAB9T0Vq/4aKRuO4ghpEoHrsT+1SBH/m32+7Nnxz51ODIYLIsXqdMcXWKOjOxisCe72g8A==}
-    peerDependencies:
-      '@apollo/gateway': ^0.44.1 || ^0.46.0 || ^0.48.0 || ^0.49.0 || ^0.50.0 || ^2.0.0
-      '@nestjs/common': ^8.0.0 || ^9.0.0
-      '@nestjs/core': ^8.0.0 || ^9.0.0
-      '@nestjs/graphql': ^9.0.0 || ^10.0.0
-      class-transformer: ^0.2.3 || 0.3.1 || ^0.5
-      class-validator: ^0.13.0
-      dataloader: ^2.0.0
-      graphql: ^16.0.0
-      graphql-subscriptions: ^2.0.0
-      ts-morph: ^13.0.2 || ^14.0.0 || ^15.0.0
-    dependencies:
-      '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
-      '@nestjs/core': 9.2.0_cwtt3atepedbfcicd735tlm23q
-      '@nestjs/graphql': 10.1.6_rp3mmpa3f7kbz7horc3p4kv2wq
-      '@vizorous/nestjs-query-core': 1.1.2_o4bgegdgebs72zdvzqhbsdthpu
-      class-transformer: 0.5.1
-      class-validator: 0.13.2
-      dataloader: 2.1.0
-      graphql: 16.6.0
-      graphql-fields: 2.0.3
-      graphql-subscriptions: 2.0.0_graphql@16.6.0
-      lodash.omit: 4.5.0
-      lower-case-first: 2.0.2
-      pluralize: 8.0.0
-      reflect-metadata: 0.1.13
-      tslib: 2.4.1
-      upper-case-first: 2.0.2
-    dev: false
-
-  /@vizorous/nestjs-query-typeorm/1.1.2_46yuwj3nkvwzgrnsejgbypyyey:
-    resolution: {integrity: sha512-fMswfNmqnz2SO2jHQg7Spqjmw90hsyEhLbl6sUrEPjj5E1//qUI5suY1hTUTuCH/D81NqHp/g4GUGljM30lzsw==}
+  /@vizorous/nestjs-query-typeorm/1.1.3_44vo3upxthpj7xdwwinyvcx4am:
+    resolution: {integrity: sha512-iDP63+O87aa6cmG2Qolrjtln/E4U2Be7j/MqyEo0+9pYCeys9YZhhBhteN+Fd8I+wIAEnVGHWtKOx3kONLH5Fg==}
     peerDependencies:
       '@nestjs/common': ^8.0.0 || ^9.0.0
       '@nestjs/typeorm': ^8.1.0 || ^9.0.0
-      '@vizorous/nestjs-query-core': 1.1.2
+      '@vizorous/nestjs-query-core': 1.1.3
       class-transformer: ^0.2.3 || 0.3.1 || ^0.5
       reflect-metadata: ^0.1.13
       typeorm: ^0.3.8
     dependencies:
       '@nestjs/common': 9.2.0_x6yqyveuahcdef4z4mxykmuv6a
       '@nestjs/typeorm': 9.0.1_2ekyp7igf6cbpgvvmiypy4gzpu
-      '@vizorous/nestjs-query-core': 1.0.9_o4bgegdgebs72zdvzqhbsdthpu
+      '@vizorous/nestjs-query-core': 1.1.3_o4bgegdgebs72zdvzqhbsdthpu
       camel-case: 4.1.2
       class-transformer: 0.5.1
       lodash.filter: 4.6.0

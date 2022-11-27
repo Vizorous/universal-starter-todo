@@ -13,6 +13,7 @@ import { FbInsightsSourceModule } from "./graph/fb-insights-source/fb-insights-s
 import { FbPageModule } from "./facebook/fb-page/fb-page.module";
 import { FbLongTokenModule } from "./facebook/fb-long-token/fb-long-token.module";
 import { FbUserModule } from "./facebook/fb-user/fb-user.module";
+import { NodeResolver } from "./_common/node/node.resolver";
 
 @Module({
 	imports: [
@@ -66,6 +67,6 @@ import { FbUserModule } from "./facebook/fb-user/fb-user.module";
 		FbUserModule,
 	],
 	controllers: [],
-	providers: [DateScalar],
+	providers: [DateScalar, NodeResolver],
 })
 export class AppModule {}

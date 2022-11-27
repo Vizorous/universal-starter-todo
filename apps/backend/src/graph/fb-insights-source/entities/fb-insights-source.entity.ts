@@ -1,13 +1,16 @@
 import { ObjectType } from "@nestjs/graphql";
-import { Entity } from "typeorm";
-import { CF, BaseEntity } from "@vizorous/nest-query-utils";
+import { Entity, ManyToOne } from "typeorm";
+import { CF, BaseEntity, CFID } from "@vizorous/nest-query-utils";
 import { FbDatePreset } from "../enums/fb-date-preset.enum";
+import { FbPage } from "src/facebook/fb-page/entities/fb-page.entity";
+import { Relation } from "@vizorous/nestjs-query-graphql";
+import { Exclude, Expose } from "class-transformer";
 
 @ObjectType()
 @Entity()
 // Defines a OneToOne or ManyToOne relations in the GraphQL Schema.
 // You can filter todos by category due to FilterableRelation.
-// @FilterableRelation("category", () => Category, { disableRemove: true, nullable: true })
+@Relation("fbPage", () => FbPage, { disableRemove: true, disableUpdate: true })
 
 // Defines a OneToMany or ManyToMany relations in the GraphQL Schema.
 // This defines a subtask relation which outputs a list of subtasks in GraphQL Schema.
@@ -17,57 +20,58 @@ export class FbInsightsSource extends BaseEntity {
 	// Turns on fulltext search for this field.
 	// @Index({ fulltext: true })
 
-	@CF({ gqlType: () => [String], columnOptions: { type: "simple-array" } })
-	metricList: string[];
+	@CF({
+		gqlType: () => [String],
+		columnOptions: { type: "simple-array" },
+		exposeOptions: { groups: ["params"], name: "metric", toClassOnly: true },
+	})
+	metric: string[];
 
 	@CF({
 		gqlType: () => FbDatePreset,
 		nullable: true,
+		exposeOptions: { groups: ["params"], toClassOnly: true },
 		columnOptions: { type: "enum", enum: FbDatePreset },
 	})
 	period?: FbDatePreset;
 
-	@CF({ nullable: true })
+	@CF({
+		nullable: true,
+		exposeOptions: { groups: ["params"], toClassOnly: true },
+	})
 	since?: string;
 
-	@CF({ nullable: true })
+	@CF({
+		nullable: true,
+		exposeOptions: { groups: ["params"], toClassOnly: true },
+	})
 	until?: string;
 
 	@CF({
 		gqlType: () => FbDatePreset,
 		nullable: true,
 		columnOptions: { type: "enum", enum: FbDatePreset },
+		exposeOptions: {
+			groups: ["params"],
+			name: "date_preset",
+			toClassOnly: true,
+		},
 	})
-	date_preset?: FbDatePreset;
+	datePreset?: FbDatePreset;
 
 	@CF({
 		fieldOptions: { defaultValue: false },
 		columnOptions: { default: false },
+		exposeOptions: {
+			name: "show_description_from_api_doc",
+			groups: ["params"],
+			toClassOnly: true,
+		},
 	})
 	show_description_from_api_doc: boolean;
 
-	// This a OnetoOne relation inside TypeORM (DB Side).
-	// @JoinColumn() is required on the owner side.
-	// @OneToOne(() => Category)
-	// @JoinColumn()
-	// category: Category;
-
-	// This a OnetoMany relation inside TypeORM (DB Side).
-	// For this to work, ManyToOne relation is required in the other entity.
-	// subTasks field will contain a list of subtasks.
-	// @OneToMany(() => SubTask, (subTask) => subTask.todo)
-	// subTasks: SubTask[];
-
-	// This a ManyToOne relation inside TypeORM (DB Side).
-	// This holds data of one category.
-	// @ManyToOne(() => Category)
-	// category?: Category;
-
-	// This is a ManyToMany relation inside TypeORM (DB Side).
-	// This creates a virtual relation table.
-	// @JoinTable() is used to show the owner of the relation.
-	// The other side must have a ManyToMany relation as well.
-	// @ManyToMany(() => SubTask)
-	// @JoinTable()
-	// subTasks: SubTask[]
+	@CFID()
+	fbPageId: string;
+	@ManyToOne(() => FbPage)
+	fbPage: FbPage;
 }

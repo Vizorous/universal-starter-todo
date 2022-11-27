@@ -51,14 +51,14 @@ export class Graph extends BaseEntity {
 	@CFID({ description: "ID of the graph layout" })
 	graphLayoutId: string;
 
-	@OneToOne(() => FbInsightsSource, { nullable: true })
+	@OneToOne(() => FbInsightsSource, { nullable: true, eager: true})
 	@JoinColumn()
 	fbInsightsSource?: FbInsightsSource;
 
 	@CFID({ nullable: true, description: "ID of the FB Insights Source" })
 	fbInsightsSourceId?: string;
 
-	@OneToOne(() => GAnalyticsSource, { nullable: true })
+	@OneToOne(() => GAnalyticsSource, { nullable: true, eager: true })
 	@JoinColumn()
 	gAnalyticsSource?: GAnalyticsSource;
 
@@ -79,8 +79,7 @@ export class Graph extends BaseEntity {
 	@CF({ columnOptions: { default: "line" } })
 	graphType: string;
 
-	// Used to render the actual data taken from the source.
 	@Type(() => GraphDataset)
 	@Field(() => [GraphDataset], { nullable: "items" })
-	graphDataset: GraphDataset;
+	graphDatasets: GraphDataset[];
 }

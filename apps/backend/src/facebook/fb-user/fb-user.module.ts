@@ -10,7 +10,7 @@ import { FbUser } from "./entities/fb-user.entity";
 const dbModule = NestjsQueryTypeOrmModule.forFeature([FbUser]);
 
 @Module({
-	providers: [FbUserResolver],
+	providers: [FbUserResolver, FbUserService],
 	imports: [
 		NestjsQueryGraphQLModule.forFeature({
 			imports: [dbModule],
@@ -35,6 +35,6 @@ const dbModule = NestjsQueryTypeOrmModule.forFeature([FbUser]);
 		}),
 		dbModule,
 	],
-	exports: [dbModule],
+	exports: [dbModule, FbUserService],
 })
 export class FbUserModule {}

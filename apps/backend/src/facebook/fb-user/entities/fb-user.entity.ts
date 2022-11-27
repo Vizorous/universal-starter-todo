@@ -1,20 +1,17 @@
 import { ObjectType } from "@nestjs/graphql";
-import { Entity } from "typeorm";
+import { Entity, OneToMany } from "typeorm";
 import { CF, CFF, BaseEntity } from "@vizorous/nest-query-utils";
+import { CursorConnection } from "@vizorous/nestjs-query-graphql";
+import { FbPage } from "src/facebook/fb-page/entities/fb-page.entity";
 
 @ObjectType()
 @Entity()
-// Defines a OneToOne or ManyToOne relations in the GraphQL Schema.
-// You can filter todos by category due to FilterableRelation.
-// @FilterableRelation("category", () => Category, { disableRemove: true, nullable: true })
-
-// Defines a OneToMany or ManyToMany relations in the GraphQL Schema.
-// This defines a subtask relation which outputs a list of subtasks in GraphQL Schema.
-// You can use @FilterableCursorConnection to enable filtering through subtasks.
-// @CursorConnection("subTasks", () => SubTask, { nullable: true, enableAggregate: false })
+// O2M, CRUD. Get the pages that belong to the user.
+@CursorConnection("fbPages", () => FbPage, {
+	nullable: true,
+	enableAggregate: false,
+})
 export class FbUser extends BaseEntity {
-	// Turns on fulltext search for this field.
-	// @Index({ fulltext: true })
 	@CFF({
 		description: "FbUser  name",
 		fieldOptions: { allowedComparisons: ["in", "is", "like"] },
@@ -24,28 +21,18 @@ export class FbUser extends BaseEntity {
 	@CF({ nullable: true })
 	description?: string;
 
-	// This a OnetoOne relation inside TypeORM (DB Side).
-	// @JoinColumn() is required on the owner side.
-	// @OneToOne(() => Category)
-	// @JoinColumn()
-	// category: Category;
+	@CFF({
+		description: "FB Internal Id of the page",
+		fieldOptions: { allowedComparisons: ["eq", "and"] },
+	})
+	fbInternalUserId: string;
 
-	// This a OnetoMany relation inside TypeORM (DB Side).
-	// For this to work, ManyToOne relation is required in the other entity.
-	// subTasks field will contain a list of subtasks.
-	// @OneToMany(() => SubTask, (subTask) => subTask.todo)
-	// subTasks: SubTask[];
+	@OneToMany(() => FbPage, (fbPage) => fbPage.fbUser)
+	fbPages: FbPage[];
 
-	// This a ManyToOne relation inside TypeORM (DB Side).
-	// This holds data of one category.
-	// @ManyToOne(() => Category)
-	// category?: Category;
+	@CF({ description: "Long lived token", nullable: true })
+	token?: string;
 
-	// This is a ManyToMany relation inside TypeORM (DB Side).
-	// This creates a virtual relation table.
-	// @JoinTable() is used to show the owner of the relation.
-	// The other side must have a ManyToMany relation as well.
-	// @ManyToMany(() => SubTask)
-	// @JoinTable()
-	// subTasks: SubTask[]
+	@CF({ description: "Expiration date", nullable: true })
+	tokenExpiryDate?: Date;
 }

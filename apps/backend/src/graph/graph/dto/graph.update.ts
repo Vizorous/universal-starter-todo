@@ -7,7 +7,7 @@ export class UpdateGraph extends UpdateType(Graph, [
 	"graphLayoutId",
 	"fbInsightsSourceId",
 	"gAnalyticsSourceId",
-	"graphDataset",
+	"graphDatasets",
 ]) {
 	// Add your own fields here
 }

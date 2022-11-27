@@ -3,7 +3,7 @@ import { ArgsType, Field } from "@nestjs/graphql";
 @ArgsType()
 export class GetPagesFromFbArgs {
 	@Field(() => String)
-	fbUserId: string;
+	fbInternalUserId: string;
 	@Field(() => String)
 	userToken: string;
 }

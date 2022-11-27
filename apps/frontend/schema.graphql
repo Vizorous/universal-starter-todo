@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+interface Node {
+  id: ID!
+}
+
 type GraphLayout {
   id: ID!
   createdAt: Date!
@@ -12,16 +16,200 @@ type GraphLayout {
   description: String
 }
 
+type FbUser {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """FbUser  name"""
+  name: String!
+  description: String
+
+  """FB Internal Id of the page"""
+  fbInternalUserId: String!
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+  fbPages(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: FbPageFilter = {}
+
+    """Paginate before opaque cursor"""
+    before: ConnectionCursor
+
+    """Paginate after opaque cursor"""
+    after: ConnectionCursor
+
+    """Paginate first"""
+    first: Int
+
+    """Paginate last"""
+    last: Int
+
+    """Specify to sort results."""
+    sorting: [FbPageSort!] = []
+  ): FbUserFbPagesConnection
+}
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input FbPageFilter {
+  and: [FbPageFilter!]
+  or: [FbPageFilter!]
+  id: FbPageIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: FbPageNameFilterComparison
+  fbInternalPageId: FbPageFbInternalPageIdFilterComparison
+  fbUser: FbPageFilterFbUserFilter
+}
+
+input FbPageIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
+}
+
+input FbPageNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input FbPageFbInternalPageIdFilterComparison {
+  eq: String
+}
+
+input FbPageFilterFbUserFilter {
+  and: [FbPageFilterFbUserFilter!]
+  or: [FbPageFilterFbUserFilter!]
+  id: FbUserIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: FbUserNameFilterComparison
+  fbInternalUserId: FbUserFbInternalUserIdFilterComparison
+}
+
+input FbUserIdFilterComparison {
+  eq: ID
+  in: [ID!]
+}
+
+input FbUserNameFilterComparison {
+  is: Boolean
+  like: String
+  in: [String!]
+}
+
+input FbUserFbInternalUserIdFilterComparison {
+  eq: String
+}
+
+input FbPageSort {
+  field: FbPageSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum FbPageSortFields {
+  id
+  createdAt
+  updatedAt
+  name
+  fbInternalPageId
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+type FbPage {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """FbPage  name"""
+  name: String!
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String!
+
+  """Fb user id"""
+  fbUserId: ID!
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+  fbUser: FbUser!
+}
+
 type FbInsightsSource {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
-  metricList: [String!]!
+  metric: [String!]!
   period: FbDatePreset
   since: String
   until: String
-  date_preset: FbDatePreset
+  datePreset: FbDatePreset
   show_description_from_api_doc: Boolean!
+  fbPageId: ID!
+  fbPage: FbPage!
 }
 
 enum FbDatePreset {
@@ -90,7 +278,7 @@ type Graph {
   """Type of the graph source"""
   graphSourceType: GraphSourceType!
   graphType: String!
-  graphDataset: [GraphDataset]!
+  graphDatasets: [GraphDataset]!
   graphLayout: GraphLayout!
   fbInsightsSource: FbInsightsSource!
   gAnalyticsSource: GAnalyticsSource!
@@ -141,23 +329,6 @@ type Section {
   ): SectionGraphsConnection!
 }
 
-input CursorPaging {
-  """Paginate before opaque cursor"""
-  before: ConnectionCursor
-
-  """Paginate after opaque cursor"""
-  after: ConnectionCursor
-
-  """Paginate first"""
-  first: Int
-
-  """Paginate last"""
-  last: Int
-}
-
-"""Cursor for paging through collections"""
-scalar ConnectionCursor
-
 input GraphFilter {
   and: [GraphFilter!]
   or: [GraphFilter!]
@@ -170,31 +341,6 @@ input GraphFilter {
 input GraphIdFilterComparison {
   eq: ID
   in: [ID!]
-}
-
-input DateFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: DateTime
-  neq: DateTime
-  gt: DateTime
-  gte: DateTime
-  lt: DateTime
-  lte: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  between: DateFieldComparisonBetween
-  notBetween: DateFieldComparisonBetween
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-input DateFieldComparisonBetween {
-  lower: DateTime!
-  upper: DateTime!
 }
 
 input GraphNameFilterComparison {
@@ -214,18 +360,6 @@ enum GraphSortFields {
   createdAt
   updatedAt
   name
-}
-
-"""Sort Directions"""
-enum SortDirection {
-  ASC
-  DESC
-}
-
-"""Sort Nulls Options"""
-enum SortNulls {
-  NULLS_FIRST
-  NULLS_LAST
 }
 
 type Dashboard {
@@ -303,6 +437,11 @@ enum SectionSortFields {
   name
 }
 
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
 type DashboardDeleteResponse {
   id: ID
   createdAt: Date
@@ -311,6 +450,11 @@ type DashboardDeleteResponse {
   """Dashboard  name"""
   name: String
   description: String
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
 }
 
 type DashboardEdge {
@@ -398,6 +542,59 @@ type SectionGraphsConnection {
   edges: [GraphEdge!]!
 }
 
+type PageFromFb {
+  """Name of the page"""
+  name: String!
+
+  """Id of the page"""
+  id: String!
+}
+
+type FbPageDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """FbPage  name"""
+  name: String
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String
+
+  """Fb user id"""
+  fbUserId: ID
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+}
+
+type FbPageEdge {
+  """The node containing the FbPage"""
+  node: FbPage!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type FbPageConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [FbPageEdge!]!
+}
+
+type GraphConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [GraphEdge!]!
+}
+
 type GraphDeleteResponse {
   id: ID
   createdAt: Date
@@ -420,15 +617,7 @@ type GraphDeleteResponse {
   """Type of the graph source"""
   graphSourceType: GraphSourceType
   graphType: String
-  graphDataset: [GraphDataset!]
-}
-
-type GraphConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [GraphEdge!]!
+  graphDatasets: [GraphDataset!]
 }
 
 type GraphLayoutEdge {
@@ -455,95 +644,6 @@ type FbInsightsSourceEdge {
   cursor: ConnectionCursor!
 }
 
-type FbLongToken {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """Long lived token"""
-  token: String!
-
-  """Expiration date"""
-  tokenExpiryDate: Date!
-}
-
-type FbUser {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """FbUser  name"""
-  name: String!
-  description: String
-}
-
-type FbPage {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """Long lived token"""
-  token: String!
-
-  """Expiration date"""
-  tokenExpiryDate: Date!
-
-  """FbPage  name"""
-  name: String!
-
-  """FB Internal Id of the page"""
-  fbInternalPageId: String!
-
-  """Fb user id"""
-  fbUserId: ID!
-  fbUser: FbUser!
-}
-
-type PageFromFb {
-  """Name of the page"""
-  name: String!
-
-  """Id of the page"""
-  id: String!
-}
-
-type FbPageDeleteResponse {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-
-  """Long lived token"""
-  token: String
-
-  """Expiration date"""
-  tokenExpiryDate: Date
-
-  """FbPage  name"""
-  name: String
-
-  """FB Internal Id of the page"""
-  fbInternalPageId: String
-
-  """Fb user id"""
-  fbUserId: ID
-}
-
-type FbPageEdge {
-  """The node containing the FbPage"""
-  node: FbPage!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type FbPageConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [FbPageEdge!]!
-}
-
 type FbUserDeleteResponse {
   id: ID
   createdAt: Date
@@ -552,6 +652,15 @@ type FbUserDeleteResponse {
   """FbUser  name"""
   name: String
   description: String
+
+  """FB Internal Id of the page"""
+  fbInternalUserId: String
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
 }
 
 type FbUserEdge {
@@ -570,10 +679,19 @@ type FbUserConnection {
   edges: [FbUserEdge!]!
 }
 
+type FbUserFbPagesConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [FbPageEdge!]!
+}
+
 """Date custom scalar type"""
 scalar Date
 
 type Query {
+  node(id: ID!): Node!
   dashboard(
     """The id of the record to find."""
     id: ID!
@@ -652,7 +770,11 @@ type Query {
     """Specify to sort results."""
     sorting: [GraphSort!] = []
   ): GraphConnection!
-  pagesFromFb(fbUserId: String!, userToken: String!): [PageFromFb]!
+  graphWithDatasets(
+    """The id of the record to find."""
+    id: ID!
+  ): Graph!
+  pagesFromFb(fbInternalUserId: String!, userToken: String!): [PageFromFb]!
   pageFromFb(pageToken: String!): PageFromFb
   fbPage(
     """The id of the record to find."""
@@ -751,66 +873,6 @@ enum DashboardSortFields {
   name
 }
 
-input FbPageFilter {
-  and: [FbPageFilter!]
-  or: [FbPageFilter!]
-  id: FbPageIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: FbPageNameFilterComparison
-  fbInternalPageId: FbPageFbInternalPageIdFilterComparison
-  fbUser: FbPageFilterFbUserFilter
-}
-
-input FbPageIdFilterComparison {
-  eq: ID
-  in: [ID!]
-}
-
-input FbPageNameFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input FbPageFbInternalPageIdFilterComparison {
-  eq: String
-}
-
-input FbPageFilterFbUserFilter {
-  and: [FbPageFilterFbUserFilter!]
-  or: [FbPageFilterFbUserFilter!]
-  id: FbUserIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: FbUserNameFilterComparison
-}
-
-input FbUserIdFilterComparison {
-  eq: ID
-  in: [ID!]
-}
-
-input FbUserNameFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input FbPageSort {
-  field: FbPageSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum FbPageSortFields {
-  id
-  createdAt
-  updatedAt
-  name
-  fbInternalPageId
-}
-
 input FbUserFilter {
   and: [FbUserFilter!]
   or: [FbUserFilter!]
@@ -818,6 +880,7 @@ input FbUserFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   name: FbUserNameFilterComparison
+  fbInternalUserId: FbUserFbInternalUserIdFilterComparison
 }
 
 input FbUserSort {
@@ -831,6 +894,7 @@ enum FbUserSortFields {
   createdAt
   updatedAt
   name
+  fbInternalUserId
 }
 
 type Mutation {
@@ -847,18 +911,27 @@ type Mutation {
   updateOneSection(input: UpdateOneSectionInput!): Section!
   deleteOneSection(input: DeleteOneSectionInput!): SectionDeleteResponse!
   createOneGraph(input: CreateOneGraphInput!): Graph!
+  createManyGraphs(input: CreateManyGraphsInput!): [Graph!]!
   updateOneGraph(input: UpdateOneGraphInput!): Graph!
+  updateManyGraphs(input: UpdateManyGraphsInput!): UpdateManyResponse!
   deleteOneGraph(input: DeleteOneGraphInput!): GraphDeleteResponse!
+  deleteManyGraphs(input: DeleteManyGraphsInput!): DeleteManyResponse!
+  createOneFbPage(input: CreateOneFbPageInput!): FbPage!
+  updateOneFbPage(input: UpdateOneFbPageInput!): FbPage!
+  deleteOneFbPage(input: DeleteOneFbPageInput!): FbPageDeleteResponse!
   createOneGraphLayout(input: CreateOneGraphLayoutInput!): GraphLayout!
   updateOneGraphLayout(input: UpdateOneGraphLayoutInput!): GraphLayout!
   createOneGAnalyticsSource(input: CreateOneGAnalyticsSourceInput!): GAnalyticsSource!
   updateOneGAnalyticsSource(input: UpdateOneGAnalyticsSourceInput!): GAnalyticsSource!
   createOneFbInsightsSource(input: CreateOneFbInsightsSourceInput!): FbInsightsSource!
   updateOneFbInsightsSource(input: UpdateOneFbInsightsSourceInput!): FbInsightsSource!
-  createOneFbPage(input: CreateOneFbPageInput!): FbPage!
-  updateOneFbPage(input: UpdateOneFbPageInput!): FbPage!
-  deleteOneFbPage(input: DeleteOneFbPageInput!): FbPageDeleteResponse!
-  createPageLongToken(createPageLongTokenInput: CreatePageLongTokenInput!): FbLongToken!
+  createUserLongToken(createUserLongTokenInput: CreateUserLongTokenInput!): FbUser!
+  createPageLongToken(createPageLongTokenInput: CreatePageLongTokenInput!): FbPage!
+  removePageLongToken(pageId: String!): FbPage!
+  removeUserLongToken(userId: String!): FbUser!
+  addFbPagesToFbUser(input: AddFbPagesToFbUserInput!): FbUser!
+  setFbPagesOnFbUser(input: SetFbPagesOnFbUserInput!): FbUser!
+  removeFbPagesFromFbUser(input: RemoveFbPagesFromFbUserInput!): FbUser!
   createOneFbUser(input: CreateOneFbUserInput!): FbUser!
   updateOneFbUser(input: UpdateOneFbUserInput!): FbUser!
   deleteOneFbUser(input: DeleteOneFbUserInput!): FbUserDeleteResponse!
@@ -1007,6 +1080,11 @@ input CreateGraph {
   graphType: String!
 }
 
+input CreateManyGraphsInput {
+  """Array of records to create"""
+  graphs: [CreateGraph!]!
+}
+
 input UpdateOneGraphInput {
   """The id of the record to update"""
   id: ID!
@@ -1026,7 +1104,90 @@ input UpdateGraph {
   graphType: String
 }
 
+input UpdateManyGraphsInput {
+  """Filter used to find fields to update"""
+  filter: GraphUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateGraph!
+}
+
+input GraphUpdateFilter {
+  and: [GraphUpdateFilter!]
+  or: [GraphUpdateFilter!]
+  id: GraphIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: GraphNameFilterComparison
+}
+
 input DeleteOneGraphInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyGraphsInput {
+  """Filter to find records to delete"""
+  filter: GraphDeleteFilter!
+}
+
+input GraphDeleteFilter {
+  and: [GraphDeleteFilter!]
+  or: [GraphDeleteFilter!]
+  id: GraphIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  name: GraphNameFilterComparison
+}
+
+input CreateOneFbPageInput {
+  """The record to create"""
+  fbPage: CreateFbPage!
+}
+
+input CreateFbPage {
+  """FbPage  name"""
+  name: String!
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String!
+
+  """Fb user id"""
+  fbUserId: ID!
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+}
+
+input UpdateOneFbPageInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateFbPage!
+}
+
+input UpdateFbPage {
+  """FbPage  name"""
+  name: String
+
+  """FB Internal Id of the page"""
+  fbInternalPageId: String
+
+  """Fb user id"""
+  fbUserId: ID
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
+}
+
+input DeleteOneFbPageInput {
   """The id of the record to delete."""
   id: ID!
 }
@@ -1087,12 +1248,13 @@ input CreateOneFbInsightsSourceInput {
 }
 
 input CreateFbInsightsSource {
-  metricList: [String!]!
+  metric: [String!]!
   period: FbDatePreset
   since: String
   until: String
-  date_preset: FbDatePreset
+  datePreset: FbDatePreset
   show_description_from_api_doc: Boolean = false
+  fbPageId: ID!
 }
 
 input UpdateOneFbInsightsSourceInput {
@@ -1104,78 +1266,62 @@ input UpdateOneFbInsightsSourceInput {
 }
 
 input UpdateFbInsightsSource {
-  metricList: [String!]
+  metric: [String!]
   period: FbDatePreset
   since: String
   until: String
-  date_preset: FbDatePreset
+  datePreset: FbDatePreset
   show_description_from_api_doc: Boolean = false
+  fbPageId: ID
 }
 
-input CreateOneFbPageInput {
-  """The record to create"""
-  fbPage: CreateFbPage!
-}
+input CreateUserLongTokenInput {
+  """User ID"""
+  fbUserId: String!
 
-input CreateFbPage {
-  """Long lived token"""
-  token: String!
-
-  """Expiration date"""
-  tokenExpiryDate: Date!
-
-  """FbPage  name"""
-  name: String!
-
-  """FB Internal Id of the page"""
-  fbInternalPageId: String!
-
-  """Fb user id"""
-  fbUserId: ID!
-}
-
-input UpdateOneFbPageInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: UpdateFbPage!
-}
-
-input UpdateFbPage {
-  """Long lived token"""
-  token: String
-
-  """Expiration date"""
-  tokenExpiryDate: Date
-
-  """FbPage  name"""
-  name: String
-
-  """FB Internal Id of the page"""
-  fbInternalPageId: String
-
-  """Fb user id"""
-  fbUserId: ID
-}
-
-input DeleteOneFbPageInput {
-  """The id of the record to delete."""
-  id: ID!
+  """Short Lived User Token"""
+  fbUserShortToken: String!
 }
 
 input CreatePageLongTokenInput {
   """User Id"""
-  fbUserId: ID!
+  fbUserId: ID
+
+  """Fb internal user Id"""
+  fbInternalUserId: String
 
   """Page Id"""
   fbPageId: ID!
 
-  """Fb Internal page Id"""
-  fbInternalPageId: String!
+  """Fb internal page Id"""
+  fbInternalPageId: String
 
   """Long Lived User Token"""
-  userLongToken: String!
+  userLongToken: String
+}
+
+input AddFbPagesToFbUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetFbPagesOnFbUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input RemoveFbPagesFromFbUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
 }
 
 input CreateOneFbUserInput {
@@ -1187,6 +1333,15 @@ input CreateFbUser {
   """FbUser  name"""
   name: String!
   description: String
+
+  """FB Internal Id of the page"""
+  fbInternalUserId: String!
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
 }
 
 input UpdateOneFbUserInput {
@@ -1201,6 +1356,15 @@ input UpdateFbUser {
   """FbUser  name"""
   name: String
   description: String
+
+  """FB Internal Id of the page"""
+  fbInternalUserId: String
+
+  """Long lived token"""
+  token: String
+
+  """Expiration date"""
+  tokenExpiryDate: Date
 }
 
 input DeleteOneFbUserInput {

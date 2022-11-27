@@ -7,7 +7,7 @@ import { stringify } from "qs";
 		HttpModule.register({
 			baseURL: "https://graph.facebook.com/v13.0/",
 			paramsSerializer: {
-				encode: (params) => stringify(params, { arrayFormat: "comma" }),
+				serialize: (params) => stringify(params, { arrayFormat: "comma" }),
 			},
 		}),
 	],

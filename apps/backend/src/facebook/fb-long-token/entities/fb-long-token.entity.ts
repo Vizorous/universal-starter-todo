@@ -4,11 +4,10 @@ import { Expose, Transform } from "class-transformer";
 import { add } from "date-fns";
 import { Column } from "typeorm";
 @ObjectType()
-export class FbLongToken extends BaseEntity {
+export class FbLongToken {
 	// actual token
 	@Expose({ name: "access_token" })
 	@Field({ description: "Long lived token" })
-	@Column()
 	token: string;
 	//transform expires_in seconds to Date
 	@Transform(({ value }) =>
@@ -18,6 +17,5 @@ export class FbLongToken extends BaseEntity {
 	)
 	@Expose({ name: "expires_in" })
 	@Field({ description: "Expiration date" })
-	@Column()
 	tokenExpiryDate: Date;
 }
