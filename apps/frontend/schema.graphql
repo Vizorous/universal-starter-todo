@@ -110,7 +110,7 @@ type SubTask {
 
   """SubTask description"""
   description: String!
-  todoId: String!
+  todoId: ID!
   categoryId: String
   category: Category!
 }
@@ -128,7 +128,7 @@ type Todo {
 
   """Todo description"""
   description: String!
-  categoryId: ID!
+  categoryId: ID
   category: Category
   subTasks(
     """Limit or page results."""
@@ -176,7 +176,7 @@ input SubTaskFilter {
   updatedAt: DateFieldComparison
   name: SubTaskNameFilterComparison
   done: BooleanFieldComparison
-  todoId: StringFieldComparison
+  todoId: IDFilterComparison
   categoryId: StringFieldComparison
   category: SubTaskFilterCategoryFilter
 }
@@ -220,6 +220,23 @@ input SubTaskNameFilterComparison {
 input BooleanFieldComparison {
   is: Boolean
   isNot: Boolean
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
 }
 
 input StringFieldComparison {
@@ -396,7 +413,7 @@ type SubTaskDeleteResponse {
 
   """SubTask description"""
   description: String
-  todoId: String
+  todoId: ID
   categoryId: String
 }
 
@@ -634,23 +651,6 @@ input TodoNameFilterComparison {
   in: [String!]
 }
 
-input IDFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: ID
-  neq: ID
-  gt: ID
-  gte: ID
-  lt: ID
-  lte: ID
-  like: ID
-  notLike: ID
-  iLike: ID
-  notILike: ID
-  in: [ID!]
-  notIn: [ID!]
-}
-
 input TodoFilter {
   and: [TodoFilter!]
   or: [TodoFilter!]
@@ -868,7 +868,7 @@ input CreateTodo {
 
   """Todo description"""
   description: String!
-  categoryId: ID!
+  categoryId: ID
 }
 
 input UpdateOneTodoInput {
@@ -915,7 +915,7 @@ input CreateSubTask {
 
   """SubTask description"""
   description: String!
-  todoId: String!
+  todoId: ID!
   categoryId: String
 }
 
@@ -936,7 +936,7 @@ input UpdateSubTask {
 
   """SubTask description"""
   description: String
-  todoId: String
+  todoId: ID
   categoryId: String
 }
 

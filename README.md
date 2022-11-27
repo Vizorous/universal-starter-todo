@@ -89,9 +89,10 @@ Aliases has been created to utilize scoped PNPM commands correctly.
 - It is integrated with TypeORM and nestjs-query as well.
 - Run the following command to create a new resource.
   ```
-  pnpm viz g resource resource-name
+  pnpm nestgen resource-name
   ```
-- *You should always use this to generate new Endpoints.*
+- _You should always use this to generate new Endpoints._
+
 ## Commit guide
 
 We utilize convention commits to put our commits in a standard format. This helps us to generate changelogs and release notes automatically. Please follow the following guide to commit your changes.

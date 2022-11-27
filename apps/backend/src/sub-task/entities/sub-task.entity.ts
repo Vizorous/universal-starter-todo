@@ -1,7 +1,7 @@
 import { ObjectType } from "@nestjs/graphql";
 import { FilterableRelation } from "@vizorous/nestjs-query-graphql";
 import { Entity, Index, ManyToOne } from "typeorm";
-import { BaseEntity, CFF } from "@vizorous/nest-query-utils";
+import { BaseEntity, CFF, CFFID } from "@vizorous/nest-query-utils";
 import { Todo } from "src/todo/entities/todo.entity";
 import { Category } from "src/category/entities/category.entity";
 import { CF } from "@vizorous/nest-query-utils";
@@ -39,7 +39,7 @@ export class SubTask extends BaseEntity {
 
 	// todoId field can be used to set the relationship on input from GraphQL Schema.
 	// This can be used to filter as well.
-	@CFF({ nullable: false })
+	@CFFID({ nullable: false })
 	todoId!: string;
 	// This is used to create the TypeORM relation (DB Side).
 	// This holds data of one todo.
