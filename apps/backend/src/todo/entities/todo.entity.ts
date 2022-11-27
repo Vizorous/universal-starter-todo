@@ -1,5 +1,5 @@
 import { ID, ObjectType } from "@nestjs/graphql";
-import { CursorConnection, FilterableField, FilterableRelation } from "@vizorous/nestjs-query-graphql";
+import { CursorConnection, FilterableRelation } from "@vizorous/nestjs-query-graphql";
 import { Entity, Index, ManyToOne, OneToMany } from "typeorm";
 import { CFF, CF } from "@vizorous/nest-query-utils";
 import { BaseEntity } from "@vizorous/nest-query-utils";
