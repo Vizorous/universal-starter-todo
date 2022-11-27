@@ -4,7 +4,6 @@ import { CF, BaseEntity, CFID } from "@vizorous/nest-query-utils";
 import { FbDatePreset } from "../enums/fb-date-preset.enum";
 import { FbPage } from "src/facebook/fb-page/entities/fb-page.entity";
 import { Relation } from "@vizorous/nestjs-query-graphql";
-import { Exclude, Expose } from "class-transformer";
 
 @ObjectType()
 @Entity()

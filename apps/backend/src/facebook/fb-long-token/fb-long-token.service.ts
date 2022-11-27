@@ -1,7 +1,7 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
-import { firstValueFrom, map } from "rxjs";
+import { map } from "rxjs";
 import { getEnv } from "src/_common/config/local.config";
 import { FbPageService } from "../fb-page/fb-page.service";
 import { FbUserService } from "../fb-user/fb-user.service";

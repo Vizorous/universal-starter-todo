@@ -1,8 +1,6 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { BaseEntity } from "@vizorous/nest-query-utils";
 import { Expose, Transform } from "class-transformer";
 import { add } from "date-fns";
-import { Column } from "typeorm";
 @ObjectType()
 export class FbLongToken {
 	// actual token

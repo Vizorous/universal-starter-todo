@@ -5,8 +5,6 @@ import { NestjsQueryGraphQLModule } from "@vizorous/nestjs-query-graphql";
 import { CreateGraph } from "./dto/graph.create";
 import { UpdateGraph } from "./dto/graph.update";
 import { Graph } from "./entities/graph.entity";
-import { FbInsightsSource } from "../fb-insights-source/entities/fb-insights-source.entity";
-import { FbInsightsSourceModule } from "../fb-insights-source/fb-insights-source.module";
 import { InsightsModule } from "src/facebook/insights/insights.module";
 import { GraphReadResolver } from "./read-graph.resolver";
 

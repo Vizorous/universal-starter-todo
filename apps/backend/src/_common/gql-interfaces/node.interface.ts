@@ -5,4 +5,3 @@ export abstract class Node {
 	@Field((type) => ID)
 	id: string;
 }
-

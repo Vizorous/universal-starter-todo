@@ -8,4 +8,3 @@ export class NodeResolver {
 		return null as Node;
 	}
 }
-

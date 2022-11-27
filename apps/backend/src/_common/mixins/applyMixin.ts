@@ -13,4 +13,3 @@ export function applyMixins<T extends Function, U extends Function>(
 		});
 	});
 }
-

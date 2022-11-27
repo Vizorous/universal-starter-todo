@@ -9,4 +9,3 @@ import { InsightsService } from "./insights.service";
 	exports: [InsightsService],
 })
 export class InsightsModule {}
-

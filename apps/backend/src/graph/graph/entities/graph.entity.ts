@@ -51,7 +51,7 @@ export class Graph extends BaseEntity {
 	@CFID({ description: "ID of the graph layout" })
 	graphLayoutId: string;
 
-	@OneToOne(() => FbInsightsSource, { nullable: true, eager: true})
+	@OneToOne(() => FbInsightsSource, { nullable: true, eager: true })
 	@JoinColumn()
 	fbInsightsSource?: FbInsightsSource;
 

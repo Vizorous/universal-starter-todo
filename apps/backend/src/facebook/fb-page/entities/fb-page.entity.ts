@@ -1,10 +1,8 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { ObjectType } from "@nestjs/graphql";
 import { Entity, Index, ManyToOne, Unique } from "typeorm";
 import { BaseEntity, CF, CFF, CFID } from "@vizorous/nest-query-utils";
-import { FbLongToken } from "src/facebook/fb-long-token/entities/fb-long-token.entity";
 import { FilterableRelation } from "@vizorous/nestjs-query-graphql";
 import { FbUser } from "src/facebook/fb-user/entities/fb-user.entity";
-import { applyMixins } from "src/_common/mixins/applyMixin";
 
 @ObjectType()
 @Entity()

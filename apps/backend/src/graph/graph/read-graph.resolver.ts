@@ -1,11 +1,9 @@
 import { Args, ArgsType, Query, Resolver } from "@nestjs/graphql";
-import { InjectQueryService } from "@vizorous/nestjs-query-core";
 import {
 	FindOneArgsType,
 	ReadResolver,
 	Relatable,
 } from "@vizorous/nestjs-query-graphql";
-import { ResolverQuery } from "@vizorous/nestjs-query-graphql/src/decorators";
 import { Graph } from "./entities/graph.entity";
 import { GraphService } from "./graph.service";
 
@@ -40,4 +38,3 @@ export class GraphReadResolver extends Relatable(
 		return this.service.getDataset(args.id);
 	}
 }
-

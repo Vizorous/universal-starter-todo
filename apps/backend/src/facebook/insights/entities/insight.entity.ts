@@ -26,4 +26,3 @@ export class InsightsData {
 	@Transform(({ value }) => new Date(value))
 	end_time: Date;
 }
-

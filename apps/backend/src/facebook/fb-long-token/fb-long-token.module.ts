@@ -6,7 +6,7 @@ import { FbLongTokenService } from "./fb-long-token.service";
 import { FbUserModule } from "../fb-user/fb-user.module";
 
 @Module({
-	imports: [FbPageModule, FbApiModule, FbPageModule,FbUserModule],
+	imports: [FbPageModule, FbApiModule, FbPageModule, FbUserModule],
 	providers: [FbLongTokenResolver, FbLongTokenService],
 })
 export class FbLongTokenModule {}

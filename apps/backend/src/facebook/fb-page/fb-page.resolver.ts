@@ -1,6 +1,6 @@
 import { Resolver, Args, Query } from "@nestjs/graphql";
 import { GetPageFromFbArgs, GetPagesFromFbArgs } from "./dto/get-page.args";
-import { FbPage, } from "./entities/fb-page.entity";
+import { FbPage } from "./entities/fb-page.entity";
 import { FbPageService } from "./fb-page.service";
 import { Selections } from "@jenyus-org/nestjs-graphql-utils";
 import { PageFromFb } from "./entities/page-from-fb.entity";
