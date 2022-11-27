@@ -5,9 +5,14 @@ import { GraphQLTaggedNode, OperationType, VariablesOf } from "relay-runtime";
 interface RootContainerProps<T extends OperationType> {
 	query: GraphQLTaggedNode;
 	variables: VariablesOf<T>;
-	render: (queryRef: PreloadedQuery<T>, query?: GraphQLTaggedNode) => ReactElement;
+	render: (
+		queryRef: PreloadedQuery<T>,
+		query?: GraphQLTaggedNode
+	) => ReactElement;
 }
-const QueryRootContainer = <T extends OperationType>(props: RootContainerProps<T>): ReactElement => {
+const QueryRootContainer = <T extends OperationType>(
+	props: RootContainerProps<T>
+): ReactElement => {
 	const [queryRef, loadQuery] = useQueryLoader<T>(props.query);
 
 	useEffect(() => {
@@ -15,7 +20,9 @@ const QueryRootContainer = <T extends OperationType>(props: RootContainerProps<T
 	}, [loadQuery]);
 	return (
 		<>
-			<Suspense fallback={"Loading page..."}>{queryRef != null && props.render(queryRef, props.query)}</Suspense>
+			<Suspense fallback={"Loading page..."}>
+				{queryRef != null && props.render(queryRef, props.query)}
+			</Suspense>
 		</>
 	);
 };

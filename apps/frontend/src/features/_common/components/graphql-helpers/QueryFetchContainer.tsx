@@ -1,7 +1,9 @@
 import { ReactElement } from "react";
 import { PreloadedQuery, usePreloadedQuery } from "react-relay";
 import { GraphQLTaggedNode, OperationType } from "relay-runtime";
-export type FetchRenderFunc<T extends OperationType> = (data: T["response"]) => ReactElement;
+export type FetchRenderFunc<T extends OperationType> = (
+	data: T["response"]
+) => ReactElement;
 
 export interface QueryFetchContainerProps<T extends OperationType> {
 	query: GraphQLTaggedNode;
@@ -20,7 +22,9 @@ export interface QueryFetchContainerProps<T extends OperationType> {
 	</QueryFetch>
 
  */
-export const QueryFetchContainer = <T extends OperationType>(props: QueryFetchContainerProps<T>): ReactElement => {
+export const QueryFetchContainer = <T extends OperationType>(
+	props: QueryFetchContainerProps<T>
+): ReactElement => {
 	const data = usePreloadedQuery<T>(props.query, props.queryRef);
 	return <>{props.render(data)}</>;
 };

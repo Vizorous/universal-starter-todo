@@ -24,7 +24,9 @@ export interface QueryFragContainerProps<T extends OperationType> {
 				render={(data) => <Todos todoKey={data}></Todos>}
 			></QueryFragContainer>
  */
-const QueryFragContainer = <T extends OperationType>(props: QueryFragContainerProps<T>): ReactElement => {
+const QueryFragContainer = <T extends OperationType>(
+	props: QueryFragContainerProps<T>
+): ReactElement => {
 	const [queryRef, loadQuery] = useQueryLoader<T>(props.query);
 	useEffect(() => {
 		loadQuery(props.variables);
@@ -33,7 +35,11 @@ const QueryFragContainer = <T extends OperationType>(props: QueryFragContainerPr
 		<>
 			<Suspense fallback={props.suspenseFallback ?? "Loading page..."}>
 				{queryRef !== null && (
-					<QueryFetchContainer<T> query={props.query} queryRef={queryRef} render={props.render}></QueryFetchContainer>
+					<QueryFetchContainer<T>
+						query={props.query}
+						queryRef={queryRef}
+						render={props.render}
+					></QueryFetchContainer>
 				)}
 			</Suspense>
 		</>
