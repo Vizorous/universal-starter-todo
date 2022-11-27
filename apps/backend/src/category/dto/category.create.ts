@@ -1,5 +1,5 @@
 import { InputType } from "@nestjs/graphql";
-import { CreateType } from "src/_common/utils/MappedTypes";
+import { CreateType } from "@vizorous/nest-query-utils";
 import { Category } from "../entities/category.entity";
 
 @InputType()

@@ -1,11 +1,10 @@
 import { ObjectType } from "@nestjs/graphql";
 import { FilterableRelation } from "@vizorous/nestjs-query-graphql";
-import { Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import CFF from "src/_common/decorators/CFF";
+import { Entity, Index, ManyToOne } from "typeorm";
+import { BaseEntity, CFF } from "@vizorous/nest-query-utils";
 import { Todo } from "src/todo/entities/todo.entity";
 import { Category } from "src/category/entities/category.entity";
-import { BaseEntity } from "src/_common/entities/base.entity";
-import CF from "src/_common/decorators/CF";
+import { CF } from "@vizorous/nest-query-utils";
 
 @ObjectType()
 @Entity()
@@ -35,31 +34,28 @@ export class SubTask extends BaseEntity {
 	@CF({ description: "SubTask description" })
 	description: string;
 
-	// Below code defines a many to one relation to todo.
-	// This relation is filterable through use of CFF.
+	// Below code defines a many to one relation to category in TypeORM (DB Side).
 	// It is required to have two fields for this, one for the id and one for the object.
 
-	// todoId field is used for filtering and DTO.
-	// This field is only available in the DTO.
+	// todoId field can be used to set the relationship on input from GraphQL Schema.
+	// This can be used to filter as well.
 	@CFF({ nullable: false })
 	todoId!: string;
-	// todo field is used for outputting the todo object.
-	// This field is only available in query output.
-	@ManyToOne(() => Todo, { cascade: true, eager: true })
-	@JoinColumn()
+	// This is used to create the TypeORM relation (DB Side).
+	// This holds data of one todo.
+	@ManyToOne(() => Todo)
 	todo!: Todo;
 
-	// Below code defines a many to one relation to category.
-	// This relation is filterable through use of CFF.
+	// Below code defines a many to one relation to category in TypeORM (DB Side).
 	// It is required to have two fields for this, one for the id and one for the object.
 
-	// categoryId field is used for filtering and DTO.
-	// This field is only available in the DTO.
-	@CFF({ nullable: false })
-	categoryId!: string;
-	// category field is used for outputting the category object.
-	// This field is only available in query output.
-	@ManyToOne(() => Category, { cascade: true, eager: true })
-	@JoinColumn()
-	category!: Category;
+	// categoryId field can be used to set the relationship on input from GraphQL Schema.
+	// This can be used to filter as well.
+	@CFF({ nullable: true })
+	categoryId?: string;
+
+	// This is used to create the TypeORM relation (DB Side).
+	// This holds data of one category.
+	@ManyToOne(() => Category)
+	category?: Category;
 }

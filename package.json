@@ -19,6 +19,7 @@
 		"fe": "pnpm --filter frontend",
 		"fea": "pnpm --filter frontend add",
 		"nest": "pnpm --filter backend nest",
+		"viz": "pnpm --filter backend viz",
 		"relay": "pnpm fe relay",
 		"be:fix": "npx eslint ./apps/backend/**/*.ts --fix"
 	},
@@ -54,3 +55,4 @@
 	},
 	"packageManager": "pnpm@7.0.1"
 }
+

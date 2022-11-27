@@ -1,20 +1,20 @@
-import { ObjectType } from "@nestjs/graphql";
-import { FilterableRelation, UnPagedRelation } from "@vizorous/nestjs-query-graphql";
-import { Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import CF from "src/_common/decorators/CF";
-import CFF from "src/_common/decorators/CFF";
-import { BaseEntity } from "../../_common/entities/base.entity";
+import { ID, ObjectType } from "@nestjs/graphql";
+import { CursorConnection, FilterableRelation } from "@vizorous/nestjs-query-graphql";
+import { Entity, Index, ManyToOne, OneToMany } from "typeorm";
+import { CFF, CF } from "@vizorous/nest-query-utils";
+import { BaseEntity } from "@vizorous/nest-query-utils";
 import { Category } from "src/category/entities/category.entity";
 import { SubTask } from "src/sub-task/entities/sub-task.entity";
 
 @ObjectType()
-@Entity()
-// This defines category as a filterable relation.
-// This means you can filter todos by category.
+@Entity({})
+// Defines a OneToOne or ManyToOne relations in the GraphQL Schema.
+// You can filter todos by category due to FilterableRelation.
 @FilterableRelation("category", () => Category, { disableRemove: true, nullable: true })
-// This defines a subtask relation which outputs a list of subtasks WITHOUT paging.
-// You cannot filter todos through this.
-@UnPagedRelation("subTasks", () => SubTask, { nullable: true })
+// Defines a OneToMany or ManyToMany relations in the GraphQL Schema.
+// This defines a subtask relation which outputs a list of subtasks in GraphQL Schema.
+// You can use @FilterableCursorConnection to enable filtering through subtasks.
+@CursorConnection("subTasks", () => SubTask, { nullable: true, enableAggregate: false })
 export class Todo extends BaseEntity {
 	// Turns on fulltext search for this field.
 	@Index({ fulltext: true })
@@ -32,10 +32,9 @@ export class Todo extends BaseEntity {
 	})
 	done!: boolean;
 
-	// This a one to many relation with sub tasks.
-	// You have to define the inverse side of the relation.
-	// This is required because we need to access subTasks from todo.
-	//subTasks field will contain a list of subtasks.
+	// This a One-to-Many relation inside TypeORM (DB Side).
+	// For this to work, ManyToOne relation is required in the other entity.
+	// subTasks field will contain a list of subtasks.
 	@OneToMany(() => SubTask, (subTask) => subTask.todo)
 	subTasks: SubTask[];
 
@@ -45,16 +44,16 @@ export class Todo extends BaseEntity {
 	@CF({ description: "Todo description" })
 	description: string;
 
-	// Below code defines a many to one relation to category.
-	// This relation is filterable through use of CFF.
+	// Below code defines a many to one relation to category in TypeORM (DB Side).
 	// It is required to have two fields for this, one for the id and one for the object.
 
-	// categoryId field is used mainly in the DTO.
-	@CFF({ nullable: true })
+	// categoryId field can be used to set the relationship on input from GraphQL Schema.
+	// This can be used to filter as well.
+	@CFF({ gqlType: () => ID, columnOptions: { nullable: true } })
 	categoryId?: string;
-	// category field is used for outputting the category object.
-	// This field is used also in filtering.
-	@ManyToOne(() => Category, { cascade: true, eager: true })
-	@JoinColumn()
+
+	// This is used to create the TypeORM relation (DB Side).
+	// This holds data of one category.
+	@ManyToOne(() => Category)
 	category?: Category;
 }
