@@ -8,13 +8,13 @@ const { Suspense } = React;
 
 function App() {
 	return (
-		<RelayEnvironmentProvider environment={relayEnv}>
-			<Suspense fallback={"Loading..."}>
-				<div className="App">
-					<Shell></Shell>
-				</div>
-			</Suspense>
-		</RelayEnvironmentProvider>
+		// <RelayEnvironmentProvider environment={relayEnv}>
+		<Suspense fallback={"Loading..."}>
+			<div className="App">
+				<Shell></Shell>
+			</div>
+		</Suspense>
+		// </RelayEnvironmentProvider>
 	);
 }
 

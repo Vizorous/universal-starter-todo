@@ -10,11 +10,12 @@ const Home: React.FC<HomeProps> = () => {
 	return (
 		<>
 			<Container size="md">
-				<QueryFragContainer<TodosQuery>
+				<div>Test</div>
+				{/* <QueryFragContainer<TodosQuery>
 					query={todosQ}
 					variables={{ first: 50 }}
 					render={(data) => <Todos todoKey={data} categoryKey={data}></Todos>}
-				></QueryFragContainer>
+				></QueryFragContainer> */}
 			</Container>
 		</>
 	);
