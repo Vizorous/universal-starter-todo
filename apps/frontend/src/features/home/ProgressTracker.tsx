@@ -13,6 +13,9 @@ const useStyles = createStyles((theme) => ({
 		padding: "20px 30px",
 		borderRadius: theme.radius.md,
 	},
+	label: {
+		color: theme.colorScheme === "dark" ? theme.white : theme.colors.dark[2] ,
+	}
 }));
 
 export function ProgressTracker() {
@@ -22,9 +25,9 @@ export function ProgressTracker() {
 	return (
 		<>
 			<Stepper active={active} onStepClick={setActive} breakpoint="sm" color="orange" className={classes.main}>
-				<Stepper.Step label="Select Template"></Stepper.Step>
-				<Stepper.Step label="Choose Dashboard Preferences"></Stepper.Step>
-				<Stepper.Step label="Add Data Sources"></Stepper.Step>
+				<Stepper.Step label="Select Template" className={classes.label}></Stepper.Step>
+				<Stepper.Step label="Choose Dashboard Preferences" className={classes.label}></Stepper.Step>
+				<Stepper.Step label="Add Data Sources" className={classes.label}></Stepper.Step>
 				<Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
 			</Stepper>
 		</>
