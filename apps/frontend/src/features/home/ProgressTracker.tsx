@@ -14,8 +14,8 @@ const useStyles = createStyles((theme) => ({
 		borderRadius: theme.radius.md,
 	},
 	label: {
-		color: theme.colorScheme === "dark" ? theme.white : theme.colors.dark[2] ,
-	}
+		color: theme.colorScheme === "dark" ? theme.white : theme.colors.dark[2],
+	},
 }));
 
 export function ProgressTracker() {
