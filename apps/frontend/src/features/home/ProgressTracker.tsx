@@ -24,7 +24,7 @@ export function ProgressTracker() {
 
 	return (
 		<>
-			<Stepper active={active} onStepClick={setActive} breakpoint="sm" color="orange" className={classes.main}>
+			<Stepper active={active} onStepClick={setActive} breakpoint="sm" className={classes.main}>
 				<Stepper.Step label="Select Template" className={classes.label}></Stepper.Step>
 				<Stepper.Step label="Choose Dashboard Preferences" className={classes.label}></Stepper.Step>
 				<Stepper.Step label="Add Data Sources" className={classes.label}></Stepper.Step>
