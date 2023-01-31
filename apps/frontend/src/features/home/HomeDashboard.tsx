@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Grid, Container } from "@mantine/core";
 
 import { ProgressTracker } from "./ProgressTracker";
@@ -6,8 +6,7 @@ import { TemplateGrid } from "./TemplateGrid";
 import { TemplateTypes } from "./TemplateTypes";
 
 export function HomeDashboard() {
-
-	const [templateType, setTemplateType] = useState('periodic');
+	const [templateType, setTemplateType] = useState("periodic");
 
 	return (
 		<Container my="md">
@@ -34,10 +33,10 @@ export function HomeDashboard() {
 					<ProgressTracker />
 				</Grid.Col>
 				<Grid.Col xs={4}>
-					<TemplateTypes setTemplateType={setTemplateType}/>
+					<TemplateTypes setTemplateType={setTemplateType} />
 				</Grid.Col>
 				<Grid.Col xs={8}>
-					<TemplateGrid templateType={templateType}/>
+					<TemplateGrid templateType={templateType} />
 				</Grid.Col>
 			</Grid>
 		</Container>

@@ -4,7 +4,7 @@ import { createStyles, Text, Image, Container, Grid, Group, Anchor } from "@mant
 // import report from "../../assets/report.png";
 // import blank from "../../assets/blank.png";
 
-import templateTypes from './data.js'
+import templateTypes from "./data.js";
 
 // const mockdata = [
 // 	{ title: "Blank Periodic Dashboard", icon: ad_report },
@@ -87,7 +87,7 @@ const useStyles = createStyles((theme) => ({
 	},
 }));
 
-export function TemplateGrid({templateType}: {templateType: String}) {
+export function TemplateGrid({ templateType }: { templateType: String }) {
 	const { classes, theme } = useStyles();
 
 	// const items = mockdata.map((item) => (
@@ -101,15 +101,15 @@ export function TemplateGrid({templateType}: {templateType: String}) {
 
 	// const templates = mockdata.map((item) => (
 	// const templates = templateTypes.campaign.map((item) => (
-	var data = templateTypes.periodic;
-	if(templateType === 'Campaign Dashboards'){
-		data = templateTypes.campaign
-	}else if(templateType === 'Periodic Dashboards'){
-		data = templateTypes.periodic
-	}else if(templateType === 'Rolling Dashboards'){
-		data = templateTypes.rolling
+	let data = templateTypes.periodic;
+	if (templateType === "Campaign Dashboards") {
+		data = templateTypes.campaign;
+	} else if (templateType === "Periodic Dashboards") {
+		data = templateTypes.periodic;
+	} else if (templateType === "Rolling Dashboards") {
+		data = templateTypes.rolling;
 	}
-	const templates = data.map((item) => (	
+	const templates = data.map((item) => (
 		<Grid.Col xs={3} key={item.title}>
 			<Group className={classes.item}>
 				<Image src={item.icon} alt={item.title} width={40} />
