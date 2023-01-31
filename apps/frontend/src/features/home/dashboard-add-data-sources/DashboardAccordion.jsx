@@ -1,8 +1,5 @@
 import { Accordion, Button, CloseButton, createStyles, Divider, Text, TextInput } from '@mantine/core';
 import { useState } from 'react';
-import { IconPlus,IconPhoto } from '@tabler/icons';
-import fbIcon from '../../../assets/facebook.png';
-import customeSources from '../../../assets/custom-data-sources.png';
 import plus from '../../../assets/plus.png';
 
 const useStyle = createStyles((theme) => ({
@@ -33,20 +30,6 @@ const useStyle = createStyles((theme) => ({
     padding: "0 20px"
   }
 }));
-
-// const sourcesTypes = [
-//   {label: "Facebook Ads", img: fbIcon},
-//   {label: "Facebook Insights", img:fbIcon},
-//   {label: "Custom Data Source", img: customeSources},
-// ];
-
-// const sourcesInfoData = [
-//   {text: "Maneesha"},
-//   {text: "Lakshani"},
-//   {text: "ABCD"},
-//   {text: "Maneesha Lakshani"},
-// ];
-
 
 export function DashboardAccordion({sourcesTypes, sourcesInfoData}) {
   const { classes, theme } = useStyle()

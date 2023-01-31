@@ -2,6 +2,8 @@ import { createStyles, TextInput, Card } from "@mantine/core";
 import { DashboardAccordion } from "./DashboardAccordion";
 // import { IconSearch } from '@tabler/icons';
 import searchImg from '../../../assets/search.png';
+import fbIcon from '../../../assets/facebook.png';
+import customeSources from '../../../assets/custom-data-sources.png';
 
 const useStyles = createStyles((theme) => ({
 	main: {
@@ -53,6 +55,19 @@ const useStyles = createStyles((theme) => ({
     }
 }));
 
+const sourcesTypes = [
+  {label: "Facebook Ads", img: fbIcon},
+  {label: "Facebook Insights", img:fbIcon},
+  {label: "Custom Data Source", img: customeSources},
+];
+
+const sourcesInfoData = [
+  {text: "Maneesha"},
+  {text: "Lakshani"},
+  {text: "ABCD"},
+  {text: "Maneesha Lakshani"},
+];
+
 
 function AddDataSources() {
    const { classes, theme } = useStyles();
@@ -72,7 +87,7 @@ function AddDataSources() {
         </Card>
         <div className={classes.addBox}>
             <div className={classes.inputBox}>
-                <DashboardAccordion />
+                <DashboardAccordion sourcesInfoData={sourcesInfoData} sourcesTypes={sourcesTypes} />
             </div>
         </div>
     </div>

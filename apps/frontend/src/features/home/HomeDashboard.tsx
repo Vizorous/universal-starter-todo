@@ -43,7 +43,7 @@ export function HomeDashboard() {
 					</Grid.Col>
 				</Grid>
 			</Container>
-			{/* <AddDataSources /> */}
+			<AddDataSources />
 			<Integrations />
 		</div>
 	);
