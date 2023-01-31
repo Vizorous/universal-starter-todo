@@ -24,10 +24,10 @@ export function ProgressTracker() {
 
 	return (
 		<>
-			<Stepper active={active} onStepClick={setActive} breakpoint="sm" className={classes.main}>
-				<Stepper.Step label="Select Template" className={classes.label}></Stepper.Step>
-				<Stepper.Step label="Choose Dashboard Preferences" className={classes.label}></Stepper.Step>
-				<Stepper.Step label="Add Data Sources" className={classes.label}></Stepper.Step>
+			<Stepper active={active} breakpoint="sm" onStepClick={setActive} className={classes.main}>
+				<Stepper.Step label={window.innerWidth <= 500 ? null : "Select Template"} className={classes.label}></Stepper.Step>
+				<Stepper.Step label={window.innerWidth <= 800 ? null : "Choose Dashboard Preferences"} className={classes.label}></Stepper.Step>
+				<Stepper.Step label={window.innerWidth <= 800 ? null : "Add Data Sources"} className={classes.label}></Stepper.Step>
 				<Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
 			</Stepper>
 		</>
