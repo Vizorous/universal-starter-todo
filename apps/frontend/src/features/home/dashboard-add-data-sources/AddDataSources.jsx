@@ -1,6 +1,7 @@
-import { createStyles, TextInput  } from "@mantine/core";
+import { createStyles, TextInput, Card  } from "@mantine/core";
 import { DashboardAccordion } from "./DashboardAccordion";
 // import { IconSearch } from '@tabler/icons';
+import searchImg from '../../../assets/search.png';
 
 const useStyles = createStyles((theme) => ({
 	main: {
@@ -21,7 +22,6 @@ const useStyles = createStyles((theme) => ({
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
-        background: "pink",
 	},
     inputBox: {
         display: "flex",
@@ -50,7 +50,7 @@ function AddDataSources() {
 
   return (
     <div className={classes.main}>
-        <div className={classes.label} justify="spaceBetween">
+        <Card shadow="sm" radius="md" className={classes.label} justify="spaceBetween">
             <div>{window.innerWidth >= 500 ? "Add you data sources" : "A"}</div>
             <TextInput
                 placeholder="Search"
@@ -60,7 +60,7 @@ function AddDataSources() {
                 styles={{ rightSection: { pointerEvents: 'none' } }}
                 className={classes.search}
             />
-        </div>
+        </Card>
         <div className={classes.addBox}>
             <div className={classes.inputBox}>
                 <DashboardAccordion />
