@@ -1,4 +1,4 @@
-import { createStyles, TextInput, Card } from "@mantine/core";
+import { createStyles, TextInput, Anchor } from "@mantine/core";
 // import { IconSearch } from '@tabler/icons';
 import searchImg from '../../assets/search.png';
 import { DashboardAccordion } from "../home/dashboard-add-data-sources/DashboardAccordion";
@@ -33,13 +33,25 @@ const useStyles = createStyles((theme) => ({
         [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
             flexDirection: "column",
             fontSize: "20px",
-            alignItems: "center"
         },
 	},
     search:{
         width: "50%",
         [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
             width: "100%",
+        },
+    },
+    mobileExpandHeader: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    expandAllLink: {
+        display: "none",
+        fontSize: "15px",
+        color: theme.colors.gray[6],
+        [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+            display: "block",
         },
     }
 }));
@@ -65,7 +77,12 @@ function Integrations() {
   return (
     <div>
         <div shadow="sm" radius="md" className={classes.label} justify="spaceBetween">
-            <div>Integrations</div>
+            <div className={classes.mobileExpandHeader}>
+                <div>Integrations</div>
+                <Anchor component="button" type="button" className={classes.expandAllLink}>
+                    Expand All
+                </Anchor>
+            </div>
             <TextInput
                 placeholder="Search"
                 icon={<img src={searchImg} width={15} />}
