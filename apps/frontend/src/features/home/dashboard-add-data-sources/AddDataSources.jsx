@@ -54,7 +54,7 @@ function AddDataSources() {
             <div>{window.innerWidth >= 500 ? "Add you data sources" : "A"}</div>
             <TextInput
                 placeholder="Search"
-                // icon={<IconSearch size={16} />}
+                icon={<img src={searchImg} width={15} />}
                 rightSectionWidth={90}
                 // rightSection={rightSection}
                 styles={{ rightSection: { pointerEvents: 'none' } }}
