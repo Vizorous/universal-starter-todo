@@ -2,6 +2,7 @@ import { Accordion, Button, CloseButton, createStyles, Divider, Text, TextInput 
 import { useState } from 'react';
 import { IconPlus,IconPhoto } from '@tabler/icons';
 import fbIcon from '../../../assets/facebook.png';
+import customeSources from '../../../assets/custom-data-sources.png';
 import plus from '../../../assets/plus.png';
 
 const useStyle = createStyles((theme) => ({
@@ -34,9 +35,9 @@ const useStyle = createStyles((theme) => ({
 }));
 
 const sourcesTypes = [
-  {label: "Facebook Ads",},
-  {label: "Facebook Insights",},
-  {label: "Custom Data Source",},
+  {label: "Facebook Ads", img: fbIcon},
+  {label: "Facebook Insights", img:fbIcon},
+  {label: "Custom Data Source", img: customeSources},
 ];
 
 const sourcesInfoData = [
@@ -56,7 +57,7 @@ export function DashboardAccordion() {
     return sourcesTypes.map((e, i) => {
       return (
         <Accordion.Item value={e.label} key={i}>
-          <Accordion.Control icon={<img src={fbIcon} width={50}/>}>{e.label}</Accordion.Control>
+          <Accordion.Control icon={<img src={e.img} width={50}/>}>{e.label}</Accordion.Control>
           <Accordion.Panel>
             <div className={classes.sourceInputContainer}>
               <TextInput placeholder="Enter here..." className={classes.sourceInput} onChange={(val) => setSource(val.target.value)} />

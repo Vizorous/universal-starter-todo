@@ -5,7 +5,7 @@ import testImg from "../../assets/type-icon.png";
 const useStyles = createStyles((theme) => ({
 	card: {
 		backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-		marginTop: "20px",
+		// marginTop: "20px",
 		height: window.innerHeight - 310,
 	},
 
