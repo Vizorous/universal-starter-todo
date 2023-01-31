@@ -4,9 +4,12 @@ import { IconPlus,IconPhoto } from '@tabler/icons';
 import fbIcon from '../../../assets/facebook.png';
 import plus from '../../../assets/plus.png';
 
-const useStyle = createStyles(() => ({
+const useStyle = createStyles((theme) => ({
   accordionContainer: {
     width: "80%",
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      width: "95%"
+    },
   },
   sourceInputContainer: {
     display: "flex",
@@ -48,8 +51,6 @@ export function DashboardAccordion() {
   const { classes, theme } = useStyle()
   const [ source, setSource ] = useState()
   const [sourcesInfo, setSourceInfo ] = useState(sourcesInfoData)
-
-  const getColor = (color) => theme.colors[color][theme.colorScheme === 'dark' ? 5 : 7];
 
   const addDataSources = (classes) => {
     return sourcesTypes.map((e, i) => {
