@@ -5,6 +5,7 @@ import { ProgressTracker } from "./ProgressTracker";
 import { TemplateGrid } from "./TemplateGrid";
 import { TemplateTypes } from "./TemplateTypes";
 import AddDataSources from "./dashboard-add-data-sources/AddDataSources";
+import Integrations from "../Integrations/Integrations";
 
 export function HomeDashboard() {
 	const [templateType, setTemplateType] = useState("periodic");
@@ -42,7 +43,8 @@ export function HomeDashboard() {
 					</Grid.Col>
 				</Grid>
 			</Container>
-			<AddDataSources />
+			{/* <AddDataSources /> */}
+			<Integrations />
 		</div>
 	);
 }

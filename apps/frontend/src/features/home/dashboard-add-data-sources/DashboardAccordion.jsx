@@ -34,21 +34,21 @@ const useStyle = createStyles((theme) => ({
   }
 }));
 
-const sourcesTypes = [
-  {label: "Facebook Ads", img: fbIcon},
-  {label: "Facebook Insights", img:fbIcon},
-  {label: "Custom Data Source", img: customeSources},
-];
+// const sourcesTypes = [
+//   {label: "Facebook Ads", img: fbIcon},
+//   {label: "Facebook Insights", img:fbIcon},
+//   {label: "Custom Data Source", img: customeSources},
+// ];
 
-const sourcesInfoData = [
-  {text: "Maneesha"},
-  {text: "Lakshani"},
-  {text: "ABCD"},
-  {text: "Maneesha Lakshani"},
-];
+// const sourcesInfoData = [
+//   {text: "Maneesha"},
+//   {text: "Lakshani"},
+//   {text: "ABCD"},
+//   {text: "Maneesha Lakshani"},
+// ];
 
 
-export function DashboardAccordion() {
+export function DashboardAccordion({sourcesTypes, sourcesInfoData}) {
   const { classes, theme } = useStyle()
   const [ source, setSource ] = useState()
   const [sourcesInfo, setSourceInfo ] = useState(sourcesInfoData)
