@@ -50,8 +50,9 @@
 	},
 	"dependencies": {
 		"@commitlint/cli": "^17.2.0",
-		"@commitlint/config-conventional": "^17.2.0"
+		"@commitlint/config-conventional": "^17.2.0",
+		"@tabler/icons": "^2.1.2",
+		"flag": "^5.0.1"
 	},
 	"packageManager": "pnpm@7.0.1"
 }
-
