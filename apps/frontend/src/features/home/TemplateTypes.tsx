@@ -48,14 +48,14 @@ const mockdata = [
 	{ label: "Rolling Dashboards", icon: testImg, showSpoiler: false },
 ];
 
-export function TemplateTypes() {
+export function TemplateTypes({setTemplateType}: {setTemplateType: any}) {
 	const { classes } = useStyles();
 	const templateTypesData = mockdata.map((template) => (
 		<Group position="apart" mt="md" className={classes.borderBottom}>
 			<div>
 				<Group>
 					<Image src={template.icon} alt={template.label} width={18} />
-					<Text weight={500}>{template.label}</Text>
+					<Text weight={500} onClick={() => setTemplateType(template.label)}>{template.label}</Text>
 				</Group>
 				{template.showSpoiler ? (
 					<Spoiler maxHeight={55} showLabel="Learn more" hideLabel="Hide">

@@ -1,53 +1,55 @@
 import { createStyles, Text, Image, Container, Grid, Group, Anchor } from "@mantine/core";
 
-import ad_report from "../../assets/ad_report.png";
-import report from "../../assets/report.png";
-import blank from "../../assets/blank.png";
+// import ad_report from "../../assets/ad_report.png";
+// import report from "../../assets/report.png";
+// import blank from "../../assets/blank.png";
 
-const mockdata = [
-	{ title: "Blank Periodic Dashboard", icon: ad_report },
-	{
-		title: "Advertising Campaign Report",
-		icon: report,
-		link1: "https://www.google.com/",
-		link2: "https://www.facebook.com/",
-	},
-	{
-		title: "Automative Marketing Report",
-		icon: blank,
-		link1: "https://www.google.com/",
-		link2: "https://www.facebook.com/",
-	},
-	{
-		title: "B2B Marketing Dashboard",
-		icon: ad_report,
-		link1: "https://www.google.com/",
-		link2: "https://www.facebook.com/",
-	},
-	{ title: "Bing Ads Report", icon: report, link1: "https://www.google.com/", link2: "https://www.facebook.com/" },
-	{
-		title: "Business Executive Report",
-		icon: ad_report,
-		link1: "https://www.google.com/",
-		link2: "https://www.facebook.com/",
-	},
-	{
-		title: "CallRail Tracking Report",
-		icon: blank,
-		link1: "https://www.google.com/",
-		link2: "https://www.facebook.com/",
-	},
-	{
-		title: "Campaign Monitor Performance Report",
-		icon: report,
-		link1: "https://www.google.com/",
-		link2: "https://www.facebook.com/",
-	},
-	{ title: "Bing Ads Report", icon: ad_report, link1: "https://www.google.com/", link2: "https://www.facebook.com/" },
-	{ title: "Credit cards", icon: ad_report, color: "violet" },
-	{ title: "Campaign Monitor ", icon: report },
-	{ title: "Campaign Monitor ", icon: blank },
-];
+import templateTypes from './data.js'
+
+// const mockdata = [
+// 	{ title: "Blank Periodic Dashboard", icon: ad_report },
+// 	{
+// 		title: "Advertising Campaign Report",
+// 		icon: report,
+// 		link1: "https://www.google.com/",
+// 		link2: "https://www.facebook.com/",
+// 	},
+// 	{
+// 		title: "Automative Marketing Report",
+// 		icon: blank,
+// 		link1: "https://www.google.com/",
+// 		link2: "https://www.facebook.com/",
+// 	},
+// 	{
+// 		title: "B2B Marketing Dashboard",
+// 		icon: ad_report,
+// 		link1: "https://www.google.com/",
+// 		link2: "https://www.facebook.com/",
+// 	},
+// 	{ title: "Bing Ads Report", icon: report, link1: "https://www.google.com/", link2: "https://www.facebook.com/" },
+// 	{
+// 		title: "Business Executive Report",
+// 		icon: ad_report,
+// 		link1: "https://www.google.com/",
+// 		link2: "https://www.facebook.com/",
+// 	},
+// 	{
+// 		title: "CallRail Tracking Report",
+// 		icon: blank,
+// 		link1: "https://www.google.com/",
+// 		link2: "https://www.facebook.com/",
+// 	},
+// 	{
+// 		title: "Campaign Monitor Performance Report",
+// 		icon: report,
+// 		link1: "https://www.google.com/",
+// 		link2: "https://www.facebook.com/",
+// 	},
+// 	{ title: "Bing Ads Report", icon: ad_report, link1: "https://www.google.com/", link2: "https://www.facebook.com/" },
+// 	{ title: "Credit cards", icon: ad_report, color: "violet" },
+// 	{ title: "Campaign Monitor ", icon: report },
+// 	{ title: "Campaign Monitor ", icon: blank },
+// ];
 
 const useStyles = createStyles((theme) => ({
 	card: {
@@ -85,7 +87,7 @@ const useStyles = createStyles((theme) => ({
 	},
 }));
 
-export function TemplateGrid() {
+export function TemplateGrid({templateType}: {templateType: String}) {
 	const { classes, theme } = useStyles();
 
 	// const items = mockdata.map((item) => (
@@ -97,7 +99,17 @@ export function TemplateGrid() {
 	// 	</UnstyledButton>
 	// ));
 
-	const templates = mockdata.map((item) => (
+	// const templates = mockdata.map((item) => (
+	// const templates = templateTypes.campaign.map((item) => (
+	var data = templateTypes.periodic;
+	if(templateType === 'Campaign Dashboards'){
+		data = templateTypes.campaign
+	}else if(templateType === 'Periodic Dashboards'){
+		data = templateTypes.periodic
+	}else if(templateType === 'Rolling Dashboards'){
+		data = templateTypes.rolling
+	}
+	const templates = data.map((item) => (	
 		<Grid.Col xs={3} key={item.title}>
 			<Group className={classes.item}>
 				<Image src={item.icon} alt={item.title} width={40} />
@@ -131,7 +143,7 @@ export function TemplateGrid() {
 		// 	</SimpleGrid>
 		// </Card>
 
-		<Container my="md">
+		<Container>
 			<Grid>{templates}</Grid>
 		</Container>
 	);
