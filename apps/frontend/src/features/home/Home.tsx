@@ -1,5 +1,6 @@
 import { Container } from "@mantine/core";
 import React from "react";
+import { ProfileUI } from "../profile-ui/ProfileUI";
 import { HomeDashboard } from "./HomeDashboard";
 
 interface HomeProps {}
@@ -13,7 +14,8 @@ const Home: React.FC<HomeProps> = () => {
 					variables={{ first: 50 }}
 					render={(data) => <Todos todoKey={data} categoryKey={data}></Todos>}
 				></QueryFragContainer> */}
-				<HomeDashboard />
+				{/* <HomeDashboard /> */}
+				<ProfileUI />
 			</Container>
 		</>
 	);
