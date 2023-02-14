@@ -1,6 +1,6 @@
 import { Anchor } from '@mantine/core'
 
-function Link(link: {label: string, underline?: boolean}) {
+function CustomeLink(link: {label: string, underline?: boolean}) {
   return (
     <Anchor 
         underline={link.underline == true ? true : false} 
@@ -11,4 +11,4 @@ function Link(link: {label: string, underline?: boolean}) {
   )
 }
 
-export default Link
+export default CustomeLink
