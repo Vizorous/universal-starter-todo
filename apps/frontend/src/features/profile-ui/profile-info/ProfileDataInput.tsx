@@ -7,7 +7,7 @@ const useStyle = createStyles((theme) => ({
   }
 }))
 
-function ProfileDataInput(input: {label: string, placeholder: string, setData: any}) {
+function ProfileDataInput(input: {label: string, placeholder: string, setData: any, withAsterisk?: boolean}) {
   const { classes, theme } = useStyle()
 
   return (
@@ -16,6 +16,7 @@ function ProfileDataInput(input: {label: string, placeholder: string, setData: a
         label={input.label}
         onChange={(val) => input.setData(val.target.value)}
         className={classes.marginTop}
+        withAsterisk={input.withAsterisk == true ? true : false}
     />
   )
 }
