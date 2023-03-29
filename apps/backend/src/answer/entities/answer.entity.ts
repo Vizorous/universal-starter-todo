@@ -1,6 +1,6 @@
 import { ObjectType } from "@nestjs/graphql";
 import { Entity, ManyToOne } from "typeorm";
-import { CF, CFF, BaseEntity, CFFID, CFID } from "@vizorous/nest-query-utils";
+import { CF, BaseEntity, CFFID, CFID } from "@vizorous/nest-query-utils";
 import { Question } from "src/question/entities/question.entity";
 import { FilterableRelation } from "@vizorous/nestjs-query-graphql";
 import { AnswerAttempt } from "src/answer-attempt/entities/answer-attempt.entity";
@@ -57,4 +57,3 @@ export class Answer extends BaseEntity {
 	// @JoinTable()
 	// subTasks: SubTask[]
 }
-

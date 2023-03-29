@@ -1,6 +1,5 @@
-import { Resolver, Args, Query } from "@nestjs/graphql";
+import { Resolver } from "@nestjs/graphql";
 import { Prediction } from "./entities/prediction.entity";
-import { PredictionService } from "./prediction.service";
 
 // this is a custom resolver.
 // this resolver will merge with the default resolver
@@ -12,4 +11,3 @@ export class PredictionResolver {
 	// 	return this.service.query({ first: 1000 });
 	// }
 }
-

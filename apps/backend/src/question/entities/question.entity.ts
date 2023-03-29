@@ -1,8 +1,7 @@
-import { Field, ObjectType } from "@nestjs/graphql";
-import { Column, Entity, OneToMany } from "typeorm";
-import { CF, CFF, BaseEntity } from "@vizorous/nest-query-utils";
+import { ObjectType } from "@nestjs/graphql";
+import { Entity, OneToMany } from "typeorm";
+import { CF, BaseEntity } from "@vizorous/nest-query-utils";
 import { Answer } from "src/answer/entities/answer.entity";
-import { FilterableCursorConnection } from "@vizorous/nestjs-query-graphql";
 
 @ObjectType()
 @Entity()
@@ -47,4 +46,3 @@ export class Question extends BaseEntity {
 	// @JoinTable()
 	// subTasks: SubTask[]
 }
-

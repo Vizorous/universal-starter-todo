@@ -1,6 +1,6 @@
 import { ObjectType } from "@nestjs/graphql";
 import { Entity, JoinColumn, OneToOne } from "typeorm";
-import { CF, CFF, BaseEntity, CFFID, CFID } from "@vizorous/nest-query-utils";
+import { CF, CFF, BaseEntity, CFID } from "@vizorous/nest-query-utils";
 import { AnswerAttempt } from "src/answer-attempt/entities/answer-attempt.entity";
 import { Relation } from "@vizorous/nestjs-query-graphql";
 
@@ -25,7 +25,7 @@ export class Prediction extends BaseEntity {
 
 	// This a OnetoOne relation inside TypeORM (DB Side).
 	// @JoinColumn() is required on the owner side.
-	@OneToOne(() => AnswerAttempt,{eager:true,cascade:true})
+	@OneToOne(() => AnswerAttempt, { eager: true, cascade: true })
 	@JoinColumn()
 	answerAttempt: AnswerAttempt;
 
@@ -51,4 +51,3 @@ export class Prediction extends BaseEntity {
 	// @JoinTable()
 	// subTasks: SubTask[]
 }
-

@@ -4,5 +4,5 @@ import { Answer } from "../entities/answer.entity";
 
 @InputType()
 export class CreateAnswer extends CreateType(Answer, []) {
-  // Add your own fields here
+	// Add your own fields here
 }

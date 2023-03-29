@@ -4,5 +4,5 @@ import { Prediction } from "../entities/prediction.entity";
 
 @InputType()
 export class UpdatePrediction extends UpdateType(Prediction, []) {
-  // Add your own fields here
+	// Add your own fields here
 }

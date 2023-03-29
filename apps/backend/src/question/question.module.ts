@@ -38,4 +38,3 @@ const dbModule = NestjsQueryTypeOrmModule.forFeature([Question]);
 	exports: [dbModule, QuestionService],
 })
 export class QuestionModule {}
-

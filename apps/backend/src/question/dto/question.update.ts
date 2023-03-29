@@ -4,5 +4,5 @@ import { Question } from "../entities/question.entity";
 
 @InputType()
 export class UpdateQuestion extends UpdateType(Question, []) {
-  // Add your own fields here
+	// Add your own fields here
 }

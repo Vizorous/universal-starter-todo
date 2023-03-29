@@ -18,9 +18,8 @@ export class AnswerService extends TypeOrmQueryService<Answer> {
 	// async getAllIds():Promise<string[]|[]>{
 	// const data = await this.repo
 	// 	.find({select: ["name"]})
-	// const idList=data.map((todo) => 
+	// const idList=data.map((todo) =>
 	// 	todo.id);
 	// return idList;
 	// }
 }
-

@@ -4,14 +4,10 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { MercuriusDriver, MercuriusDriverConfig } from "@nestjs/mercurius";
 import { DateScalar } from "./_common/scalars/date.scalar";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserModule } from "./user/user.module";
-import { TodoModule } from "./todo/todo.module";
-import { SubTaskModule } from "./sub-task/sub-task.module";
-import { CategoryModule } from "./category/category.module";
 import { QuestionModule } from "./question/question.module";
 import { AnswerModule } from "./answer/answer.module";
-import { PredictionModule } from './prediction/prediction.module';
-import { AnswerAttemptModule } from './answer-attempt/answer-attempt.module';
+import { PredictionModule } from "./prediction/prediction.module";
+import { AnswerAttemptModule } from "./answer-attempt/answer-attempt.module";
 
 @Module({
 	imports: [

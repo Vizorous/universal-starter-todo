@@ -28,4 +28,3 @@ export class PredictionService extends TypeOrmQueryService<Prediction> {
 	// return idList;
 	// }
 }
-

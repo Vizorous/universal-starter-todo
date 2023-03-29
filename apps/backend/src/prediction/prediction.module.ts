@@ -39,4 +39,3 @@ const dbModule = NestjsQueryTypeOrmModule.forFeature([Prediction]);
 	exports: [dbModule],
 })
 export class PredictionModule {}
-

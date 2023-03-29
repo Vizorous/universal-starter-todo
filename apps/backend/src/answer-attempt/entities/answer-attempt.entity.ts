@@ -48,4 +48,3 @@ export class AnswerAttempt extends BaseEntity {
 	// @JoinTable()
 	// subTasks: SubTask[]
 }
-
