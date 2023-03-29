@@ -2,140 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type AnswerAttempt {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
 
-  """User name"""
-  name: String!
-
-  """User email"""
-  email: String!
-
-  """User AIESEC email"""
-  aiesecEmail: String
-
-  """User entity"""
-  entity: String!
-
-  """User role"""
-  role: String!
-}
-
-type DeleteManyResponse {
-  """The number of records deleted."""
-  deletedCount: Int!
-}
-
-type UserDeleteResponse {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-
-  """User name"""
-  name: String
-
-  """User email"""
-  email: String
-
-  """User AIESEC email"""
-  aiesecEmail: String
-
-  """User entity"""
-  entity: String
-
-  """User role"""
-  role: String
-}
-
-type UpdateManyResponse {
-  """The number of records updated."""
-  updatedCount: Int!
-}
-
-type UserEdge {
-  """The node containing the User"""
-  node: User!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-"""Cursor for paging through collections"""
-scalar ConnectionCursor
-
-type PageInfo {
-  """true if paging forward and there are more records."""
-  hasNextPage: Boolean
-
-  """true if paging backwards and there are more records."""
-  hasPreviousPage: Boolean
-
-  """The cursor of the first returned record."""
-  startCursor: ConnectionCursor
-
-  """The cursor of the last returned record."""
-  endCursor: ConnectionCursor
-}
-
-type UserConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [UserEdge!]!
-}
-
-type Category {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """Category name"""
+  """AnswerAttempt  name"""
   name: String!
   description: String
-}
-
-type SubTask {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """SubTask name"""
-  name: String!
-
-  """SubTask done"""
-  done: Boolean!
-
-  """SubTask description"""
-  description: String!
-  todoId: ID!
-  categoryId: String
-  category: Category!
-}
-
-type Todo {
-  id: ID!
-  createdAt: Date!
-  updatedAt: Date!
-
-  """Todo name"""
-  name: String!
-
-  """Todo done"""
-  done: Boolean!
-
-  """Todo description"""
-  description: String!
-  categoryId: ID
-  category: Category
-  subTasks(
+  answers(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: SubTaskFilter = {}
+    filter: AnswerFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -150,8 +30,8 @@ type Todo {
     last: Int
 
     """Specify to sort results."""
-    sorting: [SubTaskSort!] = []
-  ): TodoSubTasksConnection
+    sorting: [AnswerSort!] = []
+  ): AnswerAttemptAnswersConnection
 }
 
 input CursorPaging {
@@ -168,20 +48,20 @@ input CursorPaging {
   last: Int
 }
 
-input SubTaskFilter {
-  and: [SubTaskFilter!]
-  or: [SubTaskFilter!]
-  id: SubTaskIdFilterComparison
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input AnswerFilter {
+  and: [AnswerFilter!]
+  or: [AnswerFilter!]
+  id: AnswerIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: SubTaskNameFilterComparison
-  done: BooleanFieldComparison
-  todoId: IDFilterComparison
-  categoryId: StringFieldComparison
-  category: SubTaskFilterCategoryFilter
+  questionId: IDFilterComparison
+  question: AnswerFilterQuestionFilter
 }
 
-input SubTaskIdFilterComparison {
+input AnswerIdFilterComparison {
   eq: ID
   in: [ID!]
 }
@@ -211,17 +91,6 @@ input DateFieldComparisonBetween {
   upper: DateTime!
 }
 
-input SubTaskNameFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input BooleanFieldComparison {
-  is: Boolean
-  isNot: Boolean
-}
-
 input IDFilterComparison {
   is: Boolean
   isNot: Boolean
@@ -239,57 +108,30 @@ input IDFilterComparison {
   notIn: [ID!]
 }
 
-input StringFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: String
-  neq: String
-  gt: String
-  gte: String
-  lt: String
-  lte: String
-  like: String
-  notLike: String
-  iLike: String
-  notILike: String
-  in: [String!]
-  notIn: [String!]
-}
-
-input SubTaskFilterCategoryFilter {
-  and: [SubTaskFilterCategoryFilter!]
-  or: [SubTaskFilterCategoryFilter!]
-  id: CategoryIdFilterComparison
+input AnswerFilterQuestionFilter {
+  and: [AnswerFilterQuestionFilter!]
+  or: [AnswerFilterQuestionFilter!]
+  id: QuestionIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: CategoryNameFilterComparison
 }
 
-input CategoryIdFilterComparison {
+input QuestionIdFilterComparison {
   eq: ID
   in: [ID!]
 }
 
-input CategoryNameFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input SubTaskSort {
-  field: SubTaskSortFields!
+input AnswerSort {
+  field: AnswerSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum SubTaskSortFields {
+enum AnswerSortFields {
   id
   createdAt
   updatedAt
-  name
-  done
-  todoId
-  categoryId
+  questionId
 }
 
 """Sort Directions"""
@@ -304,167 +146,184 @@ enum SortNulls {
   NULLS_LAST
 }
 
-type TodoName {
+type Answer {
   id: ID!
+  createdAt: Date!
+  updatedAt: Date!
 
-  """Todo name"""
-  name: String!
+  """Answer  name"""
+  value: Float!
+  description: String
+  questionId: ID!
+  answerAttemptId: ID!
+  question: Question!
 }
 
-type TodoDeleteResponse {
+type Question {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Question  text"""
+  text: String!
+  description: String
+}
+
+type QuestionDeleteResponse {
   id: ID
   createdAt: Date
   updatedAt: Date
 
-  """Todo name"""
-  name: String
-
-  """Todo done"""
-  done: Boolean
-
-  """Todo description"""
+  """Question  text"""
+  text: String
   description: String
-  categoryId: ID
 }
 
-type TodoEdge {
-  """The node containing the Todo"""
-  node: Todo!
+type QuestionEdge {
+  """The node containing the Question"""
+  node: Question!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type TodoConnection {
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type QuestionConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [TodoEdge!]!
+  edges: [QuestionEdge!]!
 }
 
-type TodoAggregateGroupBy {
+type AnswerDeleteResponse {
   id: ID
   createdAt: Date
   updatedAt: Date
-  name: String
-  done: Boolean
-  categoryId: ID
+
+  """Answer  name"""
+  value: Float
+  description: String
+  questionId: ID
+  answerAttemptId: ID
 }
 
-type TodoCountAggregate {
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  name: Int
-  done: Int
-  categoryId: Int
-}
-
-type TodoMinAggregate {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  categoryId: ID
-}
-
-type TodoMaxAggregate {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-  name: String
-  categoryId: ID
-}
-
-type TodoAggregateResponse {
-  groupBy: TodoAggregateGroupBy
-  count: TodoCountAggregate
-  min: TodoMinAggregate
-  max: TodoMaxAggregate
-}
-
-type SubTaskEdge {
-  """The node containing the SubTask"""
-  node: SubTask!
+type AnswerEdge {
+  """The node containing the Answer"""
+  node: Answer!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type TodoSubTasksConnection {
+type AnswerConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [SubTaskEdge!]!
+  edges: [AnswerEdge!]!
 }
 
-type SubTaskDeleteResponse {
+type Prediction {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+
+  """Prediction  name"""
+  value: String!
+  calculatedNumbers: String
+  answerAttemptId: ID!
+  answerAttempt: AnswerAttempt!
+}
+
+type PredictionDeleteResponse {
   id: ID
   createdAt: Date
   updatedAt: Date
 
-  """SubTask name"""
-  name: String
-
-  """SubTask done"""
-  done: Boolean
-
-  """SubTask description"""
-  description: String
-  todoId: ID
-  categoryId: String
+  """Prediction  name"""
+  value: String
+  calculatedNumbers: String
+  answerAttemptId: ID
 }
 
-type SubTaskConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [SubTaskEdge!]!
-}
-
-type CategoryDeleteResponse {
-  id: ID
-  createdAt: Date
-  updatedAt: Date
-
-  """Category name"""
-  name: String
-  description: String
-}
-
-type CategoryEdge {
-  """The node containing the Category"""
-  node: Category!
+type PredictionEdge {
+  """The node containing the Prediction"""
+  node: Prediction!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type CategoryConnection {
+type PredictionConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [CategoryEdge!]!
+  edges: [PredictionEdge!]!
+}
+
+type AnswerAttemptDeleteResponse {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+
+  """AnswerAttempt  name"""
+  name: String
+  description: String
+}
+
+type AnswerAttemptEdge {
+  """The node containing the AnswerAttempt"""
+  node: AnswerAttempt!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type AnswerAttemptConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [AnswerAttemptEdge!]!
+}
+
+type AnswerAttemptAnswersConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [AnswerEdge!]!
 }
 
 """Date custom scalar type"""
 scalar Date
 
 type Query {
-  user(
+  question(
     """The id of the record to find."""
     id: ID!
-  ): User!
-  users(
+  ): Question!
+  questions(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: UserFilter = {}
+    filter: QuestionFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -479,23 +338,18 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [UserSort!] = []
-  ): UserConnection!
-  todoNames(todoName: String!): [TodoName]!
-  todoAggregate(
-    """Filter to find records to aggregate on"""
-    filter: TodoAggregateFilter
-  ): [TodoAggregateResponse!]!
-  todo(
+    sorting: [QuestionSort!] = []
+  ): QuestionConnection!
+  answer(
     """The id of the record to find."""
     id: ID!
-  ): Todo!
-  todos(
+  ): Answer!
+  answers(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: TodoFilter = {}
+    filter: AnswerFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -510,18 +364,18 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [TodoSort!] = []
-  ): TodoConnection!
-  subTask(
+    sorting: [AnswerSort!] = []
+  ): AnswerConnection!
+  prediction(
     """The id of the record to find."""
     id: ID!
-  ): SubTask!
-  subTasks(
+  ): Prediction!
+  predictions(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: SubTaskFilter = {}
+    filter: PredictionFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -536,18 +390,18 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [SubTaskSort!] = []
-  ): SubTaskConnection!
-  category(
+    sorting: [PredictionSort!] = []
+  ): PredictionConnection!
+  answerAttempt(
     """The id of the record to find."""
     id: ID!
-  ): Category!
-  categories(
+  ): AnswerAttempt!
+  answerAttempts(
     """Limit or page results."""
     paging: CursorPaging = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: CategoryFilter = {}
+    filter: AnswerAttemptFilter = {}
 
     """Paginate before opaque cursor"""
     before: ConnectionCursor
@@ -562,147 +416,100 @@ type Query {
     last: Int
 
     """Specify to sort results."""
-    sorting: [CategorySort!] = []
-  ): CategoryConnection!
+    sorting: [AnswerAttemptSort!] = []
+  ): AnswerAttemptConnection!
 }
 
-input UserFilter {
-  and: [UserFilter!]
-  or: [UserFilter!]
-  id: UserIdFilterComparison
+input QuestionFilter {
+  and: [QuestionFilter!]
+  or: [QuestionFilter!]
+  id: QuestionIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: UserNameFilterComparison
-  email: UserEmailFilterComparison
-  aiesecEmail: UserAiesecEmailFilterComparison
-  entity: UserEntityFilterComparison
-  role: UserRoleFilterComparison
 }
 
-input UserIdFilterComparison {
+input QuestionSort {
+  field: QuestionSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum QuestionSortFields {
+  id
+  createdAt
+  updatedAt
+}
+
+input PredictionFilter {
+  and: [PredictionFilter!]
+  or: [PredictionFilter!]
+  id: PredictionIdFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  value: PredictionValueFilterComparison
+}
+
+input PredictionIdFilterComparison {
   eq: ID
   in: [ID!]
 }
 
-input UserNameFilterComparison {
+input PredictionValueFilterComparison {
   is: Boolean
   like: String
   in: [String!]
 }
 
-input UserEmailFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input UserAiesecEmailFilterComparison {
-  is: Boolean
-  like: String
-  in: [String!]
-}
-
-input UserEntityFilterComparison {
-  is: Boolean
-  in: [String!]
-}
-
-input UserRoleFilterComparison {
-  is: Boolean
-  in: [String!]
-}
-
-input UserSort {
-  field: UserSortFields!
+input PredictionSort {
+  field: PredictionSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum UserSortFields {
+enum PredictionSortFields {
   id
   createdAt
   updatedAt
-  name
-  email
-  aiesecEmail
-  entity
-  role
+  value
 }
 
-input TodoAggregateFilter {
-  and: [TodoAggregateFilter!]
-  or: [TodoAggregateFilter!]
-  id: TodoIdFilterComparison
+input AnswerAttemptFilter {
+  and: [AnswerAttemptFilter!]
+  or: [AnswerAttemptFilter!]
+  id: AnswerAttemptIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: TodoNameFilterComparison
-  done: BooleanFieldComparison
-  categoryId: IDFilterComparison
+  name: AnswerAttemptNameFilterComparison
+  answers: AnswerAttemptFilterAnswerFilter
 }
 
-input TodoIdFilterComparison {
+input AnswerAttemptIdFilterComparison {
   eq: ID
   in: [ID!]
 }
 
-input TodoNameFilterComparison {
+input AnswerAttemptNameFilterComparison {
   is: Boolean
   like: String
   in: [String!]
 }
 
-input TodoFilter {
-  and: [TodoFilter!]
-  or: [TodoFilter!]
-  id: TodoIdFilterComparison
+input AnswerAttemptFilterAnswerFilter {
+  and: [AnswerAttemptFilterAnswerFilter!]
+  or: [AnswerAttemptFilterAnswerFilter!]
+  id: AnswerIdFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
-  name: TodoNameFilterComparison
-  done: BooleanFieldComparison
-  categoryId: IDFilterComparison
-  category: TodoFilterCategoryFilter
+  questionId: IDFilterComparison
 }
 
-input TodoFilterCategoryFilter {
-  and: [TodoFilterCategoryFilter!]
-  or: [TodoFilterCategoryFilter!]
-  id: CategoryIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: CategoryNameFilterComparison
-}
-
-input TodoSort {
-  field: TodoSortFields!
+input AnswerAttemptSort {
+  field: AnswerAttemptSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum TodoSortFields {
-  id
-  createdAt
-  updatedAt
-  name
-  done
-  categoryId
-}
-
-input CategoryFilter {
-  and: [CategoryFilter!]
-  or: [CategoryFilter!]
-  id: CategoryIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: CategoryNameFilterComparison
-}
-
-input CategorySort {
-  field: CategorySortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum CategorySortFields {
+enum AnswerAttemptSortFields {
   id
   createdAt
   updatedAt
@@ -710,122 +517,56 @@ enum CategorySortFields {
 }
 
 type Mutation {
-  createOneUser(input: CreateOneUserInput!): User!
-  createManyUsers(input: CreateManyUsersInput!): [User!]!
-  updateOneUser(input: UpdateOneUserInput!): User!
-  updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
-  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
-  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
-  setCategoryOnTodo(input: SetCategoryOnTodoInput!): Todo!
-  addSubTasksToTodo(input: AddSubTasksToTodoInput!): Todo!
-  setSubTasksOnTodo(input: SetSubTasksOnTodoInput!): Todo!
-  removeSubTasksFromTodo(input: RemoveSubTasksFromTodoInput!): Todo!
-  createOneTodo(input: CreateOneTodoInput!): Todo!
-  updateOneTodo(input: UpdateOneTodoInput!): Todo!
-  deleteOneTodo(input: DeleteOneTodoInput!): TodoDeleteResponse!
-  setCategoryOnSubTask(input: SetCategoryOnSubTaskInput!): SubTask!
-  createOneSubTask(input: CreateOneSubTaskInput!): SubTask!
-  updateOneSubTask(input: UpdateOneSubTaskInput!): SubTask!
-  deleteOneSubTask(input: DeleteOneSubTaskInput!): SubTaskDeleteResponse!
-  createOneCategory(input: CreateOneCategoryInput!): Category!
-  updateOneCategory(input: UpdateOneCategoryInput!): Category!
-  deleteOneCategory(input: DeleteOneCategoryInput!): CategoryDeleteResponse!
+  createOneQuestion(input: CreateOneQuestionInput!): Question!
+  updateOneQuestion(input: UpdateOneQuestionInput!): Question!
+  deleteOneQuestion(input: DeleteOneQuestionInput!): QuestionDeleteResponse!
+  setQuestionOnAnswer(input: SetQuestionOnAnswerInput!): Answer!
+  createOneAnswer(input: CreateOneAnswerInput!): Answer!
+  updateOneAnswer(input: UpdateOneAnswerInput!): Answer!
+  deleteOneAnswer(input: DeleteOneAnswerInput!): AnswerDeleteResponse!
+  setAnswerAttemptOnPrediction(input: SetAnswerAttemptOnPredictionInput!): Prediction!
+  createOnePrediction(input: CreateOnePredictionInput!): Prediction!
+  updateOnePrediction(input: UpdateOnePredictionInput!): Prediction!
+  deleteOnePrediction(input: DeleteOnePredictionInput!): PredictionDeleteResponse!
+  addAnswersToAnswerAttempt(input: AddAnswersToAnswerAttemptInput!): AnswerAttempt!
+  setAnswersOnAnswerAttempt(input: SetAnswersOnAnswerAttemptInput!): AnswerAttempt!
+  removeAnswersFromAnswerAttempt(input: RemoveAnswersFromAnswerAttemptInput!): AnswerAttempt!
+  createOneAnswerAttempt(input: CreateOneAnswerAttemptInput!): AnswerAttempt!
+  updateOneAnswerAttempt(input: UpdateOneAnswerAttemptInput!): AnswerAttempt!
+  deleteOneAnswerAttempt(input: DeleteOneAnswerAttemptInput!): AnswerAttemptDeleteResponse!
 }
 
-input CreateOneUserInput {
+input CreateOneQuestionInput {
   """The record to create"""
-  user: CreateUser!
+  question: CreateQuestion!
 }
 
-input CreateUser {
-  """User name"""
-  name: String!
-
-  """User email"""
-  email: String!
-
-  """User entity"""
-  entity: String!
-
-  """User role"""
-  role: String!
+input CreateQuestion {
+  """Question  text"""
+  text: String!
+  description: String
 }
 
-input CreateManyUsersInput {
-  """Array of records to create"""
-  users: [CreateUser!]!
-}
-
-input UpdateOneUserInput {
+input UpdateOneQuestionInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateUser!
+  update: UpdateQuestion!
 }
 
-input UpdateUser {
-  """User name"""
-  name: String
-
-  """User email"""
-  email: String
-
-  """User AIESEC email"""
-  aiesecEmail: String
-
-  """User entity"""
-  entity: String
-
-  """User role"""
-  role: String
+input UpdateQuestion {
+  """Question  text"""
+  text: String
+  description: String
 }
 
-input UpdateManyUsersInput {
-  """Filter used to find fields to update"""
-  filter: UserUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: UpdateUser!
-}
-
-input UserUpdateFilter {
-  and: [UserUpdateFilter!]
-  or: [UserUpdateFilter!]
-  id: UserIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: UserNameFilterComparison
-  email: UserEmailFilterComparison
-  aiesecEmail: UserAiesecEmailFilterComparison
-  entity: UserEntityFilterComparison
-  role: UserRoleFilterComparison
-}
-
-input DeleteOneUserInput {
+input DeleteOneQuestionInput {
   """The id of the record to delete."""
   id: ID!
 }
 
-input DeleteManyUsersInput {
-  """Filter to find records to delete"""
-  filter: UserDeleteFilter!
-}
-
-input UserDeleteFilter {
-  and: [UserDeleteFilter!]
-  or: [UserDeleteFilter!]
-  id: UserIdFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  name: UserNameFilterComparison
-  email: UserEmailFilterComparison
-  aiesecEmail: UserAiesecEmailFilterComparison
-  entity: UserEntityFilterComparison
-  role: UserRoleFilterComparison
-}
-
-input SetCategoryOnTodoInput {
+input SetQuestionOnAnswerInput {
   """The id of the record."""
   id: ID!
 
@@ -833,70 +574,41 @@ input SetCategoryOnTodoInput {
   relationId: ID!
 }
 
-input AddSubTasksToTodoInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetSubTasksOnTodoInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input RemoveSubTasksFromTodoInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input CreateOneTodoInput {
+input CreateOneAnswerInput {
   """The record to create"""
-  todo: CreateTodo!
+  answer: CreateAnswer!
 }
 
-input CreateTodo {
-  """Todo name"""
-  name: String!
-
-  """Todo description"""
-  description: String!
-  categoryId: ID
+input CreateAnswer {
+  """Answer  name"""
+  value: Float!
+  description: String
+  questionId: ID!
+  answerAttemptId: ID!
 }
 
-input UpdateOneTodoInput {
+input UpdateOneAnswerInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateTodo!
+  update: UpdateAnswer!
 }
 
-input UpdateTodo {
-  """Todo name"""
-  name: String
-
-  """Todo done"""
-  done: Boolean
-
-  """Todo description"""
+input UpdateAnswer {
+  """Answer  name"""
+  value: Float
   description: String
-  categoryId: ID
+  questionId: ID
+  answerAttemptId: ID
 }
 
-input DeleteOneTodoInput {
+input DeleteOneAnswerInput {
   """The id of the record to delete."""
   id: ID!
 }
 
-input SetCategoryOnSubTaskInput {
+input SetAnswerAttemptOnPredictionInput {
   """The id of the record."""
   id: ID!
 
@@ -904,73 +616,88 @@ input SetCategoryOnSubTaskInput {
   relationId: ID!
 }
 
-input CreateOneSubTaskInput {
+input CreateOnePredictionInput {
   """The record to create"""
-  subTask: CreateSubTask!
+  prediction: CreatePrediction!
 }
 
-input CreateSubTask {
-  """SubTask name"""
-  name: String!
-
-  """SubTask description"""
-  description: String!
-  todoId: ID!
-  categoryId: String
+input CreatePrediction {
+  """Prediction  name"""
+  value: String!
+  calculatedNumbers: String
+  answerAttemptId: ID!
 }
 
-input UpdateOneSubTaskInput {
+input UpdateOnePredictionInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateSubTask!
+  update: UpdatePrediction!
 }
 
-input UpdateSubTask {
-  """SubTask name"""
-  name: String
-
-  """SubTask done"""
-  done: Boolean
-
-  """SubTask description"""
-  description: String
-  todoId: ID
-  categoryId: String
+input UpdatePrediction {
+  """Prediction  name"""
+  value: String
+  calculatedNumbers: String
+  answerAttemptId: ID
 }
 
-input DeleteOneSubTaskInput {
+input DeleteOnePredictionInput {
   """The id of the record to delete."""
   id: ID!
 }
 
-input CreateOneCategoryInput {
-  """The record to create"""
-  category: CreateCategory!
+input AddAnswersToAnswerAttemptInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
 }
 
-input CreateCategory {
-  """Category name"""
+input SetAnswersOnAnswerAttemptInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input RemoveAnswersFromAnswerAttemptInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOneAnswerAttemptInput {
+  """The record to create"""
+  answerAttempt: CreateAnswerAttempt!
+}
+
+input CreateAnswerAttempt {
+  """AnswerAttempt  name"""
   name: String!
   description: String
 }
 
-input UpdateOneCategoryInput {
+input UpdateOneAnswerAttemptInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: UpdateCategory!
+  update: UpdateAnswerAttempt!
 }
 
-input UpdateCategory {
-  """Category name"""
+input UpdateAnswerAttempt {
+  """AnswerAttempt  name"""
   name: String
   description: String
 }
 
-input DeleteOneCategoryInput {
+input DeleteOneAnswerAttemptInput {
   """The id of the record to delete."""
   id: ID!
 }

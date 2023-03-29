@@ -8,6 +8,10 @@ import { UserModule } from "./user/user.module";
 import { TodoModule } from "./todo/todo.module";
 import { SubTaskModule } from "./sub-task/sub-task.module";
 import { CategoryModule } from "./category/category.module";
+import { QuestionModule } from "./question/question.module";
+import { AnswerModule } from "./answer/answer.module";
+import { PredictionModule } from './prediction/prediction.module';
+import { AnswerAttemptModule } from './answer-attempt/answer-attempt.module';
 
 @Module({
 	imports: [
@@ -42,10 +46,14 @@ import { CategoryModule } from "./category/category.module";
 			graphiql: false,
 			autoSchemaFile: "./../frontend/schema.graphql",
 		}),
-		UserModule,
-		TodoModule,
-		SubTaskModule,
-		CategoryModule,
+		// UserModule,
+		// TodoModule,
+		// SubTaskModule,
+		// CategoryModule,
+		QuestionModule,
+		AnswerModule,
+		PredictionModule,
+		AnswerAttemptModule,
 	],
 	controllers: [],
 	providers: [DateScalar],
