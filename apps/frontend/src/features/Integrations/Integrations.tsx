@@ -5,6 +5,7 @@ import { DashboardAccordion } from "../home/dashboard-add-data-sources/Dashboard
 import fbIcon from '../../assets/facebook.png';
 import customeSources from '../../assets/custom-data-sources.png';
 import twitterIcon from '../../assets/twitter.png';
+import React from 'react';
 
 const useStyles = createStyles((theme) => ({
 	main: {
@@ -75,10 +76,11 @@ function Integrations() {
    const { classes, theme } = useStyles();
 
   return (
-    <div>
-        <div shadow="sm" radius="md" className={classes.label} justify="spaceBetween">
+    <div data-testid="testing">
+        {/* <div shadow="sm" radius="md" className={classes.label} justify="spaceBetween"> */}
+        <div className={classes.label} >
             <div className={classes.mobileExpandHeader}>
-                <div>Integrations</div>
+                <h3 data-testid='ii'>Integrations</h3>
                 <Anchor component="button" type="button" className={classes.expandAllLink}>
                     Expand All
                 </Anchor>

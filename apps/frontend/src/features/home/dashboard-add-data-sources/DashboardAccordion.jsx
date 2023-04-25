@@ -1,6 +1,8 @@
 import { Accordion, Button, CloseButton, createStyles, Divider, Text, TextInput } from '@mantine/core';
 import { useState } from 'react';
 import plus from '../../../assets/plus.png';
+import React from 'react';
+
 
 const useStyle = createStyles((theme) => ({
   accordionContainer: {
@@ -62,7 +64,7 @@ export function DashboardAccordion({sourcesTypes, sourcesInfoData}) {
   const displaySources = (classes) => {
     return sourcesInfo.map((e, i) => {
       return (
-        <div>
+        <div key={i}>
           <div className={classes.infoContainer}>
             <Text c="dimmed">{e.text}</Text>
             <CloseButton aria-label="Close modal" size={18} />

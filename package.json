@@ -52,7 +52,8 @@
 		"@commitlint/cli": "^17.2.0",
 		"@commitlint/config-conventional": "^17.2.0",
 		"@tabler/icons": "^2.1.2",
-		"flag": "^5.0.1"
+		"flag": "^5.0.1",
+		"resize-observer-polyfill": "^1.5.1"
 	},
 	"packageManager": "pnpm@7.0.1"
 }
