@@ -1,6 +1,5 @@
 import { Container } from "@mantine/core";
 import React from "react";
-import { HomeDashboard } from "./HomeDashboard";
 import Integrations from "../Integrations/Integrations";
 
 interface HomeProps {}
