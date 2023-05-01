@@ -8,7 +8,7 @@
 	],
 	"scripts": {
 		"prebuild": "rimraf .dist",
-		"prepare": "npx husky install",
+		"prepare": "husky install",
 		"build": "turbo run build",
 		"dev": "turbo run dev --parallel ",
 		"dev:vite": "turbo run dev:vite --parallel ",
@@ -42,7 +42,8 @@
 	},
 	"devDependencies": {
 		"prettier": "latest",
-		"turbo": "latest"
+		"turbo": "latest",
+		"husky": "^8.0.3"
 	},
 	"engines": {
 		"npm": ">=7.0.0",
@@ -50,8 +51,10 @@
 	},
 	"dependencies": {
 		"@commitlint/cli": "^17.2.0",
-		"@commitlint/config-conventional": "^17.2.0"
+		"@commitlint/config-conventional": "^17.2.0",
+		"@tabler/icons": "^2.1.2",
+		"flag": "^5.0.1",
+		"resize-observer-polyfill": "^1.5.1"
 	},
 	"packageManager": "pnpm@7.0.1"
 }
-
