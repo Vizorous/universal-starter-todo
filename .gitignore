@@ -39,3 +39,4 @@ yarn-error.log*
 
 [0-9]*
 # **/dist
+.history/
